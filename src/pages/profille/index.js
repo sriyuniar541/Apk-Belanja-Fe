@@ -36,29 +36,29 @@ export default function Profile() {
                 <div className={styles.line}></div> 
                 {/* <div><hr></hr></div> */}
 
-                <div className="container col-12 row">
+                <div className="container col-lg-12  row">
                     <div className="col col-8 row">
                         {/* awal list item */}
-                        <div className="col-12 row mb-3">
+                        <div className="col-lg-12  row mb-3">
                                 <div className="col col-3 centered-value">
                                     Name
                                 </div>
-                                <div className=" col col-9">
+                                <div className=" col col-lg-9">
                                     <input type="text" className="from-control" value={data?data.name:'data not found'}/>
                                 </div> 
                         </div>  
 
                         <div className="col-12 row mb-3">
-                                <div className="col col-3 centered-value">
+                                <div className="col col-lg-3 centered-value">
                                     Email
                                 </div>
-                                <div className=" col col-9">
+                                <div className=" col col-lg-9">
                                     <input type="text" className="from-control" value={data?data.email:'data not found'}/>
                                 </div> 
                         </div> 
                         {/* form phone number */}
                         <div className="col-12 row mb-3">
-                                <div className="col col-3 centered-value">
+                                <div className="col col-lg-3 centered-value">
                                     Phone-Number
                                 </div>
                                 <div className=" col col-9">
@@ -67,21 +67,21 @@ export default function Profile() {
                         </div> 
                         {/* radio button */}
                         < div className="col-12 row mb-3">
-                                <div className="col col-3 centered-value">
+                                <div className="col col-lg-3 col-12 centered-value">
                                     Gender
                                 </div>
-                                <div className=" col col-9">
+                                <div className=" col col-lg-9">
                                 <div>
                                     <input className="form-check-input mr-4" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
-                                   <span class="ms-2">Laki-laki</span> 
+                                   <span class="ms-lg-2">Laki-laki</span> 
 
-                                   <input className="form-check-input mr-4 ms-4" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
-                                   <span class="ms-2">Perempuan</span> 
+                                   <input className="form-check-input mr-lg-4 col-12 ms-4" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
+                                   <span class="ms-lg-2">Perempuan</span> 
                                 </div>
                                 </div> 
                         </div> 
                         {/* tanggal */}
-                        < div className="col-12 row">
+                        < div className="col-12 mb-3 row">
                                 <div className="col col-3 centered-value">
                                     Birtday
                                 </div>
@@ -90,7 +90,7 @@ export default function Profile() {
                                 </div> 
                         </div>
                     </div>
-                    <div className="col-4">
+                    <div className="col-lg-4 col-6" ms-auto>
                         <img src={profile} style={{width:'200px',height:'200px',borderRadius:'100px'}}/> 
                     </div>
                 </div>

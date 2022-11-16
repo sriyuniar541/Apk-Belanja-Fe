@@ -1,7 +1,9 @@
 import React,{useState,useEffect} from 'react'
-import axios from 'axios'
+import axios from 'axios' //untuk interaksi dengan database
 // import styles from'./Product.module.css'
 import Alert from "../../componen/Alert";
+
+
 
 export default function Product() {
   const [data,setData] = useState([])
@@ -16,7 +18,7 @@ export default function Product() {
     name: "",
     stock: "",
     price: "",
-    category_id: "1",
+    categorys_id: 1,
     search: ""
   })
   const [sortBy,setSortBy] = useState("name")
@@ -104,7 +106,7 @@ export default function Product() {
     formData.append("name",inputData.name)
     formData.append("stock",inputData.stock)
     formData.append("price",inputData.price)
-    formData.append("category_id",inputData.category_id)
+    formData.append("categorys_id",inputData.categorys_id)
     formData.append("photo",photo)
     console.log(formData)
     if(!selected){
