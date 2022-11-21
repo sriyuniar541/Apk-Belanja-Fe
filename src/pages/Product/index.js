@@ -1,11 +1,25 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios' //untuk interaksi dengan database
-// import styles from'./Product.module.css'
 import Alert from "../../componen/Alert";
+import NavbarBaru from './../../componen/navbarBaru'
+import Button from 'react-bootstrap/Button';
+import styles from '../../componen/Componen.module.css';
+import logoTas from '../../image/tas.png' //untuk import gambar
+import email from '../../image/mail (3) 1.png' //untuk import gambar
+import lonceng from '../../image/bell (1) 1.png' //untuk import gambar
+import pr from '../../image/gbr.png' //untuk import gambar
+import  SideBar from '../../componen/sideBar' //untuk import gambar
+
+
+
+
 
 
 
 export default function Product() {
+//import url dari env
+  let urlGet = process.env.REACT_APP_URL_GET
+
   const [data,setData] = useState([])
   const [photo,setPhoto] = useState(null)
   const [message,setMessage]  = useState({
@@ -28,7 +42,7 @@ export default function Product() {
   const [temp,setTemp] = useState(null)
 
   const deleteData = () => {
-    axios.delete(`http://localhost:4000/product/${selected}`)
+    axios.delete(`${urlGet}/${selected}`)
     .then((res)=>{
         console.log("delete data success")
         console.log(res)
@@ -78,8 +92,14 @@ export default function Product() {
     getData()
   },[])
 
-  let users = `http://localhost:4000/product?sortby=${sortBy}&sort=${sort}&search=${inputData.search}`
+  
+ 
+  console.log(urlGet)
+  let users = `${urlGet}?sortby=${sortBy}&sort=${sort}&search=${inputData.search}`
   const getData = ()=> {
+    let token = localStorage.getItem('token')
+    console.log('my token')
+
     axios.get(users)
     .then((res)=>{
         console.log("get data success")
@@ -96,12 +116,13 @@ export default function Product() {
          setData([])
         setMessageShow(true)
       setMessage({title:"fail",text:"get data fail",type:"danger"})
-      messageTime()
+      
+      //messageTime()
     })
   }
 
   const postForm = (e) => {
-    e.preventDefault()
+     e.preventDefault()
     const formData = new FormData()
     formData.append("name",inputData.name)
     formData.append("stock",inputData.stock)
@@ -111,7 +132,7 @@ export default function Product() {
     console.log(formData)
     if(!selected){
       axios.
-      post('http://localhost:4000/product',formData,{
+      post(`${urlGet}`,formData,{
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -131,7 +152,7 @@ export default function Product() {
     })
   } else {
     axios.
-    put(`http://localhost:4000/product/${selected}`,formData,{
+    put(`${urlGet}/${selected}`,formData,{
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -168,30 +189,57 @@ export default function Product() {
   return (
     <div>
 
+    <NavbarBaru/>
+    <div className='Container-fluid shadow p-3 bg-white rounded'>
+            <div className='Container'>
+                <div className={styles.navbar}>
+                <div className='ContainerNav col-12'>
+                    <div className='row d-flex justify-content-between'>
+                        <div className='col-lg-2 col-6 offset-4  d-flex offset-lg-1'>
+                            <img alt="" src={logoTas} width="40" height="40" className="d-inline-block align-top"/>{' '}
+                                <h2 className="text-danger mx-2">Blanja</h2>
+                        </div>
+                        <div className='col-lg-3  col-6 ms-auto'>
+                            <Button variant=""className="mr-lg-2"><img src={lonceng}/></Button>
+                            <Button variant=""className="mr-lg-2"><img src={email}/></Button>
+                            <Button href='http://localhost:3000/profile' variant=""><img src={pr} style={{borderRadius:'50%'}}/></Button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+    
+          <div className='container-fluid'>
+            <div className='row'>
+              <div className='col-lg-4'>
+              <SideBar/>
+              </div>
 
+              <div className='col-lg-8 px-5'style={{background:'#F5F5F5'}}>
+                <div className='mx-5 bg-white'>
+                {/* post data */}
+                <form onSubmit={postForm} className="container mt-3 p-2 border border-3 mt-5">
+                  <div className="d-flex flex-row">
+                  <input className="form-control"  type="text" value={inputData.name} name="name" onChange={handleChange} placeholder="nama"/>
+                  <input  className="form-control" type="number" value={inputData.stock} name="stock" onChange={handleChange} placeholder="stock"/>
+                  </div>
+                  <div className="d-flex flex-row">
+                  <input  className="form-control" type="number" value={inputData.price} name="price" onChange={handleChange} placeholder="price"/>
+                  <input className="form-control"  type="file" name="photo" onChange={handlePhoto} placeholder="photo" required/>
+                  </div>
+                    {
+                      onedit ? 
+                        <button className='btn btn-primary' type="submit">
+                          update
+                        </button>            
+                      :
+                        <button className='btn btn-primary' type="submit">
+                          post
+                        </button>
 
-      {/* post data */}
-      <form onSubmit={postForm} className="container mt-3 p-2 border border-3 ">
-        <div className="d-flex flex-row">
-        <input className="form-control"  type="text" value={inputData.name} name="name" onChange={handleChange} placeholder="nama"/>
-        <input  className="form-control" type="number" value={inputData.stock} name="stock" onChange={handleChange} placeholder="stock"/>
-        </div>
-        <div className="d-flex flex-row">
-        <input  className="form-control" type="number" value={inputData.price} name="price" onChange={handleChange} placeholder="price"/>
-        <input className="form-control"  type="file" name="photo" onChange={handlePhoto} placeholder="photo" required/>
-        </div>
-          {
-            onedit ? 
-              <button className='btn btn-primary' type="submit">
-                update
-              </button>            
-            :
-              <button className='btn btn-primary' type="submit">
-                post
-              </button>
-
-          }
-      </form>
+                    }
+                </form>
 
       {/* filter */}
       <div className="container bg-info mt-2 p-2 rounded">
@@ -215,12 +263,12 @@ export default function Product() {
 
       {/* get data */}
       <table className='table container'>
-        <thead>
+        <thead >
           <tr>
             <th>number</th>
-            <th>nama</th>
-            <th>stock</th>
-            <th>harga</th>
+            <th>Product nama</th>
+            <th>Stock</th>
+            <th>Price</th>
             <th>photo</th>
           </tr>
         </thead>
@@ -259,6 +307,18 @@ export default function Product() {
           </button>
           </div>
         }
+        </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
 
       {/* alert */}
       {messageShow && 
@@ -280,124 +340,6 @@ export default function Product() {
 
 
 
-
-
-
-
-
-
-
-// import React,{useState,useEffect} from 'react'
-// import axios from 'axios'
-// import styles from'./Product.module.css'
-
-// export default function Product() {
-//   const [data,setData] = useState([])
-  // const [photo,setPhoto] = useState(null)
-  // const [inputData, setInputData] = useState({
-  //   name: "",
-  //   stock: "",
-  //   price: "",
-  //   category_id: "1"
-  // })
-
-  // let users = 'http://localhost:4000/product'
-  // useEffect(()=>{
-    
-
-    //untuk get data
-  //     axios.get(users)
-  //     .then((res)=>{
-  //         console.log("get data success")
-  //         console.log(res.data.data)
-  //         res.data && setData(res.data.data)
-  //     })
-  //     .catch((err)=>{
-  //         console.log("get data fail")
-  //         console.log(err)
-  //     })
-  // },[])
-  // const postForm = (e) => {
-  //   e.preventDefault()
-  //   const formData = new FormData()
-  //   formData.append("name",inputData.name)
-  //   formData.append("stock",inputData.stock)
-  //   formData.append("price",inputData.price)
-  //   formData.append("category_id",inputData.category_id)
-  //   formData.append("photo",photo)
-  //   console.log(formData)
-  //   axios.
-  //   post('http://localhost:4000/product',formData,{
-  //     headers: {
-  //       "Content-Type": "multipart/form-data",
-  //     },
-  //   }).then((res)=>{
-  //     console.log("input data success")
-  //     console.log(res)
-  //   }).catch((err)=>{
-  //     console.log("input data fail")
-  //     console.log(err)
-  //   })
-  // }
-  // const handlePhoto = (e) => {
-  //   setPhoto(e.target.files[0])
-  //   console.log(e.target.files[0])
-  // }
-
-  // const handleChange = (e) =>{
-  //   setInputData({
-  //     ...inputData,
-  //     [e.target.name]: e.target.value
-  //   })
-  //   console.log(data)
-  // }
-
-  // return (
-  //   <div>
-      // eslint-disable-next-line no-lone-blocks
-      {/* post data
-      <form onSubmit={postForm} className="container mt-3 p-2 border">
-        <input type="text" value={inputData.name} name="name" onChange={handleChange} placeholder="nama"/>
-        <input type="number" value={inputData.stock} name="stock" onChange={handleChange} placeholder="stock"/>
-        <input type="number" value={inputData.price} name="price" onChange={handleChange} placeholder="price"/>
-        <input type="file" name="photo" onChange={handlePhoto} placeholder="photo"/>
-
-        <button className='btn btn-primary' type="submit">
-          input
-        </button>
-      </form>  */}
-
-
-      {/* get data */}
-       // eslint-disable-next-line no-lone-blocks
-       {/* <table className='table'>
-         <thead>
-           <tr>
-             <th>id</th>
-             <th>nama</th>
-             <th>stock</th>
-             <th>harga</th>
-             <th>categorys_id</th>
-             <th>photo</th>
-           </tr>
-         </thead>
-         <tbody>
-           {data.map((item,index)=>(
-           <tr key={index+1}>
-                <td>{index+1}</td>
-                <td>{item.name}</td>
-                <td>{item.stock}</td>
-                <td>{item.price}</td>
-                <td>{item.categorys_id}</td>
-                <td><img src={item.photo} style={{width:'100px',height:'100px'}}/></td>
-            </tr>
-          ))
-          }
-        </tbody>
-      </table>
-    </div>
-  )
-} */}
 
 
 

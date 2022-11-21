@@ -2,22 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App'; //untuk import
-// import Home from './home'; 
-// import Product from './product'; 
- import './custom.scss';
-// import { BrowserRouter,Router,Route,Routes,Navigate } from 'react-router-dom';
+import './custom.scss';
+import { Provider } from 'react-redux'; //import store dari redux 
+import store from './redux/storage'; //import store dari redux 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
   
-  </React.StrictMode>
+  <Provider store={store}>
+     <App/> 
+  </Provider>
+
 );
-
-
-
 
 
 //untuk menampilkan di layar ditulis componen dalam <React.StrictMode>

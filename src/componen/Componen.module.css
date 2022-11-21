@@ -1,6 +1,7 @@
-/* body{
-    background-color: blue;
-} */
+body {
+    font-family: "Metropolis";
+}
+
 .navbar{
     /* background-color: aqua; */
     width: 100%;

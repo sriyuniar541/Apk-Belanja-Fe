@@ -6,7 +6,7 @@ import styles from '../login/Login.module.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import FormK from '../../componen/form';
-
+import "@fontsource/metropolis";
 
 
 function LoginCustommer() {

@@ -1,4 +1,4 @@
-import axios from "axios"; //untuk menampilkan API di website 
+ import axios from "axios"; //untuk menampilkan API di website 
 import { useEffect, useState } from "react"; 
 import styles from './Profile.module.css'; //mengimpor css kita dan menajdikan componin yg bisa dipakai lagi
 import DatePicker from "react-datepicker"; //untuk mengimpor tgl dari npm

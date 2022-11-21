@@ -1,68 +1,10 @@
 body {
-  margin: 0;
-  font-family: SemiBold;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Metropolis";
 }
-
-
-/* import font */
-@font-face {
-  font-family: ('Bold');
-  src: url('./font/Metropolis-Bold.otf') format('truetype');
-}
-
-@font-face {
-  font-family: ('Black');
-  src: url('./font/Metropolis-Black.otf') format('truetype');
-}
-@font-face {
-  font-family: ('ExtraBold');
-  src: url('./font/Metropolis-ExtraBold.otf') format('truetype');
-}
-@font-face {
-  font-family: ('ExtraBold');
-  src: url('./font/Metropolis-ExtraBold.otf') format('truetype');
-}
-
-@font-face {
-  font-family: ('ExtraLight');
-  src: url('./font/Metropolis-ExtraLight.otf') format('truetype');
-}
-@font-face {
-  font-family: ('Light');
-  src: url('./font/Metropolis-Light.otf') format('truetype');
-}
-@font-face {
-  font-family: ('Medium');
-  src: url('./font/Metropolis-Medium.otf') format('truetype');
-}
-@font-face {
-  font-family: ('Regular');
-  src: url('./font/Metropolis-Regular.otf') format('truetype');
-}
-@font-face {
-  font-family: ('SemiBold');
-  src: url('./font/Metropolis-SemiBold.otf') format('truetype');
-}
-
-@font-face {
-  font-family: ('Thin');
-  src: url('./font/Metropolis-Thin.otf') format('truetype');
-}
-
-
-
-
-
-
-
-
 
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: SemiBold;
 }
 nav {
   width: 100vw;
@@ -71,5 +13,6 @@ nav {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  font-family: "Metropolis";
 
 }

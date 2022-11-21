@@ -1,34 +1,68 @@
-import React from "react";
 import NavbarSebelumLogin from "../componen/navbar2";
 import Star from '../../src/image/Star.png' 
 import Photo from '../image/cth.png' 
 import Button from 'react-bootstrap/Button';
 import CardsProduct from "../componen/CardsProduct";
+import { Link, useParams} from 'react-router-dom'; //menghubungkan anatar halaman
+import React, { useState,useEffect } from "react";
+import axios from 'axios' //untuk interaksi dengan database
 
 
 
-export default function DetailProduct() {
+
+
+
+const DetailProduct = (props) => {
+    
+    const [product,setProduct] = useState([])
+    const {id} =useParams() //untuk berpindah sesuai params (id)
+  
+    let users = `http://localhost:4000/product/${id}`
+    useEffect(()=>{
+        
+
+        // untuk get data
+        axios.get(users)
+        .then((res)=>{
+            console.log("get data success")
+            console.log(res.data.data)
+            res.data && setProduct(res.data.data)
+        })
+        .catch((err)=>{
+            console.log("get data fail")
+            console.log(err)
+        })
+    },[])
+
+
+
+
     return (
         <div>
             <NavbarSebelumLogin/>
             <div className="container">
                 <div className="row">
                     <div className="col-12 d-flex">
-                        <a href="http://localhost:3000/Home">Home </a>
+                        <Link to ='/'>Home</Link>
                         <p>></p>
                         <a href="#">Category </a>
                         <p>></p>
                         <a href="#">T-Shirt </a>
+                        <p style={{marginRight:'20px',color:'grey'}}><i>Detail product - {id}</i></p>
+                        <hr/>
                     </div>
                 </div>
             </div>
-            <div className="container">
+            
+            {/* get detail product by id */}
+            {product.map((products)=>
+                <div className="container ">
                 <div className="row">
                     <div className="col-lg-4">
-                        <img src={Photo}/>
+                        <img src={products.photo}/>
                     </div>
                     <div className="col-lg-6 offset-lg-1 ">
-                        <h6>Baju Pria</h6>
+                        <h6>{products.name}</h6>
                         <p>Zalora Shirt</p>
                         <div className='star d-flex'>
                             <img src={Star}/>
@@ -38,7 +72,7 @@ export default function DetailProduct() {
                             <img src={Star}/>
                         </div>
                         <p className='text-secondary'>Price</p>
-                        <h6>$ 200.000</h6>
+                        <h6>$ {products.price}</h6>
                         <p>Color</p>
                         <button className=" border-white bg-black rounded-circle mr-3" style={{width:'36px',height:'36px'}}></button>
                         <button className="border-white bg-danger rounded-circle mr-3"style={{width:'36px',height:'36px'}}></button>
@@ -78,25 +112,21 @@ export default function DetailProduct() {
                     </div>
                     </div>
                 </div>
-            </div> 
+                </div> 
+            )}
+            
             <div className='container mt-5'>
                 <div className="col-12">
                     <h5>Informasi Product</h5>
                     <h6>Condition</h6>
                     <h6 className='text-danger'>New</h6>
                     <h6>Description</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Donec non magna rutrum, pellentesque augue eu, sagittis velit. Phasellus quis laoreet dolor. Fusce nec pharetra quam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent sed enim vel turpis blandit imperdiet ac ac felis. Etiam tincidunt tristique placerat. Pellentesque a consequat mauris, vel suscipit ipsum. 
-                        Donec ac mauris vitae diam commodo vehicula. Donec quam elit, sollicitudin eu nisl at, ornare suscipit magna.
-
-                        Donec non magna rutrum, pellentesque augue eu, sagittis velit. Phasellus quis laoreet dolor. Fusce nec pharetra quam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent sed enim vel turpis blandit imperdiet ac ac felis.
-
-                        In ultricies rutrum tempus. Mauris vel molestie orci.</p>
+                    <p style={{textAlign:'justify'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Donec non magna rutrum, pellentesque augue eu, sagittis velit. Phasellus quis laoreet dolor. Fusce nec pharetra quam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent sed enim vel turpis blandit imperdiet ac ac felis. Etiam tincidunt tristique placerat. Pellentesque a consequat mauris, vel suscipit ipsum. Donec ac mauris vitae diam commodo vehicula. Donec quam elit, sollicitudin eu nisl at, ornare suscipit magna.Donec non magna rutrum, pellentesque augue eu, sagittis velit. Phasellus quis laoreet dolor. Fusce nec pharetra quam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent sed enim vel turpis blandit imperdiet ac ac felis.In ultricies rutrum tempus. Mauris vel molestie orci.</p>
                 </div>
                 <h6>Product Review</h6>
                 <div>
                     <h2> 5.0</h2>
-                    <div className='star d-flex'>
+                    <div className='star d-flex mb-5'>
                             <img src={Star}/>
                             <img src={Star}/>
                             <img src={Star}/>
@@ -104,7 +134,7 @@ export default function DetailProduct() {
                             <img src={Star}/>
                         </div>
                 </div>
-                <h5 className='mt-5'>You can also like this</h5>
+                {/* <h5 className='mt-5'>You can also like this</h5>
                 <div className="daftarProduct ">
                     <div className="row d-flex justify-content-center g-5">
                         <div className="col-lg-2 col-6 mr-2">
@@ -145,8 +175,10 @@ export default function DetailProduct() {
                         </div>
 
                     </div>
-                </div>
+                </div> */}
             </div> 
         </div>
     )
 }
+
+export default DetailProduct

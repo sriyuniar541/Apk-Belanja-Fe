@@ -1,18 +1,11 @@
-
-import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import styles from './Componen.module.css';
 import logoTas from './../image/tas.png' //untuk import gambar
 import segitiga from './../image/Vector (3).png' //untuk import gambar
 import keranjang from './../image/shop.png' //untuk import gambar
-import email from './../image/Vector (2).png' //untuk import gambar
-import lonceng from './../image/Vector (4).png' //untuk import gambar
-import pr from './../image/gbr.png' //untuk import gambar
-import Image from 'react-bootstrap/Image'
-import LoginSeller from '../pages/login/login';
-
-
+import { Link } from 'react-router-dom'; //menghubungkan anatar halaman
+import "@fontsource/metropolis";
 
 
 function NavbarSebelumLogin() {
@@ -25,7 +18,7 @@ function NavbarSebelumLogin() {
             <div className='row'>
               <div className='col-lg-2 col-4 d-flex offset-lg-1'>
                   <img alt="" src={logoTas} width="40" height="40" className="d-inline-block align-top"/>{' '}
-                    <h2 className="text-danger mx-2">Blanja</h2>
+                    <h2 className="text-danger mx-2" style={{fontFamily:'Black'}}>Blanja</h2>
               </div>
               <div className='col-lg-4 col-8'>
               <Form className="d-flex">
@@ -34,9 +27,10 @@ function NavbarSebelumLogin() {
               </Form>
               </div> 
               <div className='col-lg-4 col-12 offset-lg-1 '>
-                  <Button href='http://localhost:3000/MyBag' variant=""className={styles.ke}><img src={keranjang}/></Button>
-                  <Button href='http://localhost:3000/login' variant="danger" style={{borderRadius:'25px'}} className={styles.btd}>login</Button>{' '}
-                  <Button href='http://localhost:3000/sighup' variant="light" style={{borderRadius:'25px',borderColor:'#9B9B9B'}} className={styles.btd2}>sigup</Button>{' '}
+                  {/* <Link to ='/MyBag'><img src={keranjang}/> */}
+                  <Button variant=""className="mr-lg-2"><Link to ='/MyBag'><img src={keranjang}/></Link></Button>
+                  <Button variant="danger" style={{borderRadius:'25px'}} className={styles.btd}><Link to ='/login'style={{textDecoration:'none',color:'black'}}>Login</Link></Button>{' '}
+                  <Button variant="light" style={{borderRadius:'25px',borderColor:'#9B9B9B'}} className={styles.btd2}><Link to ='/sighup'style={{textDecoration:'none',color:'black'}}>sighup</Link></Button>{' '}
               </div>
             </div>
           </div>

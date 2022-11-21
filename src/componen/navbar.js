@@ -9,7 +9,7 @@ import email from './../image/mail (3) 1.png' //untuk import gambar
 import lonceng from './../image/bell (1) 1.png' //untuk import gambar
 import pr from './../image/gbr.png' //untuk import gambar
 import Image from 'react-bootstrap/Image'
-
+import { Link } from 'react-router-dom'; //menghubungkan anatar halaman
 
 
 
@@ -33,7 +33,7 @@ function NavbarLogin() {
               </Form>
               </div>
               <div className='col-lg-3 offset-lg-1 col-6 ms-auto'>
-                  <Button href='http://localhost:3000/MyBag' variant=""className="mr-lg-2"><img src={keranjang}/></Button>
+                  <Button variant=""className="mr-lg-2"><Link to ='/MyBag'><img src={keranjang}/></Link></Button>
                   <Button variant=""className="mr-lg-2"><img src={lonceng}/></Button>
                   <Button variant=""className="mr-lg-2"><img src={email}/></Button>
                   <Button href='http://localhost:3000/profile' variant=""><img src={pr} style={{borderRadius:'50%'}}/></Button>
