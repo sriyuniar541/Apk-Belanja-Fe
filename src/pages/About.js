@@ -21,8 +21,7 @@ export default function About() {
   })
   const [messageShow,setMessageShow]  = useState(true)
 
-  const [sortBy,setSortBy] = useState("name")
-  const [sort,setSort] = useState("asc")
+  
   const [selected,setSelected] = useState(null)
   const [inputData, setInputData] = useState({
     name: "",
@@ -40,17 +39,17 @@ export default function About() {
     setTimeout(()=>setMessageShow(false),3000)
   }
   useEffect(()=>{
-    console.log("checked", sortBy)
+    console.log("checked")
     getData()
-  },[sortBy,sort,inputData.search])
+  },[inputData.search])
   useEffect(()=>{
     getData()
   },[])
 
-  
+   
  
   console.log(urlGet)
-  let users = `${urlGet}?sortby=${sortBy}&sort=${sort}&search=${inputData.search}`
+  let users = `${urlGet}search=${inputData.search}`
   const getData = ()=> {
     let token = localStorage.getItem('token')
     console.log('my token')
@@ -98,15 +97,8 @@ export default function About() {
       <div className="container bg-info mt-2 p-2 rounded">
         Filter
       <div className="container d-flex flex-row">
-        <div className="">
-          <div className={`btn ${sortBy=="name"? "btn-primary":"btn-secondary"} ms-1`} onClick={()=>setSortBy("name")}>name</div>
-          <div className={`btn ${sortBy=="stock"? "btn-primary":"btn-secondary"} ms-1`} onClick={()=>setSortBy("stock")}>stock</div>
-          <div className={`btn ${sortBy=="price"? "btn-primary":"btn-secondary"} ms-1`} onClick={()=>setSortBy("price")}>price</div>
-        </div>
-        <div className="ms-1 border-start border-dark">
-          <div className={`btn ${sort=="asc"? "btn-primary":"btn-secondary"} ms-1`} onClick={()=>setSort("asc")}>asc</div>
-          <div className={`btn ${sort=="desc"? "btn-primary":"btn-secondary"} ms-1`} onClick={()=>setSort("desc")}>desc</div>
-        </div>
+        
+        
         <div className="search ms-2">
         <input type="text" className="form-control" value={inputData.search} name="search" onChange={handleChange} placeholder="search"/>
         </div>
@@ -143,9 +135,9 @@ export default function About() {
               {item.price}
             </td>
             <td>
-              <img src={item.photo} style={{width:'100px',height:'100px'}}/>
+              <img src={item.photo} style={{width:'100px',height:'100px'}} alt=''/>
             </td>
-          </tr>
+          </tr> 
           ))
           }
         </tbody>

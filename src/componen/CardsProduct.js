@@ -14,11 +14,11 @@ const CardsProduct = (props) => {
         <h6 className='text-danger'>$. {props.price}</h6>
         <p className='text-secondary'>{props.toko}</p>
         <div className='star d-flex'>
-            <img src={Star}/>
-            <img src={Star}/>
-            <img src={Star}/>
-            <img src={Star}/>
-            <img src={Star}/>
+            <img src={Star} alt='bintang'/>
+            <img src={Star} alt='bintang'/>
+            <img src={Star} alt='bintang'/>
+            <img src={Star} alt='bintang'/>
+            <img src={Star} alt='bintang'/>
         </div>
       </Card.Body>
     </Card>

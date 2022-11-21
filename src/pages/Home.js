@@ -7,6 +7,8 @@ import { Link, useParams} from 'react-router-dom'; //menghubungkan anatar halama
 import "@fontsource/metropolis";
 
 
+
+
 const Home = () => { 
     const [product,setProduct] = useState([])
     const {id} =useParams() //untuk berpindah sesuai params (id)
