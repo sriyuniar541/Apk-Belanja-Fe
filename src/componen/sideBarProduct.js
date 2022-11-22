@@ -6,6 +6,8 @@ import l2 from  './../image/tk.png'
 import l3 from  './../image/krg.png'
 import ubah from './../image/ub.png'
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link} from 'react-router-dom'; //menghubungkan anatar halaman
+
 
 
 export default function SideBar() {
@@ -35,10 +37,8 @@ export default function SideBar() {
                         <div className="d-flex">
                                 <Button href='#' variant=""><img src={l2} style={{}}/></Button>
                                 <NavDropdown title="Product" id="collasible-nav-dropdown" style={{marginTop:'3%'}}>
-                                <NavDropdown.Item href="#action/3.1">My Product</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">
-                                    Selling Product
-                                </NavDropdown.Item>
+                                <Link to='/product'><NavDropdown.Item href="#action/3.1">My Product</NavDropdown.Item></Link>
+                                <NavDropdown.Item href="#action/3.2">Selling Product</NavDropdown.Item>
                                 </NavDropdown>
                                
                         </div>

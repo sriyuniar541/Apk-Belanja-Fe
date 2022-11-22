@@ -16,8 +16,6 @@ const Home = () => {
 
   let users = 'http://localhost:4000/product'
   useEffect(()=>{
-    
-
     // untuk get data
       axios.get(users)
       .then((res)=>{
@@ -38,15 +36,15 @@ const Home = () => {
         <div>
             <NavbarBaru/>
             <NavbarSebelumLogin/> 
-            <div className="container ">
+            <div className="container">
                 {/* carausel */}
                 {/* <CarouselCategory/> */}
                 <h4>New</h4>
                 <p>You’ve never seen it before!</p>
                 </div>
                     <div className='container'>
-                        <div className='row '>
-                            <div className="col-lg-2">
+                        <div className='row d-flex'>
+                            <div className="col-lg-3 col-6">
                                 {product.map((products) => 
                                 <Link to ={`/DetailProduct/${products.id}`} style={{textDecoration:'none',color:'black'}}>
                                     <CardsProduct key={id} photo={products.photo} name={products.name} price={products.price} toko='Sri-Olshop'/>
@@ -56,20 +54,20 @@ const Home = () => {
                         </div>
                     </div>
 
-                <h4 className="mt-5">Popular</h4>
-                <p>Find clothes that are trending recently</p>
-                <div className="daftarProduct ">
-                    <div className="row d-flex justify-content-center g-5">
-                    <div className="col-lg-2 col-6 mr-2 bg-danger w-100 h-100 d-flex">
-                    {product.map((products) => 
-                            <Link to ={`/DetailProduct/${products.id}`}>
-                                <CardsProduct key={id} photo={products.photo} name={products.name} price={products.price} toko='Zalora Cloth'/>
-                            </Link>
-                            )}
+                
+                <div className="container ">
+                    <h4 className="mt-5">Popular</h4>
+                    <div className='col-12'><p>Find clothes that are trending recently</p></div>
+                    <div className=" row d-flex ">
+                        <div className='col-lg-2 col-6 '>
+                            {product.map((products) => 
+                                <Link to ={`/DetailProduct/${products.id}`} style={{textDecoration:'none',color:'black'}}>
+                                    <CardsProduct key={id} photo={products.photo} name={products.name} price={products.price} toko='Zalora Cloth'/>
+                                </Link>
+                                )}
                         </div>
                     </div>
                 </div>
-            
         </div>
     )
 }

@@ -119,7 +119,7 @@ export default function About() {
         </thead>
         <tbody>
           {data.map((item,index)=>(
-            <tr key={index+1} className={`${item.id == selected ? "bg-info" : "bg-white"}`} onClick={item.id == selected ? ()=>setSelected(null) : ()=>
+            <tr key={index+1} className={`${item.id === selected ? "bg-info" : "bg-white"}`} onClick={item.id === selected ? ()=>setSelected(null) : ()=>
             (setSelected(item.id))
             }>
             <td>

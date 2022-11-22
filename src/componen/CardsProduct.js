@@ -7,7 +7,7 @@ import "@fontsource/metropolis";
 
 const CardsProduct = (props) => {
   return (
-    <Card className='shadow-sm p-3 mb-5 bg-body rounded' style={{width:'238px',fontFamily:'Metropolis'}}>
+    <Card className='shadow-sm p-3 mb-3 bg-body rounded' style={{width:'238px',fontFamily:'Metropolis'}}>
       <Card.Img variant="top" src={props.photo} alt='gambar'/>
       <Card.Body>
         <Card.Title><b>{props.name}</b> </Card.Title>

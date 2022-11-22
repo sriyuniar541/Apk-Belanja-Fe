@@ -3,7 +3,6 @@ import ButtonCustom from '../../componen/button';
 import styles from '../login/Login.module.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-//import FormK from '../../componen/form';
 import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import {loginUser} from '../../redux/actions/login'
@@ -30,7 +29,6 @@ export default function LoginSeller() {
     let data = {
       email,password 
     }
-
     dispact (loginUser(data,navigate))
     
   }
@@ -46,9 +44,9 @@ export default function LoginSeller() {
                 <div className={styles.bt} ><ButtonCustom/></div>
                 <div className='justify-content-center mt-5 '>
                     <form onSubmit={postData} className='justify-content-center'>
-                        <Form.Control style={{ width:'400px',height:'48px',borderRadius:'4px',marginBottom:'10px'}} type='email' placeholder='Email' value={email} name='email' onChange={(e)=>setEmail(e.target.value)}/>
-                        <Form.Control style={{ width:'400px',height:'48px',borderRadius:'4px',marginBottom:'10px'}} type='password' placeholder='Password' value={password} name='password' onChange={(e)=>setPassword(e.target.value)}/>
-                        <a className={styles.fg} href="#">Forget password?</a>
+                        <Form.Control style={{ marginLeft:'32%',width:'400px',height:'48px',borderRadius:'4px',marginBottom:'10px'}} type='email' placeholder='Email' value={email} name='email' onChange={(e)=>setEmail(e.target.value)}/>
+                        <Form.Control style={{ marginLeft:'32%',width:'400px',height:'48px',borderRadius:'4px',marginBottom:'10px'}} type='password' placeholder='Password' value={password} name='password' onChange={(e)=>setPassword(e.target.value)}/>
+                        <a className style={{ marginLeft:'25%',color:'red'}} href="#">Forget password?</a>
                         <div className={styles.bt}>
                           {/* <ButtonUmum type='submit'/> */}
                           <Button variant="danger" type='submit' style={{ width:'401px',height:'48px',borderRadius:'25px'}}>Login</Button>{' '}
@@ -63,5 +61,3 @@ export default function LoginSeller() {
   ); 
 }
 
-//export default LoginSeller;
-//import Login from './pages/login';

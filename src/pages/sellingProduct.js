@@ -100,7 +100,7 @@ export default function SellingProduct() {
                             </div>
                         </div>
                             <hr/>
-                            <Button className ='bg-white border-secondary mb-5'style={{borderRadius:'20px',color:'black',marginRight:'50%'}}>Upload Foto</Button>{' '}
+                            <Button className ='bg-white border-secondary mb-5'style={{borderRadius:'20px',color:'black',textAlign:'center'}}>Upload Foto</Button>{' '}
                         </div>
                     </Card.Body>
                     </Card>
