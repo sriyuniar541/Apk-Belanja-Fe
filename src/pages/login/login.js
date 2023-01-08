@@ -8,9 +8,9 @@ import Form from 'react-bootstrap/Form';
 import {loginUser} from '../../redux/actions/login'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import NavbarBaru from '../../componen/navbarBaru'
 import Button from 'react-bootstrap/Button';
 import "@fontsource/metropolis";
+import { Link } from 'react-router-dom';
 
 
 
@@ -35,23 +35,23 @@ export default function LoginSeller() {
 
   return (
     <div>
-    <NavbarBaru/>
+    {/* <NavbarBaru/> */}
     <Container className='container'style={{ textAlign:'center'}} >
-        <Row className='row'>
+        <Row className='row py-5'>
             <div className='col-12'>
               <div className='d-flex justify-content-center'><GambarLogo/></div>
                 <h4 className={styles.h4}>Please login with your account</h4>
                 <div className={styles.bt} ><ButtonCustom/></div>
-                <div className='justify-content-center mt-5 '>
+                <div className=' col-lg-4 offset-lg-4 col-10 offset-1 justify-content-center mt-5 '>
                     <form onSubmit={postData} className='justify-content-center'>
-                        <Form.Control style={{ marginLeft:'32%',width:'400px',height:'48px',borderRadius:'4px',marginBottom:'10px'}} type='email' placeholder='Email' value={email} name='email' onChange={(e)=>setEmail(e.target.value)}/>
-                        <Form.Control style={{ marginLeft:'32%',width:'400px',height:'48px',borderRadius:'4px',marginBottom:'10px'}} type='password' placeholder='Password' value={password} name='password' onChange={(e)=>setPassword(e.target.value)}/>
-                        <a className style={{ marginLeft:'25%',color:'red'}} href="#">Forget password?</a>
+                        <Form.Control style={{ height:'48px',borderRadius:'4px',marginBottom:'10px'}} type='email' placeholder='Email' value={email} name='email' onChange={(e)=>setEmail(e.target.value)}/>
+                        <Form.Control style={{ height:'48px',borderRadius:'4px',marginBottom:'10px'}} type='password' placeholder='Password' value={password} name='password' onChange={(e)=>setPassword(e.target.value)}/>
+                        <p className='text-end' style={{color:'red'}} >Forget password?</p>
                         <div className={styles.bt}>
                           {/* <ButtonUmum type='submit'/> */}
-                          <Button variant="danger" type='submit' style={{ width:'401px',height:'48px',borderRadius:'25px'}}>Login</Button>{' '}
+                          <Button className= 'col-12' variant="danger" type='submit' style={{height:'48px',borderRadius:'25px'}}>Login</Button>
                           </div>
-                        <p className={styles.p}>Don't have a Tokopedia account? <a className="link text-danger" href="#">Register</a></p>
+                        <p className={styles.p}>Don't have a Tokopedia account? <Link to='/sighupSeller' className='text-danger'>Register</Link></p>
                     </form>
                 </div>
             </div>

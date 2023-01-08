@@ -1,11 +1,11 @@
 import React, { useState,useEffect } from "react";
 import NavbarSebelumLogin from "./../componen/navbar2";
 import CardsProduct from "./../componen/CardsProduct";
-import NavbarBaru from '../componen/navbarBaru'
 import axios from 'axios' //untuk interaksi dengan database
 import { Link, useParams} from 'react-router-dom'; //menghubungkan anatar halaman
 import "@fontsource/metropolis";
-
+import Carousel from "../componen/carousel";
+import Carousel2 from "../componen/carousel2";
 
 
 
@@ -34,23 +34,26 @@ const Home = () => {
     console.log(product)
     return (
         <div>
-            <NavbarBaru/>
             <NavbarSebelumLogin/> 
             <div className="container">
-                {/* carausel */}
-                {/* <CarouselCategory/> */}
-                <h4>New</h4>
+            <Carousel2/> 
+                <h4>Category</h4>
+                <p className="mb-4">Where are you currently looking for</p>
+                <div className="row d-flex justify-content-between ">
+                   <Carousel/> 
+                </div>
+                <h4 className="mt-4">New</h4>
                 <p>You’ve never seen it before!</p>
                 </div>
                     <div className='container'>
-                        <div className='row d-flex'>
-                            <div className="col-lg-3 col-6">
-                                {product.map((products) => 
+                        <div className='row  d-flex justify-content-between'>
+                        {product.map((products) =>
+                            <div className="col-lg-2 col-6 mx-lg-2" key={products.id}>
                                 <Link to ={`/DetailProduct/${products.id}`} style={{textDecoration:'none',color:'black'}}>
                                     <CardsProduct key={id} photo={products.photo} name={products.name} price={products.price} toko='Sri-Olshop'/>
                                 </Link>
-                                )}
                             </div>
+                            )}
                         </div>
                     </div>
 
@@ -58,15 +61,15 @@ const Home = () => {
                 <div className="container ">
                     <h4 className="mt-5">Popular</h4>
                     <div className='col-12'><p>Find clothes that are trending recently</p></div>
-                    <div className=" row d-flex ">
-                        <div className='col-lg-2 col-6 '>
-                            {product.map((products) => 
+                    <div className='row  d-flex justify-content-between'>
+                        {product.map((products) =>
+                            <div className="col-lg-2 col-6 mx-lg-2" key={products.id}>
                                 <Link to ={`/DetailProduct/${products.id}`} style={{textDecoration:'none',color:'black'}}>
-                                    <CardsProduct key={id} photo={products.photo} name={products.name} price={products.price} toko='Zalora Cloth'/>
+                                    <CardsProduct key={id} photo={products.photo} name={products.name} price={products.price} toko='Sri-Olshop'/>
                                 </Link>
-                                )}
+                            </div>
+                            )}
                         </div>
-                    </div>
                 </div>
         </div>
     )

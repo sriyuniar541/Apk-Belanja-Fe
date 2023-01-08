@@ -6,7 +6,7 @@ import segitiga from './../image/Vector (3).png' //untuk import gambar
 import keranjang from './../image/shop.png' //untuk import gambar
 import email from './../image/mail (3) 1.png' //untuk import gambar
 import lonceng from './../image/bell (1) 1.png' //untuk import gambar
-import pr from './../image/gbr.png' //untuk import gambar
+import pr from './../image/gbr1.png' //untuk import gambar
 import { Link } from 'react-router-dom'; //menghubungkan anatar halaman
 import { useState } from 'react';
 

@@ -1,156 +1,210 @@
-
-//import SellingProduct from "../pages/sellingProduct";
-//import SideBar from "../componen/sideBar";
-//import SideBarProduct from "../componen/sideBarProduct";
-import React,{useState,useEffect} from 'react'
-import axios from 'axios' //untuk interaksi dengan database
-// import styles from'./Product.module.css'
-import Alert from "./../componen/Alert";
-import NavbarBaru from './../componen/navbarBaru'
+import React, { useEffect, useState } from 'react'
+import axios  from 'axios'
 
 
-export default function About() {
-             
-  let urlGet = process.env.REACT_APP_URL_GET
 
-  const [data,setData] = useState([])
-  const [message,setMessage]  = useState({
-    title: "",
-    text: "",
-    type: "success"
-  })
-  const [messageShow,setMessageShow]  = useState(true)
+const About = () => {
+const [product,setProduct] = useState([])
 
+//const url = `http://localhost:4000/product`
+
+const getProduct = () => {
+  axios.get(`http://localhost:4000/product`)
+  .then((res)=>{
+    setProduct(res.data)
+    console.log(res.data)
+}).catch ((e)=>{
+    console.log(e)
+})
   
-  const [selected,setSelected] = useState(null)
-  const [inputData, setInputData] = useState({
-    name: "",
-    stock: "",
-    price: "",
-    categorys_id: 1,
-    search: ""
-  })
+}
+
+useEffect(()=>{
+    getProduct()
+},[])
 
 
 
-
-
-  const messageTime = () =>{
-    setTimeout(()=>setMessageShow(false),3000)
-  }
-  useEffect(()=>{
-    console.log("checked")
-    getData()
-  },[inputData.search])
-  useEffect(()=>{
-    getData()
-  },[])
-
-   
- 
-  console.log(urlGet)
-  let users = `${urlGet}search=${inputData.search}`
-  const getData = ()=> {
-    let token = localStorage.getItem('token')
-    console.log('my token')
-
-    axios.get(users)
-    .then((res)=>{
-        console.log("get data success")
-        console.log(res.data.data)
-        res.data && setData(res.data.data)
-        !selected && setMessageShow(true)
-        !selected && setMessage({title:"success",text:"get data success",type:"success"})
-        !selected && messageTime()
-        setSelected(null)
-      })
-      .catch((err)=>{
-        console.log("get data fail")
-        console.log(err)
-         setData([])
-        setMessageShow(true)
-      setMessage({title:"fail",text:"get data fail",type:"danger"})
-      
-      //messageTime()
-    })
-  }
-
- 
-    
-   
-  const handleChange = (e) =>{
-    setInputData({
-      ...inputData,
-      [e.target.name]: e.target.value
-    })
-    console.log(data)
-  }
 
   return (
     <div>
-
-    <NavbarBaru/>
-    
-
-
-      {/* filter */}
-      <div className="container bg-info mt-2 p-2 rounded">
-        Filter
-      <div className="container d-flex flex-row">
+      <p>hallo</p>
+      
         
+        {/* {product.map((p)=>{
+                  return (
+                    <div className='row'>
+                    <p>{p.name}</p>
+                </div>
+                  )
+                })} */}
         
-        <div className="search ms-2">
-        <input type="text" className="form-control" value={inputData.search} name="search" onChange={handleChange} placeholder="search"/>
-        </div>
-      </div>
-      </div>
-
-
-      {/* get data */}
-      <table className='table container'>
-        <thead>
-          <tr>
-            <th>number</th>
-            <th>nama</th>
-            <th>stock</th>
-            <th>harga</th>
-            <th>photo</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item,index)=>(
-            <tr key={index+1} className={`${item.id === selected ? "bg-info" : "bg-white"}`} onClick={item.id === selected ? ()=>setSelected(null) : ()=>
-            (setSelected(item.id))
-            }>
-            <td>
-              {index+1}
-            </td>
-            <td>
-              {item.name}
-            </td>
-            <td>
-              {item.stock}
-            </td>
-            <td>
-              {item.price}
-            </td>
-            <td>
-              <img src={item.photo} style={{width:'100px',height:'100px'}} alt=''/>
-            </td>
-          </tr> 
-          ))
-          }
-        </tbody>
-      </table>
-
-
-      {/* alert */}
-      {messageShow && 
-    <Alert title={message.title} text={message.text}  type={message.type} />
-    }
-
-
+      
     </div>
   )
 }
+
+export default About
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //import React, { useState } from 'react'
+// // import { Link, unstable_HistoryRouter } from 'react-router-dom'
+
+
+// //https://jsonplaceholder.typicode.com/todos
+
+// import React, { useEffect, useState } from 'react'
+// import CardsProduct from '../componen/CardsProduct'
+// import axios from 'axios'
+
+
+// // "userId": 1,
+// // "id": 1,
+// // "title": "delectus aut autem",
+// const About = () => {
+
+//   const [loading,setLoading] = ('')
+//   const [post, setPost] = useState([])
+//   const getPost = () => {
+//     // setLoading(true);
+//     axios
+//     .get('https://jsonplaceholder.typicode.com/todos')
+//     .then((res)=>{
+//       setPost(res.data)
+//       setLoading(false)
+//     }).catch((e)=>{
+//       setLoading(false)
+//       console.log(e)  
+//     })
+//   }
+
+//   useEffect(()=>{
+//     getPost()
+//   },[])
+
+//   return (
+    
+//     <div className='container post-list'>
+//       {loading&&<div>Loading...</div>}
+//       {post.map((p)=>{
+//         return (
+//           <div className='row'>
+//           <div className='col-lg-2 col-6 p-3'>
+//             <CardsProduct price='5000' name='baju baru'/>
+//           </div>
+//       </div>
+//         )
+//       })}
+//     </div>
+//   )
+// }
+
+// export default About
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // //belajar reactJs
+// // const Todulis = (props) => {
+// //  const [input,setInput] = useState(['makan','minum'])
+// //  const [tambah,setTambah] = useState('')
+// //   const histore = unstable_HistoryRouter 
+// //   return (
+// //   <div>
+// //     <p>title</p>
+// //     <input type='text' value={tambah} onChange={(p)=>{
+// //       setTambah(p.target.value)
+      
+// //     }}/>
+// //     <button onClick={()=>{  
+// //       if(tambah.length > 0) {
+// //         setInput((p)=> {
+// //           const data = [...p];
+// //           data.push(tambah);
+// //           return data
+// //         }); setTambah('')
+// //         }}
+// //       }>create</button>
+       
+// //   <br/>
+// //   {input.map((p,i)=>{
+// //     return (
+// //       <div key={i}>
+// //         <p>{p}</p>
+// //         {/*  <Link to={`/Todulis:${i}`}><button>hallo</button></Link> */}
+// //         <button onClick={()=>{
+// //           setInput((p)=>{
+// //               const data =[...p]
+// //               data.splice(i,1)
+// //               return data
+// //           })
+// //         }}>delete</button>
+// //         <button onClick={()=>{
+// //           setTambah(p);
+// //         }}>edite</button>
+// //       </div>
+// //     )
+// //   })}
+
+  
+   
+
+// //   </div>
+
+
+
+// //   )
+// // }
+ 
+// // export default Todulis
+
+
 

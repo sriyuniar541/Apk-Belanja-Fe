@@ -6,13 +6,16 @@ import Profile from './pages/profille/index';
 import { BrowserRouter,Route,Routes,Navigate} from 'react-router-dom';
 import LoginSeller from './pages/login/login';
 import  SigUpSeller from './pages/sigup';
+import SigUpCustommer from './pages/sigupCus';
 import  MyBag from './pages/MyBag';
 import LoginCustommer from './pages/login/loginCus'
 import ResetPasswordSeller from './pages/resetPasswordSeller'
 import DetailProduct from './pages/DetailProduct'
 import AuthChecker from '../src/componen/AuthChecker'
 import SellingProduct from './pages/sellingProduct'
+import CheckOut from './pages/checkout';
 import "@fontsource/metropolis";
+import Category from './pages/cateory';
 
 
 
@@ -39,16 +42,20 @@ untuk routes untuk menyambungkan ke halaman terkait pada page*/}
         } />
         <Route path='/about' element={<About/>} />
         <Route path='/profile' element={<Profile/>} />
-        <Route path='/login' element={<LoginSeller/>} />
+        <Route path='/loginSeller' element={<LoginSeller/>} />
         <Route path='/loginCus' element={<LoginCustommer/>} />
-        <Route path='/sighup' element={<SigUpSeller/>} />
+        <Route path='/sighupSeller' element={<SigUpSeller/>} />
+        <Route path='/sighupCustommer' element={<SigUpCustommer/>} />
         <Route path='/MyBag' element={<MyBag/>} />
         <Route path='/ResetPasswordSeller' element={<ResetPasswordSeller/>} />
         <Route path='/DetailProduct' element={<DetailProduct/>} />
         <Route path='/DetailProduct/:id' element={<DetailProduct/>} />
+        <Route path='/category/:categoryP' element={<Category/>} />
         <Route path='/ResetPasswordCus/' element={<ResetPasswordSeller/>} />
         <Route path='/SellingProduct/' element={<SellingProduct/>} />
-        ResetPasswordCus
+        <Route path='/checkout/' element={<CheckOut/>} />
+        <Route path='*' element={<page not Found/>} />
+        
     </Routes>
    
 

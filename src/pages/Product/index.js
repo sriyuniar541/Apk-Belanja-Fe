@@ -1,14 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios' //untuk interaksi dengan database
 import Alert from "../../componen/Alert";
-import NavbarBaru from './../../componen/navbarBaru'
-import Button from 'react-bootstrap/Button';
-import styles from '../../componen/Componen.module.css';
-import logoTas from '../../image/tas.png' //untuk import gambar
-import email from '../../image/mail (3) 1.png' //untuk import gambar
-import lonceng from '../../image/bell (1) 1.png' //untuk import gambar
-import pr from '../../image/gbr.png' //untuk import gambar
-import  SideBar from '../../componen/sideBar' //untuk import gambar
+// import NavbarBaru from './../../componen/navbarBaru'
+import NavbarSebelumLogin from '../../componen/navbar2';
+import  SideBar from '../../componen/sideBarProduct' //untuk import gambar
 
 
 
@@ -40,6 +35,7 @@ export default function Product() {
   const [selected,setSelected] = useState(null)
   const [onedit,setOnedit] = useState(false)
   const [temp,setTemp] = useState(null)
+  const [page, setPage] = useState(1)
 
   const deleteData = () => {
     axios.delete(`${urlGet}/${selected}`)
@@ -90,12 +86,12 @@ export default function Product() {
   },[sortBy,sort,inputData.search])
   useEffect(()=>{
     getData()
-  },[])
+  },[page])
 
   
  
   console.log(urlGet)
-  let users = `${urlGet}?sortby=${sortBy}&sort=${sort}&search=${inputData.search}`
+  let users = `${urlGet}?sortby=${sortBy}&sort=${sort}&search=${inputData.search}&limit=3&page=${page}`
   const getData = ()=> {
     let token = localStorage.getItem('token')
     console.log('my token')
@@ -186,40 +182,33 @@ export default function Product() {
     console.log(data)
   }
 
+  const next = () => {
+    setPage(page + 1)
+  }
+
+  const back = () => {
+    if (page === 0) {
+      setPage(page = 1)
+    }
+    else {
+       setPage(page - 1)
+    }
+  }
+
+
   return (
     <div>
-
-    <NavbarBaru/>
-    <div className='Container-fluid shadow p-3 bg-white rounded'>
-            <div className='Container'>
-                <div className={styles.navbar}>
-                <div className='ContainerNav col-12'>
-                    <div className='row d-flex justify-content-between'>
-                        <div className='col-lg-2 col-6 offset-4  d-flex offset-lg-1'>
-                            <img alt="" src={logoTas} width="40" height="40" className="d-inline-block align-top"/>{' '}
-                                <h2 className="text-danger mx-2">Blanja</h2>
-                        </div>
-                        <div className='col-lg-3  col-6 ms-auto'>
-                            <Button variant=""className="mr-lg-2"><img src={lonceng}/></Button>
-                            <Button variant=""className="mr-lg-2"><img src={email}/></Button>
-                            <Button href='http://localhost:3000/profile' variant=""><img src={pr} style={{borderRadius:'50%'}}/></Button>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-    
+    <NavbarSebelumLogin/>
           <div className='container-fluid'>
             <div className='row'>
               <div className='col-lg-4'>
               <SideBar/>
               </div>
 
-              <div className='col-lg-8 px-5'style={{background:'#F5F5F5'}}>
+              <div className='col-lg-8 p-5'style={{background:'#F5F5F5'}}>
                 <div className='mx-5 bg-white'>
                 {/* post data */}
-                <form onSubmit={postForm} className="container mt-3 p-2 border border-3 mt-5">
+                {/* <form onSubmit={postForm} className="container mt-3 p-2 border border-3 mt-5">
                   <div className="d-flex flex-row">
                   <input className="form-control"  type="text" value={inputData.name} name="name" onChange={handleChange} placeholder="nama"/>
                   <input  className="form-control" type="number" value={inputData.stock} name="stock" onChange={handleChange} placeholder="stock"/>
@@ -239,10 +228,10 @@ export default function Product() {
                         </button>
 
                     }
-                </form>
+                </form> */}
 
       {/* filter */}
-      <div className="container bg-info mt-2 p-2 rounded">
+      <div className="container mt-2 p-2 rounded " >
         Filter
       <div className="container d-flex flex-row">
         <div className="">
@@ -265,7 +254,7 @@ export default function Product() {
       <table className='table container'>
         <thead >
           <tr>
-            <th>number</th>
+            {/* <th>number</th> */}
             <th>Product nama</th>
             <th>Stock</th>
             <th>Price</th>
@@ -277,9 +266,9 @@ export default function Product() {
             <tr key={index+1} className={`${item.id == selected ? "bg-info" : "bg-white"}`} onClick={item.id == selected ? ()=>setSelected(null) : ()=>
             (setSelected(item.id),editForm(item))
             }>
-            <td>
+            {/* <td>
               {index+1}
-            </td>
+            </td> */}
             <td>
               {item.name}
             </td>
@@ -290,13 +279,14 @@ export default function Product() {
               {item.price}
             </td>
             <td>
-              <img src={item.photo} style={{width:'100px',height:'100px'}}/>
+              <img src={item.photo} style={{width:'100px',height:'100px'}} alt=''/>
             </td>
           </tr>
           ))
           }
         </tbody>
       </table>
+    
 
         {/* delete data */}
         {
@@ -307,6 +297,13 @@ export default function Product() {
           </button>
           </div>
         }
+
+        {/* pagination */}
+        <div className='d-flex text-end '>
+           <button className='btn btn-white border-secondary' onClick={next}>Next</button>
+          <button className='btn btn-white '>{page}</button>
+          <button className='btn btn-white border-secondary'onClick={back}>Back</button>
+        </div>
         </div>
               </div>
             </div>

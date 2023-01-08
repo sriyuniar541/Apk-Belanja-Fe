@@ -9,11 +9,13 @@ export const loginUser = (data,navigate) => async(dispact) => {
         dispact({type:'USER_LOGIN_PENDING'})
         const result = await axios.post('http://localhost:4000/users/login',data)
         const user = result.data.data 
-        console.log(user)
+        console.log(result.data.data )
+        console.log(result.data )
         
         
         //local storage
         localStorage.setItem('token',user.token)
+        localStorage.setItem('user',user)
         dispact({type:'USER_LOGIN_SUCCESS',payload:user})
         navigate('/product') //jika login berhasil maka diarahkan ke product
         console.log('user login success')

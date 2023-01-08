@@ -7,23 +7,25 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import FormK from '../../componen/form';
 import "@fontsource/metropolis";
+import { Link } from 'react-router-dom';
+import {Form, Button} from 'react-bootstrap';
 
 
 function LoginCustommer() {
   return (
     <Container className='container'style={{ textAlign:'center'}} >
-        <Row className='row'>
-            <div className='col-12'>
+        <Row className='row my-5'>
+            <div className='col-10 offset-1 col-lg-4 offset-lg-4 '>
               <div className='d-flex justify-content-center'><GambarLogo/></div>
-                <h4 className={styles.h4}>Please login with your account</h4>
-                <div className={styles.bt} ><ButtonSeller/></div>
-                <div className='mt-5'>
-                  <FormK type='email' placeholder='Email'/>
-                  <FormK type='password' placeholder='Password'/>
+                <h4 className='my-4'>Please login with your account</h4>
+                <div className=''><ButtonSeller/></div>
+                <div className='my-4'>
+                <Form.Control style={{ height:'48px',borderRadius:'4px',marginBottom:'10px'}} type='email' placeholder='Email' />
+                <Form.Control style={{ height:'48px',borderRadius:'4px',marginBottom:'10px'}} type='password' placeholder='Password' />
                 </div>
-                <a className={styles.fg} href="#">Forget password?</a>
-                <div className={styles.bt}><ButtonUmum/></div>
-                <p className={styles.p}>Don't have a Tokopedia account? <a className="link text-danger" href="#">Register</a></p>
+                <p className='text-end' >Forget password?</p>
+                <Button href='http://localhost:3000/login' variant="danger" className='col-12' style={{ height:'48px',borderRadius:'25px'}}>Login</Button>
+                <p className={styles.p}>Don't have a Tokopedia account? <Link to='/sighupCustommer' className='text-danger'>Register</Link></p>
             </div>
         </Row>
     </Container>
