@@ -1,4 +1,5 @@
 import NavbarSebelumLogin from "../componen/navbar2";
+import { useSelector } from 'react-redux'; 
 import Star from '../../src/image/Star.png'
 import Button from 'react-bootstrap/Button';
 import { Link, useParams } from 'react-router-dom'; //menghubungkan anatar halaman
@@ -11,9 +12,15 @@ import axios from 'axios' //untuk interaksi dengan database
 
 
 const DetailProduct = (props) => {
-
+    const token = localStorage.getItem('token')
     const [product, setProduct] = useState([])
     const { id } = useParams() //untuk berpindah sesuai params (id)
+    const user = useSelector((state) => state.user.user)
+
+    useEffect(()=>{
+    console.log(user)
+    console.log(user.id)
+    },[user])
 
     let users = `http://localhost:4000/product/${id}`
     useEffect(() => {
@@ -33,22 +40,21 @@ const DetailProduct = (props) => {
 
     
      
-    const user_id='b2b1a7f1-51d2-4945-8c69-00ea3567e0ad'
-
+    const count = 1
     const AddBag = (e) => {
-        // localStorage.setItem('addBag',JSON.stringify(product))
         console.log('tambah product', product)
         console.log(e.target.files)
         e.preventDefault()
         const formData = new FormData()
         formData.append('products_id',product.id)
-        formData.append('categorys_id',product.categorys_id
-        )
-        formData.append('user_id',user_id)
+        formData.append('categorys_id',product.categorys_id)
+        formData.append('user_id',user.id)
+        formData.append('count',count)
         console.log(formData)
         axios.post('http://localhost:4000/addProduct', formData , {
             headers: {
                'Content-Type' : 'multipart/form-data',
+               Authorization : `Bearer ${token}`
               
            },
    }) 
@@ -62,25 +68,7 @@ const DetailProduct = (props) => {
    })
         
     }
-        const addBagProduct = () => {
-             axios.post('http://localhost:4000/addProduct', product , {
-                 headers: {
-                    'Content-Type' : 'multipart/form-data',
-                    // "Content-Type": "aplication/json",
-                    'accept' :'aplication/json'
-                    // "Content-Type": "multipart/form-data"
-
-                },
-        }) 
-        .then((res) => {
-            console.log(res,"post data success")
-        })
-        .catch((err) => {
-            console.log(err.message, 'post data fail')
-        })
-
-        }
-    // }
+        
     
 
     return (

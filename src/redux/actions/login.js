@@ -9,8 +9,8 @@ export const loginUser = (data,navigate) => async(dispact) => {
         dispact({type:'USER_LOGIN_PENDING'})
         const result = await axios.post('http://localhost:4000/users/login',data)
         const user = result.data.data 
-        console.log(result.data.data )
-        console.log(result.data )
+        console.log(result.data.data ,'data dari login data2')
+        console.log(result.data,'data dari login data1' )
         
         
         //local storage
