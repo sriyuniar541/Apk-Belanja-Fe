@@ -3,7 +3,8 @@ import axios from 'axios' //untuk interaksi dengan database
 import Alert from "../../componen/Alert";
 // import NavbarBaru from './../../componen/navbarBaru'
 import NavbarSebelumLogin from '../../componen/navbar2';
-import  SideBar from '../../componen/sideBarProduct' //untuk import gambar
+import SideBar from "../../componen/sideBar";
+import { Link } from 'react-router-dom';
 
 
 
@@ -14,7 +15,7 @@ import  SideBar from '../../componen/sideBarProduct' //untuk import gambar
 export default function Product() {
 //import url dari env
   let urlGet = process.env.REACT_APP_URL_GET
-
+  let token = localStorage.getItem('token')
   const [data,setData] = useState([])
   const [photo,setPhoto] = useState(null)
   const [message,setMessage]  = useState({
@@ -37,8 +38,8 @@ export default function Product() {
   const [temp,setTemp] = useState(null)
   const [page, setPage] = useState(1)
 
-  const deleteData = () => {
-    axios.delete(`${urlGet}/${selected}`)
+  const deleteData = (id) => {
+    axios.delete(`${urlGet}/${id}`)
     .then((res)=>{
         console.log("delete data success")
         console.log(res)
@@ -48,6 +49,7 @@ export default function Product() {
         getData()
       })
       .catch((err)=>{
+        alert('delete fail',err)
         console.log("delete data fail")
         console.log(err)
         setMessageShow(true)
@@ -91,12 +93,17 @@ export default function Product() {
   
  
   console.log(urlGet)
-  let users = `${urlGet}?sortby=${sortBy}&sort=${sort}&search=${inputData.search}&limit=3&page=${page}`
+  let users = `http://localhost:4000/product/user?sortby=${sortBy}&sort=${sort}&search=${inputData.search}&limit=3&page=${page}`
   const getData = ()=> {
     let token = localStorage.getItem('token')
     console.log('my token')
 
-    axios.get(users)
+    axios.get(users , {
+        headers: {
+            Authorization : `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+        },
+    })
     .then((res)=>{
         console.log("get data success")
         console.log(res.data.data)
@@ -129,9 +136,10 @@ export default function Product() {
     if(!selected){
       axios.
       post(`${urlGet}`,formData,{
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+         headers: {
+            Authorization : `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+        }
       }).then((res)=>{
         console.log("input data success")
       console.log(res)
@@ -195,6 +203,39 @@ export default function Product() {
     }
   }
 
+  const updateData = (id) => {
+    axios.put(`http://localhost:4000/product/active/${id}`,{},{
+      headers: {Authorization : `Bearer ${token}`}
+  })
+      .then((res) => {
+          alert(" status active")
+          console.log(" status delivery")
+          getData()
+         
+      })
+      .catch((err) => {
+          alert("change fail, please login lagi gaiss")
+          console.log("change fail, please login lagi gaiss")
+          console.log(err)
+      }) 
+  }
+
+  const notActive = (id) => {
+    axios.put(`http://localhost:4000/product/notActive/${id}`,{},{
+      headers: {Authorization : `Bearer ${token}`}
+  })
+      .then((res) => {
+          alert(" status not active")
+          getData()
+         
+      })
+      .catch((err) => {
+          alert("change fail, please login lagi gaiss")
+          console.log("change fail, please login lagi gaiss")
+          console.log(err)
+      }) 
+  }
+
 
   return (
     <div>
@@ -232,7 +273,15 @@ export default function Product() {
 
       {/* filter */}
       <div className="container mt-2 p-2 rounded " >
-        Filter
+        <div className='d-flex justify-content-between'>
+            <h5 className='py-4'>My Products</h5>
+            <div className='py-4'>
+            <Link to='/Editcategory'><button className='btn btn-warning text-white mx-2 '>Category</button></Link> 
+           <Link to='/SellingProduct'><button className='btn btn-warning text-white'>Add Products</button></Link> 
+            </div>
+           
+        </div>
+        
       <div className="container d-flex flex-row">
         <div className="">
           <div className={`btn ${sortBy=="name"? "btn-primary":"btn-secondary"} ms-1`} onClick={()=>setSortBy("name")}>name</div>
@@ -258,14 +307,13 @@ export default function Product() {
             <th>Product nama</th>
             <th>Stock</th>
             <th>Price</th>
-            <th>photo</th>
+            <th>Category</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item,index)=>(
-            <tr key={index+1} className={`${item.id == selected ? "bg-info" : "bg-white"}`} onClick={item.id == selected ? ()=>setSelected(null) : ()=>
-            (setSelected(item.id),editForm(item))
-            }>
+            <tr key={index+1} className={`${item.id}`}>
             {/* <td>
               {index+1}
             </td> */}
@@ -279,7 +327,14 @@ export default function Product() {
               {item.price}
             </td>
             <td>
-              <img src={item.photo} style={{width:'100px',height:'100px'}} alt=''/>
+            {item.categorys}
+              {/* <img src={item.photo} style={{width:'100px',height:'100px'}} alt=''/> */}
+            </td>
+            <td> <Link to={`/EditProduct/${item.id}`}><button className='btn btn-warning text-white'>Edit</button></Link> 
+            {}
+            <button className='btn btn-danger text-white' onClick={()=> deleteData(item.id)}>Hapus</button>
+            <button className='btn btn-success text-white' onClick={()=> updateData(item.id)}>Active</button>
+            <button className='btn btn-primary text-white' onClick={()=> notActive(item.id)}>Not active</button>
             </td>
           </tr>
           ))

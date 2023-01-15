@@ -31,25 +31,15 @@ export default function SideBar() {
                             <div className="row">
                                 <div className="col-12 mt-3">
                                     <div className="d-flex">
-                                        <Button href='#' variant=""><img alt='' src={l1} /></Button>
                                     </div>
-                                    <div className="d-flex">
-                                        <Button href='#' variant=""><img alt='' src={l2} style={{}} />
+                                   
+                                        <Link to='/product'>
+                                        <Button variant=""><img alt='' src={l2} style={{}} />
                                         </Button>
-                                        <NavDropdown className="" id="collasible-nav-dropdown" style={{ marginTop: '3%' ,color:'white'}}>
-                                            <Link to='/product'>
-                                             <NavDropdown.Item href="#action/3.2">My Product</NavDropdown.Item>   
-                                            </Link>
-                                            <Link to='/sellingProduct'>
-                                            <NavDropdown.Item href="#action/3.2">Selling Product</NavDropdown.Item> 
-                                            </Link>
-                                        </NavDropdown>
-
-                                    </div>
-
-                                    <div className="d-flex">
-                                        <Button href='#' variant=""><img alt='' src={l3} /></Button>
-                                    </div>
+                                        </Link>
+                                        <Link to='/Order'>
+                                        <Button variant=""><img alt='' src={l3} /></Button>
+                                        </Link>
                                 </div>
                             </div>
                         </div>

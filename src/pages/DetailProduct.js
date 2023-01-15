@@ -76,7 +76,7 @@ const DetailProduct = (props) => {
             <NavbarSebelumLogin />
             <div className="container py-3">
                 <div className="row">
-                    <div className="col-12 d-flex">
+                    {/* <div className="col-12 d-flex">
                         <Link to='/'>Home</Link>
                         <p>></p>
                         <a href="#">Category </a>
@@ -84,7 +84,7 @@ const DetailProduct = (props) => {
                         <a href="#">T-Shirt </a>
 
                         <hr />
-                    </div>
+                    </div> */}
                 </div>
             </div>
 

@@ -5,16 +5,24 @@ import Button from 'react-bootstrap/Button';
 import NavbarSebelumLogin from "../componen/navbar2";
 import axios from 'axios' //untuk interaksi dengan database
 import NavbarBaru from "../componen/navbarBaru";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 
 export default function MyBag() {
+    
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
     const [addBag, setAddBag] = useState([])
     console.log(addBag)
-    const [checValue, setCheckValue] = useState([])
-    const [jumlah, setJumlah] = useState(1)
+    let [totalOrder,setTotalOrder] = useState(0)
+    // console.log(addBag)
+    let filterPayment = addBag.filter((p)=> p.status === 0)
+    console.log(filterPayment,'ini data diatas')
+    let sum = filterPayment.map(i => (i.products_price * i.count)).reduce((e,c)=> {return parseInt(e+c,0)},[]) 
+    console.log(sum,'ini data sum')
+    // let sum = addBag.map(i => {if(i.status === 0) {i.products_price * i.count})}.reduce((e,c)=> {return parseInt(e+c,0)},[]) 
+
+    totalOrder = sum 
+    console.log(sum)
     const user = useSelector((state) => state.user.user)
 
     //menangkap user dari login
@@ -60,15 +68,17 @@ export default function MyBag() {
     //get product
     useEffect(() => {
         addBagAll()
+        // console.log(addBag.map((p)=>p.count),'ini get my bag')
     }, [])
 
     //delete All product
     const deleteAll = () => {
-        axios.delete(`http://localhost:4000/addProduct`, {
+       
+          axios.delete(`http://localhost:4000/addProduct`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then((res) => {
-                console.log("delete data success")
+                console.log("keranjang empty")
                 alert('delete success')
                 addBagAll()
 
@@ -77,7 +87,9 @@ export default function MyBag() {
                 console.log("delete data fail")
                 alert('delete fail')
                 console.log(err)
-            })
+            })  
+      
+        
     }
 
     useEffect(() => {
@@ -86,14 +98,11 @@ export default function MyBag() {
 
     //post product to checkout
     const count = 1
-    const handleCheck = (e, id, categorys_id) => {
-        console.log(id, 'ini id dari cheklish')
-        const { value, checked } = e.target
-        if (checked ) {
+    const handleCheck = (e,products_id,categorys_id) => {
             e.preventDefault()
             const formData = new FormData()
-            formData.append('products_id', id)
-            formData.append('categorys_id', categorys_id)
+            formData.append('products_id', products_id)
+            formData.append('categorys_id',categorys_id)
             formData.append('user_id', user.id)
             formData.append('count', count)
             console.log(formData)
@@ -111,88 +120,69 @@ export default function MyBag() {
                     console.log(err.message, 'post data fail')
                     alert('gagal order')
                 })
-
-        } else {
-            alert('please checklish')
-        }
     }
-    console.log(checValue)
+   
 
-    // order
     const handleBuy = (e) => {
-        const { value, checked } = e.target
-        // if (checked) {
-            axios.put(`http://localhost:4000/checkout/${user.id}`, {},
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        Authorization: `Bearer ${token}`
-                    },
-                })
-                .then((res) => {
-                    console.log(res, "post data success")
-                    alert('berhasil order silahkan melanjutkan pembayaran')
-                    navigate('/checkout')
-                })
-                .catch((err) => {
-                    console.log(err.message, 'post data fail')
-                    alert('gagal order')
-                })
-
-        // } else {
-        //     alert('please checklish')
-        // }
-
-    }
-
-    let sum = addBag.map(i => (i.products_price)).reduce((e,c)=> {return parseInt(e+c,0)},[]) 
-    let totalOrder = sum 
-    console.log(sum)
-    console.log(totalOrder)
-
-    //count
-    const handleTambah = (e, id) => {
-    }
-    const handleKurang = (e, id) => {
-        setJumlah(pre => pre - 1)
+        axios.put(`http://localhost:4000/addProduct/updateStatus`, {},
+            {
+                headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`
+                },
+            })
+            .then((res) => {
+                console.log(res, "post data success")
+                alert('berhasil order silahkan melanjutkan pembayaran')
+                navigate('/checkout')
+                localStorage.setItem('addBag',JSON.stringify(addBag))
+                localStorage.setItem('totalOrder',totalOrder)
+                setTotalOrder(0)
+                // deleteAll()
+            })
+            .catch((err) => {
+                console.log(err.message, 'post data fail')
+                alert('gagal order, please login lagi ')
+            })
     }
 
 
+    //total count
+    const handleTambah = (id) => {
+        setAddBag(addBag => 
+            addBag.map((item)=> 
+                id === item.id ? {...item,count :item.count + (item.count < 10 ? 1:0)} : item
+            )
+        )
+       
+    }
+   
+    const handleKurang = (id) => {
+        setAddBag(addBag => 
+            addBag.map((item)=> 
+                id === item.id ? {...item,count :item.count - (item.count > 1 ? 1 : 0)} : item
+            )
+        )
+    }
 
+    
+    const filterBag = addBag.filter((p)=> p.status === 0)
+    console.log(filterBag,'ini filter bag')
 
     return (
         <div>
-            <NavbarBaru />
+            {/* <NavbarBaru /> */}
             <NavbarSebelumLogin />
             <div className="container">
                 <h2 className='py-4'>My Bag</h2>
+                
                 <div className="row">
                     <div className="col-lg-8">
-                        <Card style={{ height: '' }} className='mb-2 shadow p-3 bg-white rounded'>
-                            <Card.Body>
-
-                                <div className="row">
-                                    <div className="col-lg-1 col-1">
-                                        <input type="checkbox" />
-                                    </div>
-                                    <div className="col-lg-9 col-8">
-                                        <h6>Select all items (2 items selected)</h6>
-                                    </div>
-                                    <div className="col-lg-2 col-3">
-                                        <button className='btn btn-white text-danger' onClick={deleteAll}>Delete</button>
-                                    </div>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                        {addBag?.length >= 1 ? addBag.map((p) => {
+                        {filterBag?.length >= 1 ? filterBag.map((p) => {
                             return (
                                 <Card style={{ height: '' }} className='mb-2 shadow p-3 bg-white rounded' key={p.id}>
                                     <Card.Body >
                                         <div className="row ">
-                                            <div className="col-lg-1 col-1 p-lg-2 ">
-                                                <input type="checkbox" name='check'
-                                                    onChange={((e) => handleCheck(e, p.products_id, p.categorys_id))} />
-                                            </div>
                                             <div className="col-lg-3 col-4 p-lg-2 ">
                                                 <img src={p.products_photo} style={{ height: '69px', borderRadius: '8px' }} alt='' />
                                             </div>
@@ -201,9 +191,10 @@ export default function MyBag() {
                                                 <p className="text-secondary">Zalora Cloth</p>
                                             </div>
                                             <div className="col-lg-2 col-3 p-lg-3  d-flex">
-                                                <button className="border-white rounded-circle" style={{ width: '36px', height: '36px' }} onClick={() => handleKurang(p.id)}><h4>-</h4></button>
+                                                <button className="border-white rounded-circle" style={{ width: '36px', height: '36px' }} onClick={()=>handleKurang(p.id)}><h4>-</h4></button>
                                                 <h5 className='p-2'>{p.count}</h5>
-                                                <button className="border-white rounded-circle" style={{ width: '36px', height: '36px' }} onClick={() => handleTambah(p.id)}><h4>+</h4></button>
+                                                <button className="border-white rounded-circle" style={{ width: '36px', height: '36px' }} onClick={()=>handleTambah(p.id)}><h4>+</h4></button>
+                                                {/* <p>{tmb}</p> */}
                                             </div>
                                             <div className="col-lg-3 col-6  p-lg-4 d-flex "><p className="text-right">$ {p.products_price}</p>
                                                 <button className='btn btn-white text-danger' onClick={(e) => deleteAdd(e,p.id)}>X</button>
@@ -212,7 +203,7 @@ export default function MyBag() {
                                     </Card.Body>
                                 </Card>
                             )
-                        }) : 'data not found'}
+                        }) : 'My Bag Empty'}
                     </div>
                     <div className="col-lg-4">
                         <Card style={{ height: '' }} className='mb-2 shadow p-3 bg-white rounded'>

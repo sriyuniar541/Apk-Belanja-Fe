@@ -6,26 +6,87 @@ import profile from '../../image/cth.png'
 import "react-datepicker/dist/react-datepicker.css"; //untuk mengimpor tgl
 import SideBar from "../../componen/sideBar";
 import NavbarSebelumLogin from "../../componen/navbar2";
+import { useSelector } from 'react-redux'; 
 
 
 
 
 
 export default function Profile() {
-    const [data, setData] = useState(null)
+    const [data, setData] = useState({
+        email :'',
+        fullname:'',
+        adress:'',
+        gender:'',
+        phonenumber:''
+    })
+    const user = useSelector((state) => state.user.user)
+    useEffect(()=>{
+    console.log(user)
+    },[user])
+    const [photo,setPhoto] = useState(null)
+    const token = localStorage.getItem('token')
     const [startDate, setStartDate] = useState(new Date());
-    let users = 'https://jsonplaceholder.typicode.com/users/1'
-    useEffect(() => {
+    //http://localhost:4000/users/get/20ec53a1-1402-48ff-877f-fecdc43ac362
+    let users = `http://localhost:4000/users/get/${user.id?user.id:'profile not found please login'}`
+    const get = () => {
         axios.get(users)
             .then((res) => {
                 console.log('get data sukses')
-                console.log(res)
-                res.data && setData(res.data)
+                console.log(res.data.data[0])
+                res.data && setData(res.data.data[0])
             }).catch((err) => {
                 console.log('get data gagal')
                 console.log(err)
             })
+    }
+
+    const updateProfile = (e,id) => {
+            e.preventDefault()
+            const formData = new FormData()
+            formData.append('email', data.email)
+            formData.append('fullname', data.fullname)
+            formData.append('photo', photo)
+            formData.append('adress', data.adress)
+            formData.append('gender', data.gender)
+            formData.append('phonenumber', data.phonenumber)
+            console.log(formData)
+            axios.put( `http://localhost:4000/users/${user.id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${token}`
+                },
+            })
+                .then((res) => {
+                    console.log(res, "post data success")
+                    alert('berhasil update')
+                    get()
+                })
+                .catch((err) => {
+                    console.log(err.message, 'post data fail')
+                    alert('gagal update')
+                })
+       
+    }
+    
+    const handlePhoto = (e) => {
+        setPhoto(e.target.files[0])
+        console.log(e.target.files[0])
+      }
+    
+      const handleChange = (e) =>{
+        setData({
+          ...data,
+          [e.target.name]: e.target.value
+        })
+        console.log(data)
+      }
+
+      useEffect(() => {
+        get()
     }, [])
+    
+
     return (
         <div className="bg-light w-100 h-100">
             <NavbarSebelumLogin />
@@ -46,7 +107,7 @@ export default function Profile() {
                                         Name
                                     </div>
                                     <div className=" col col-lg-9">
-                                        <input type="text" className="from-control" value={data ? data.name : 'data not found'} />
+                                        <input type="text" name='fullname' className="from-control" value={data ? data.fullname : 'data not found,please login lagi'} onChange={handleChange}/>
                                     </div>
                                 </div>
 
@@ -55,7 +116,7 @@ export default function Profile() {
                                         Email
                                     </div>
                                     <div className=" col col-lg-9">
-                                        <input type="text" className="from-control" value={data ? data.email : 'data not found'} />
+                                        <input type="text" className="from-control" value={data ? data.email : 'data not found,please login lagi'} name='email' onChange={handleChange}/>
                                     </div>
                                 </div>
                                 {/* form phone number */}
@@ -64,7 +125,7 @@ export default function Profile() {
                                         Phone-Number
                                     </div>
                                     <div className=" col col-9">
-                                        <input type="text" className="from-control" value={data ? data.phone : 'data not found'} />
+                                        <input type="text" className="from-control" value={data ? data.phonenumber : 'data not found,please login lagi'} name='phonenumber' onChange={handleChange}/>
                                     </div>
                                 </div>
                                 {/* radio button */}
@@ -74,11 +135,11 @@ export default function Profile() {
                                     </div>
                                     <div className=" col col-lg-9">
                                         <div>
-                                            <input className="form-check-input mr-4" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-                                            <span class="ms-lg-2">Laki-laki</span>
+                                            <input className="form-check-input mr-4" type="radio" name="flexRadioDefault" id="flexRadioDefault" />
+                                            <span class="ms-lg-2" onChange={handleChange} name='laki-laki'>Laki-laki</span>
 
                                             <input className="form-check-input mr-lg-4 col-12 ms-4" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-                                            <span class="ms-lg-2">Perempuan</span>
+                                            <span class="ms-lg-2" onChange={handleChange} name='perempuan'>Perempuan</span>
                                         </div>
                                     </div>
                                 </div>
@@ -91,11 +152,11 @@ export default function Profile() {
                                         <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                                     </div>
                                 </div>
-                                <button className="btn btn-danger text-white col-lg-5 offset-lg-3 mt-3 mb-4" style={{borderRadius: '18px'}}>Save</button>
+                                <button className=" btn btn-danger text-white col-lg-5 offset-lg-3 mt-3 mb-4" style={{borderRadius: '18px'}}onClick={updateProfile}>Save</button>
                             </div>
                             <div className="col-lg-4 col-6 text-center " ms-auto>
-                                <img src={profile} alt='' style={{ width: '200px', height: 'auto', borderRadius: '50%' }} className='img-fluid mb-3'/>
-                                <button className="btn btn-white text-secondary border-secondary col-12" style={{borderRadius: '18px'}}>Select Image</button>
+                                <img src={data?data.photo:'photo not found'} alt='' style={{ width: '200px', height: '200px', borderRadius: '50%' }} className='img-fluid mb-3'name='photo' />
+                                <input type='file' placeholder="Select Image" onChange={handlePhoto}/>
                             </div>
                         </div>
                     </div>

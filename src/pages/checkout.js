@@ -10,12 +10,17 @@ import axios from 'axios' //untuk interaksi dengan database
 
 export default function CheckOut() {
     const token = localStorage.getItem('token')
+    const myBag = JSON.parse(localStorage.getItem('addBag'))
+    const [totalOrder,setTotalOrder] = useState(localStorage.getItem('totalOrder'))
+    // const totalOrder = localStorage.getItem('totalOrder')
     const [checkout, setCheckout] = useState([])
     const user = useSelector((state) => state.user.user)
 
     useEffect(()=>{
     console.log(user)
     console.log(user.id)
+    console.log(totalOrder) 
+    console.log(myBag)
     },[user])
     
     const getDataCheckout = () => {
@@ -39,10 +44,6 @@ export default function CheckOut() {
     }, [])
 
 
-    // const summary = 0
-    // const totalP = checkout.map((e)=> e.products_price)
-    // totalP += summary
-    
     const filterCheckout = checkout.filter((e) => e.statuspayment === 0)
     console.log(filterCheckout,'ini data filter')
 
@@ -55,6 +56,7 @@ export default function CheckOut() {
                 console.log(" Terima kasih telah order")
                 // console.log(res.data.data)
                  setCheckout([])
+                 setTotalOrder(0)
             })
             .catch((err) => {
                 alert("payment fail, please login lagi gaiss")
@@ -65,7 +67,7 @@ export default function CheckOut() {
 
    //total bayar
     let sum = filterCheckout.map(i => (i.products_price)).reduce((e,c)=> {return parseInt(e+c,0)},[]) 
-    let totalOrder = sum + 80000
+    let total = parseInt(totalOrder) + 80000
     console.log(sum)
     console.log(totalOrder)
    
@@ -82,7 +84,7 @@ export default function CheckOut() {
                             <Card.Body>
                                 <h6>{user.fullname}</h6>
                                 <p>{user.adress}</p>
-                                <Button className='m-3' variant="white" style={{ width: '210px', height: '36px', borderRadius: '24px', borderColor: '#9B9B9B' }}>Choose another adress</Button>{' '}
+                                <Button className='m-3' variant="white" style={{ width: '210px', height: '36px', borderRadius: '24px', borderColor: '#9B9B9B' }}> go to detail history  </Button>{' '}
                             </Card.Body>
                         </Card>
                         {checkout?.length >= 1 ? filterCheckout.map((p) => {
@@ -121,7 +123,7 @@ export default function CheckOut() {
                                     </div>
                                     <div className="d-flex justify-content-between text-secondary">
                                         <p>Order</p>
-                                        <p>$. {sum}</p>
+                                        <p>$. {totalOrder}</p>
                                     </div>
                                     <div className="d-flex justify-content-between text-secondary">
                                         <p>Delivery</p>
@@ -130,7 +132,7 @@ export default function CheckOut() {
                                     <hr />
                                     <div className="d-flex justify-content-between ">
                                         <h6>Shooping summary</h6>
-                                        <h6 className='text-danger'>$. {totalOrder}</h6>
+                                        <h6 className='text-danger'>$. {total}</h6>
                                     </div>
                                 </div>
                                 <div>

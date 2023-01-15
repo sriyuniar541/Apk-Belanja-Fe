@@ -9,60 +9,59 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'; //untuk mengimpor data dari database
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 
 
 export default function SigUpSeller() {
 
+  const navigate = useNavigate()
+  const [inputData, setInputData] = useState({
+    email: '',
+    password: '',
+    fullname:'',
+    role:'toko'
+  })
 
-  const [fullname, setFullname] = useState('')
-  const [email, setEmail] = useState('')
-  // const [phone,setPhone] = useState ('')
-  // const [store,setStore] = useState ('')
-  const [password, setPassword] = useState('')
+  const registerHandling = async (e) => {
+    e.preventDefault()
+    const {password,email,fullname,role} = inputData
+    const data = {password,email,fullname,role}
+    // adminLogin(data)
 
-
-  const changeUsername = (e) => {
-    const value = e.target.value
-    setFullname(value)
-  }
-
-  const changeEmail = (e) => {
-    const value = e.target.value
-    setEmail(value)
-  }
-
-  // const changePhone = (e) => {
-  //   const value = e.target.value
-  //   setPhone (value)
-  // }
-
-  // const changeStore = (e) => {
-  //   const value = e.target.value
-  //   setStore(value)
-  // }
-
-  const changePassword = (e) => {
-    const value = e.target.value
-    setPassword(value)
-  }
-
-  const sigHup = () => {
-
-    const data = {
-      email: '',
-      password: '',
-      fullname: '',
-      role: 'toko'
-
-    }
-
-    console.log(data)
-    axios.post('http://localhost:4000/users/register/toko')
-      .then(result => {
-        console.log(result)
+    const res = await (await fetch('http://localhost:4000/users/register/toko', {
+      method : 'POST',
+      body : JSON.stringify(data),
+      headers : { 'Content-Type' :'application/json' }
+    })).json()
+    if (res.success) {
+      alert(res.message);
+      setInputData({
+        email: '',
+        password: '',
+        fullname:'',
+        role:'toko'
       })
+      console.log(res.data.otp,'ini data login')
+      localStorage.setItem('otp',res.data.otp)
+      navigate('/Otp')
+    }  else {
+      alert(res.data)
+      console.log(res.data.data)
+  } 
   }
+
+  const onChangeHandler = (e) => {
+    const name = e.target.name
+    const value = e.target.value
+    setInputData({ ...inputData, [name]: value })
+  }
+
+    // console.log(data)
+    // axios.post('http://localhost:4000/users/register/toko')
+    //   .then(result => {
+    //     console.log(result)
+    //   })
+  
   // id VARCHAR PRIMARY KEY,
   // email VARCHAR NOT NULL,
   // password VARCHAR NOT NULL,
@@ -77,12 +76,12 @@ export default function SigUpSeller() {
           <h4 className='my-4'>Please sign up with your account</h4>
           <div className={styles.bt} ><ButtonCustomSig /></div>
           <form className='mt-4  col-lg-4 col-10 offset-1 offset-lg-4  '>
-              <Form.Control style={{ height: '48px', borderRadius: '4px', marginBottom: '10px' }} type='email' placeholder='Email' value={email} name='email' onChange={changeEmail} />
-              <Form.Control style={{height: '48px', borderRadius: '4px', marginBottom: '10px' }} type='password' placeholder='Password' value={password} name='password' onChange={changePassword} />
-              <Form.Control style={{ height: '48px', borderRadius: '4px', marginBottom: '10px' }} type='fullname' placeholder='fullname' value={fullname} name='fullname' onChange={changeUsername} />
-              <button className='btn btn-danger col-12 mt-3' style={{ height:'48px',borderRadius:'25px'}}>Register</button>
+              <Form.Control style={{ height: '48px', borderRadius: '4px', marginBottom: '10px' }} type='email' placeholder='Email' value={inputData.email} name='email' onChange={onChangeHandler} />
+              <Form.Control style={{height: '48px', borderRadius: '4px', marginBottom: '10px' }} type='password' placeholder='Password' value={inputData.password} name='password' onChange={onChangeHandler} />
+              <Form.Control style={{ height: '48px', borderRadius: '4px', marginBottom: '10px' }} type='fullname' placeholder='fullname' value={inputData.fullname} name='fullname' onChange={onChangeHandler} />
+              <button className='btn btn-danger col-12 mt-3' style={{ height:'48px',borderRadius:'25px'}} onClick={registerHandling}>Register</button>
           </form>
-          <p className={styles.p}>Already have a Tokopedia account?<Link to='/loginSeller' className='text-danger'>Login</Link></p>
+          <p className={styles.p}>Already have a Tokopedia account?<Link to='/' className='text-danger'>Login</Link></p>
         </div>
       </Row>
     </Container>

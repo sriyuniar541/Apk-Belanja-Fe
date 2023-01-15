@@ -16,6 +16,7 @@ export const loginUser = (data,navigate) => async(dispact) => {
         //local storage
         localStorage.setItem('token',user.token)
         localStorage.setItem('user',user)
+        localStorage.setItem('role',user.role)
         dispact({type:'USER_LOGIN_SUCCESS',payload:user})
         navigate('/product') //jika login berhasil maka diarahkan ke product
         console.log('user login success')
@@ -24,6 +25,7 @@ export const loginUser = (data,navigate) => async(dispact) => {
     }catch (err) {
         console.log('user login fail')
         console.log(err)
+        alert(err.response.data.message,err.response.data.data,'login fail')
 
     }
 }

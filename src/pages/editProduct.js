@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import SideBarProduct from "../componen/sideBar";
+import SideBarProduct from "../componen/sideBarProduct";
 import Card from 'react-bootstrap/Card';
 import "@fontsource/metropolis";
 import NavbarSebelumLogin from '../componen/navbar2';
 import axios from 'axios' //untuk interaksi dengan database
+import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 
-
-export default function SellingProduct() {
-    let token = localStorage.getItem('token')
+export default function EditProduct() {
     const navigate = useNavigate()
+    const token = localStorage.getItem('token')
+    let {id} = useParams()
     let urlGet = process.env.REACT_APP_URL_GET
     const [photo, setPhoto] = useState(null)
-    const [inputData, setInputData] = useState({
-        name: "",
-        stock: "",
-        price: "",
-        categorys_id: "",
+    const [get,setget] = useState([])
+    const [updateData, setUpdateData] = useState({
+        name: get.name,
+        stock: get.stock,
+        price: get.price,
+        categorys_id: get.categorys_id,
         search: ""
     })
 
@@ -29,43 +31,62 @@ export default function SellingProduct() {
     }
 
     const handleChange = (e) => {
-        setInputData({
-            ...inputData,
+        setUpdateData({
+            ...updateData,
             [e.target.name]: e.target.value
         })
         // console.log(data)
     }
 
-    // const handleOption = (e) => {
+    const addBagAll = () => {
+        axios.get(`http://localhost:4000/product/${id}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then((res) => {
+                console.log("get data success")
+                console.log(res.data.data[0])
+                res.data && setget(res.data.data[0])
+            })
+            .catch((err) => {
+                console.log("get data fail")
+                console.log(err)
+            })
+    }
 
-    // }
+    useEffect(() => {
+        addBagAll()
+        console.log(get.id,'ini dari update')
+    }, [])
 
     const postForm = (e) => {
         e.preventDefault()
         const formData = new FormData()
-        formData.append("name", inputData.name)
-        formData.append("stock", inputData.stock)
-        formData.append("price", inputData.price)
-        formData.append("categorys_id", inputData.categorys_id)
+        formData.append("name", updateData.name)
+        formData.append("stock", updateData.stock)
+        formData.append("price", updateData.price)
+        formData.append("categorys_id", updateData.categorys_id)
         formData.append("photo", photo)
         console.log(formData)
         axios.
-            post(`${urlGet}`, formData, {
+            put(`${urlGet}/${id}`, formData, {
                 headers: {
                     Authorization : `Bearer ${token}`,
                     "Content-Type": "multipart/form-data",
                 },
             }).then((res) => {
-                console.log("input data success")
+                console.log("edit data success")
                 console.log(res)
-                alert('input data success')
+                alert('edit data success')
                 navigate('/product')
+                addBagAll()
             }).catch((err) => {
-                console.log("input data fail")
+                console.log("edit data fail")
                 console.log(err)
-                alert('input data fail')
+                alert('edit data fail')
             })
     }
+
+   
 
     return (
         <div className='Container-fluid' style={{ background: '#F5F5F5' }}>
@@ -82,7 +103,7 @@ export default function SellingProduct() {
                                     <Card.Header className='bg-white'><h4>Inventory</h4></Card.Header>
                                     <Card.Body className='col-lg-6'>
                                         <p>Name of Good</p>
-                                        <Form.Control type="text" value={inputData.name} name='name' onChange={handleChange} />
+                                        <Form.Control placeholder={get.name} type="text" value={updateData.name} name='name' onChange={handleChange} />
                                     </Card.Body>
                                 </Card>
 
@@ -91,10 +112,10 @@ export default function SellingProduct() {
                                     <Card.Header className='bg-white'><h4>Item details</h4></Card.Header>
                                     <Card.Body className='col-lg-6'>
                                         <p>Unit price</p>
-                                        <Form.Control type="text" value={inputData.price} name='price' onChange={handleChange} className='mb-3'/>
+                                        <Form.Control type="text" placeholder={get.price} value={updateData.price} name='price' onChange={handleChange} className='mb-3'/>
                                         <div className='d-flex'>
-                                        <Form.Control type="text" placeholder="stock" value={inputData.stock} name='stock' onChange={handleChange} />
-                                        <Form.Control type="text" placeholder="category" value={inputData.categorys_id} name='categorys_id' onChange={handleChange} />
+                                        <Form.Control type="text"  value={updateData.stock} placeholder={get.stock} name='stock' onChange={handleChange} />
+                                        <Form.Control type="text" placeholder={get.categorys_id} value={updateData.categorys_id} name='categorys_id' onChange={handleChange} />
                                         {/* <select class="form-select" aria-label="Default select example">
                                         <option selected>Category</option>
                                         <option value={1} name={1} onChange={handleChange}>t_shirt</option>
@@ -147,7 +168,7 @@ export default function SellingProduct() {
 
                                     </Card.Body>
                                 </Card>
-                                <button className='btn btn-danger col-3' style={{ borderRadius: '20px' }} onClick={postForm}>Jual</button>
+                                <button className='btn btn-danger col-3' style={{ borderRadius: '20px' }} onClick={postForm}>Edit</button>
                             </div>
                         </div>
                     </div>
@@ -156,3 +177,4 @@ export default function SellingProduct() {
         </div>
     )
 }
+
