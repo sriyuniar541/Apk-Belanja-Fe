@@ -8,9 +8,6 @@ import axios from 'axios' //untuk interaksi dengan database
 
 
 
-
-
-
 const DetailProduct = (props) => {
     const token = localStorage.getItem('token')
     const [product, setProduct] = useState([])
@@ -22,7 +19,7 @@ const DetailProduct = (props) => {
     console.log(user.id)
     },[user])
 
-    let users = `http://localhost:4000/product/${id}`
+    let users = process.env.REACT_APP_URL_BE +`/product/${id}`
     useEffect(() => {
         // untuk get data
         axios.get(users)
@@ -51,7 +48,7 @@ const DetailProduct = (props) => {
         formData.append('user_id',user.id)
         formData.append('count',count)
         console.log(formData)
-        axios.post('http://localhost:4000/addProduct', formData , {
+        axios.post(process.env.REACT_APP_URL_BE +`/addProduct`, formData , {
             headers: {
                'Content-Type' : 'multipart/form-data',
                Authorization : `Bearer ${token}`
@@ -70,26 +67,13 @@ const DetailProduct = (props) => {
     }
         
     
-
     return (
         <div>
             <NavbarSebelumLogin />
             <div className="container py-3">
                 <div className="row">
-                    {/* <div className="col-12 d-flex">
-                        <Link to='/'>Home</Link>
-                        <p>></p>
-                        <a href="#">Category </a>
-                        <p>></p>
-                        <a href="#">T-Shirt </a>
-
-                        <hr />
-                    </div> */}
                 </div>
             </div>
-
-            {/* get detail product by id */}
-            {/* {product.map((product) => */}
                 <div className="container " key={product.id}>
                     <div className="row">
                         <div className=" col-lg-4 ">
@@ -101,7 +85,6 @@ const DetailProduct = (props) => {
                                 <img src={product.photo} className='col-2' alt='' />
                                 <img src={product.photo} className='col-2' alt='' />
                             </div>
-
                         </div>
                         <div className="col-lg-6 mx-lg-5 ">
                             <h4>{product.name}</h4>
@@ -122,7 +105,6 @@ const DetailProduct = (props) => {
                                 <button className="border-white bg-primary rounded-circle mr-3" style={{ width: '36px', height: '36px' }}></button>
                                 <button className="border-white bg-success rounded-circle mr-3" style={{ width: '36px', height: '36px' }}></button>
                             </div>
-
                             <div>
                                 <div className="d-flex ">
                                     <div>
@@ -142,7 +124,6 @@ const DetailProduct = (props) => {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <div className="row mt-5">
                                 <Button className='col-lg-3 col-4 border-secondary bg-white ' variant="white" style={{ height: '48px', borderRadius: '24px', borderColor: '#9B9B9B' }}>Chat</Button>
@@ -152,8 +133,6 @@ const DetailProduct = (props) => {
                         </div>
                     </div>
                 </div>
-            {/* )} */}
-
             <div className='container mt-5'>
                 <div className="col-12">
                     <h4 className="mb-4">Informasi Product</h4>
@@ -173,48 +152,6 @@ const DetailProduct = (props) => {
                         <img src={Star} />
                     </div>
                 </div>
-                {/* <h5 className='mt-5'>You can also like this</h5>
-                <div className="daftarProduct ">
-                    <div className="row d-flex justify-content-center g-5">
-                        <div className="col-lg-2 col-6 mr-2">
-                            <CardsProduct name='Mens formal suit - Black & White' price='$ 400.000' toko='Zalora Cloth'/>
-                        </div>
-                        <div className="col-lg-2 col-6">
-                            <CardsProduct name='Mens formal suit - Black & White' price='$ 400.000' toko='Zalora Cloth'/>
-                        </div>
-                        <div className="col-lg-2 col-6">
-                            <CardsProduct name='Mens formal suit - Black & White' price='$ 400.000' toko='Zalora Cloth'/>
-                        </div>
-                        <div className="col-lg-2 col-6">
-                            <CardsProduct name='Mens formal suit - Black & White' price='$ 400.000' toko='Zalora Cloth'/>
-                        </div>
-                        <div className="col-lg-2 col-6">
-                            <CardsProduct name='Mens formal suit - Black & White' price='$ 400.000' toko='Zalora Cloth'/>
-                        </div>
-                        <div className="col-lg-2 col-6">
-                            <CardsProduct name='Mens formal suit - Black & White' price='$ 400.000' toko='Zalora Cloth'/>
-                        </div>
-                        <div className="col-lg-2 col-6">
-                            <CardsProduct name='Mens formal suit - Black & White' price='$ 400.000' toko='Zalora Cloth'/>
-                        </div>
-                        <div className="col-lg-2 col-6">
-                            <CardsProduct name='Mens formal suit - Black & White' price='$ 400.000' toko='Zalora Cloth'/>
-                        </div>
-                        <div className="col-lg-2 col-6">
-                            <CardsProduct name='Mens formal suit - Black & White' price='$ 400.000' toko='Zalora Cloth'/>
-                        </div>
-                        <div className="col-lg-2 col-6">
-                            <CardsProduct name='Mens formal suit - Black & White' price='$ 400.000' toko='Zalora Cloth'/>
-                        </div>
-                        <div className="col-lg-2 col-6">
-                            <CardsProduct name='Mens formal suit - Black & White' price='$ 400.000' toko='Zalora Cloth'/>
-                        </div>
-                        <div className="col-lg-2 col-6">
-                            <CardsProduct name='Mens formal suit - Black & White' price='$ 400.000' toko='Zalora Cloth'/>
-                        </div>
-
-                    </div>
-                </div> */}
             </div>
         </div>
     )

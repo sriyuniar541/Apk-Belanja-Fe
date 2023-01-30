@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import SideBarProduct from "../componen/sideBar";
 import Card from 'react-bootstrap/Card';
@@ -7,21 +6,14 @@ import "@fontsource/metropolis";
 import NavbarSebelumLogin from '../componen/navbar2';
 import axios from 'axios' //untuk interaksi dengan database
 import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 
 
 export default function Editcategory() {
-    const navigate = useNavigate()
-    const token = localStorage.getItem('token')
-    let { id } = useParams()
-    let urlGet = process.env.REACT_APP_URL_GET
-    
+    const token = localStorage.getItem('token')    
     const [categorys, setCategorys] = useState([])
     const [postcategory,setPostCategory] = useState({
         categorys:''
     })
-
-
 
     const handleChange = (e) => {
         setPostCategory({
@@ -29,18 +21,6 @@ export default function Editcategory() {
             [e.target.name]: e.target.value
         })
     }
-
-    
-
-
-    const editCategory = (item) =>{
-        console.log(item)
-        setPostCategory({
-            ...postcategory,
-          categorys: item.categorys,
-          })  
-    }
-
    
     const postForm = (e) => {
         e.preventDefault()
@@ -48,7 +28,7 @@ export default function Editcategory() {
         formData.append("categorys", postcategory.categorys)
         console.log(formData)
         axios.
-            post(`http://localhost:4000/categorys`, formData, {
+            post(process.env.REACT_APP_URL_BE +`/categorys`, formData, {
                 headers: {
                     Authorization : `Bearer ${token}`,
                     "Content-Type": "multipart/form-data",
@@ -59,8 +39,6 @@ export default function Editcategory() {
                 alert('insert data success')
                 setPostCategory('')
                 addBagAll()
-                
-
                 // navigate('/product')
             }).catch((err) => {
                 console.log("inseert data fail")
@@ -75,7 +53,7 @@ export default function Editcategory() {
         formData.append("categorys", postcategory.categorys)
         console.log(formData)
         axios.
-            put(`http://localhost:4000/categorys/${id}`, formData, {
+            put(process.env.REACT_APP_URL_BE +`/categorys/${id}`, formData, {
                 headers: {
                     Authorization : `Bearer ${token}`,
                     "Content-Type": "multipart/form-data",
@@ -85,8 +63,6 @@ export default function Editcategory() {
                 console.log(res)
                 alert('update data success')
                 addBagAll()
-                
-
                 // navigate('/product')
             }).catch((err) => {
                 console.log("inseert data fail")
@@ -97,7 +73,7 @@ export default function Editcategory() {
 
     const deleteCategory = (e,id) => {
         axios.
-            delete(`http://localhost:4000/categorys/${id}`,{
+            delete(process.env.REACT_APP_URL_BE +`/categorys/${id}`,{
                 headers: {
                     Authorization : `Bearer ${token}`,
                     "Content-Type": "multipart/form-data",
@@ -116,7 +92,7 @@ export default function Editcategory() {
     }
 
     const addBagAll = () => {
-        axios.get(`http://localhost:4000/categorys`, {
+        axios.get(process.env.REACT_APP_URL_BE +`/categorys`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then((res) => {
@@ -153,7 +129,6 @@ export default function Editcategory() {
                                         <Form.Control name='categorys' value={postcategory.categorys} onChange={handleChange}/>
                                              <button className='btn btn-warning text-white ms-2' onClick={postForm}>Add</button>
                                         </div>
-                                       
                                     </Card.Header>
                                     <Card.Body className='col-lg-6'>
                                         {categorys?categorys.map((p)=>(

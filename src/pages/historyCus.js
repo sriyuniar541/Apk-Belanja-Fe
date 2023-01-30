@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios' //untuk interaksi dengan database
-// import Alert from "../../componen/Alert";
-// import NavbarBaru from './../../componen/navbarBaru'
+import axios from 'axios' 
 import NavbarSebelumLogin from '../componen/navbar2'
-import SideBar from '../componen/sideBar' //untuk import gambar
-import { Link } from 'react-router-dom';
+import SideBar from '../componen/sideBar' 
 import { useSelector } from 'react-redux'; 
 import Example from '../componen/modal';
-
-
-
-
 
 
 
@@ -22,13 +15,11 @@ export default function Order() {
     console.log(user.id)
     },[user])
     
-
     const token = localStorage.getItem('token')
     const [checkout,setCheckout] = useState([])
     const getDataCheckout = () => {
         // untuk get data
-        //http://localhost:4000/addProduct/order/?search=0cf2484e-5638-41d9-887b-1eab61a9518d
-        axios.get(`http://localhost:4000/addProduct/`,{
+        axios.get(process.env.REACT_APP_URL_BE +`/addProduct/`,{
             headers: {Authorization : `Bearer ${token}`}
         })
             .then((res) => {
@@ -40,25 +31,6 @@ export default function Order() {
                 console.log("get data fail")
                 console.log(err)
             })
-    }
-
-
-    const changeStatus = (id) => {
-        //http://localhost:4000/addProduct/updateDelevery/044f91a5-ed46-4655-be5e-8fce4b2adb1f
-        axios.put(`http://localhost:4000/addProduct/updateDelevery/${id}`,{},{
-            headers: {Authorization : `Bearer ${token}`}
-        })
-            .then((res) => {
-                alert(" status delivery")
-                console.log(" status delivery")
-                getDataCheckout()
-               
-            })
-            .catch((err) => {
-                alert("change fail, please login lagi gaiss")
-                console.log("change fail, please login lagi gaiss")
-                console.log(err)
-            }) 
     }
 
     useEffect(() => {
@@ -76,13 +48,10 @@ export default function Order() {
                     <div className='col-lg-4'>
                         <SideBar/>
                     </div>
-
                     <div className='col-lg-8 p-5' style={{ background: '#F5F5F5' }}>
                         <div className='mx-5 bg-white'>
-
                             <div className="container mt-2 p-2 rounded " >
                                 <div className='d-flex justify-content-between'>
-
                                     <div className='py-4'>
                                     </div>
                                 </div>
@@ -120,7 +89,6 @@ export default function Order() {
                                          order={p.user_name} 
                                         />
                                         </td></>
-                                       
                                     </tr>
                                     )) :'data empty'}
                                 </tbody>

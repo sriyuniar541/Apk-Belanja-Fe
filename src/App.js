@@ -1,5 +1,4 @@
  //import { useState } from 'react';
-import About from './pages/About'; 
 import Home from './pages/Home'; 
 import Product from './pages/Product/index'; 
 import Profile from './pages/profille/index'; 
@@ -8,7 +7,6 @@ import LoginSeller from './pages/login/login';
 import  SigUpSeller from './pages/sigup';
 import SigUpCustommer from './pages/sigupCus';
 import  MyBag from './pages/MyBag';
-import ResetPasswordSeller from './pages/resetPasswordSeller'
 import DetailProduct from './pages/DetailProduct'
 import AuthChecker from '../src/componen/AuthChecker'
 import SellingProduct from './pages/sellingProduct'
@@ -53,17 +51,14 @@ function App() {
               <Editcategory/>
           </AuthChecker>
         } />
-        <Route path='/about' element={<About/>} />
         <Route path='/profile' element={<Profile/>} />
         <Route path='/login' element={<LoginSeller/>} />
         <Route path='/sighupSeller' element={<SigUpSeller/>} />
         <Route path='/sighupCustommer' element={<SigUpCustommer/>} />
         <Route path='/MyBag' element={<MyBag/>} />
-        <Route path='/ResetPasswordSeller' element={<ResetPasswordSeller/>} />
         <Route path='/DetailProduct' element={<DetailProduct/>} />
         <Route path='/DetailProduct/:id' element={<DetailProduct/>} />
         <Route path='/category/:categoryP' element={<Category/>} />
-        <Route path='/ResetPasswordCus/' element={<ResetPasswordSeller/>} />
         <Route path='/checkout/' element={<CheckOut/>} />
         <Route path='/History' element={<History/>} />
         <Route path='/Order' element={<Order/>} />

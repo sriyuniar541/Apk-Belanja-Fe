@@ -3,14 +3,12 @@ import { useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import styles from './Componen.module.css';
-import logoTas from './../image/tas.png' //untuk import gambar
-import segitiga from './../image/Vector (3).png' //untuk import gambar
-import keranjang from './../image/shop.png' //untuk import gambar
-import { Link, useNavigate } from 'react-router-dom'; //menghubungkan anatar halaman
-import "@fontsource/metropolis";
-import email from './../image/mail (3) 1.png' //untuk import gambar
-import lonceng from './../image/bell (1) 1.png' //untuk import gambar
-import pr from './../image/gbr1.png' //untuk import gambar
+import logoTas from './../image/tas.png'
+import segitiga from './../image/Vector (3).png' 
+import keranjang from './../image/shop.png' 
+import { Link, useNavigate } from 'react-router-dom'; 
+import "@fontsource/metropolis"; 
+import lonceng from './../image/bell (1) 1.png' 
 import axios from 'axios';
 
 
@@ -18,18 +16,18 @@ import axios from 'axios';
 function NavbarSebelumLogin(props) {
 
   const navigate = useNavigate
+
   const logout = () => {
     localStorage.clear() 
-    // window.location.reload(false)
     navigate('/login')
-  } //fungsi tombol untuk refres halaman otomatis dan kembali ke login
+  } 
     
     const token = localStorage.getItem('token') //mendapat item token dari localStorage
     const role = localStorage.getItem('role')
     const user = useSelector((state) => state.user.user)
     const [data,setData] = useState([])
 
-    let users = `http://localhost:4000/users/get/${user.id}`
+    let users = process.env.REACT_APP_URL_BE +`/users/get/${user.id}`
     const get = () => {
         axios.get(users)
             .then((res) => {
@@ -46,8 +44,7 @@ function NavbarSebelumLogin(props) {
       console.log(user)
     },[user])
 
-     // localStorage.setItem('token',user.token)
-      // localStorage.getItem('user',user.role === "toko" ? navigate('/product') :  navigate('/')) 
+    
     let filterRole = localStorage.getItem('role')
     const toko = filterRole ==='toko'
     console.log(toko)
@@ -77,8 +74,8 @@ function NavbarSebelumLogin(props) {
             </Link></Button>
             { !token ? 
              (
-              <><Link to='/'><button className='col-lg-5 btn btn-danger me-2' style={{ borderRadius: '20px' }}>Login</button></Link>
-              <Link to='/sighupSeller'><button className='col-lg-5 btn btn-white border-secondary ' style={{ borderRadius: '20px' }}>SingIn</button></Link></>
+              <><Link to='/'><button className='col-lg-12 btn btn-danger me-2' style={{ borderRadius: '20px' }}>Login</button></Link>
+              <Link to='/sighupSeller'><button className='col-lg-12 btn btn-white border-secondary ' style={{ borderRadius: '20px' }}>SingIn</button></Link></>
               ): (
                 <><>
                   {!toko ?

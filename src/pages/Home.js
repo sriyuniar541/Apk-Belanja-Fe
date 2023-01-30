@@ -16,7 +16,7 @@ const Home = () => {
     const [page, setPage] = useState(1)
 
 
-    let users = `http://localhost:4000/product/?search=${search}&limit=10&page=${page}`
+    let users = process.env.REACT_APP_URL_BE +`/product/?search=${search}&limit=10&page=${page}`
     const next = () => {
         setPage(page + 1)
       }

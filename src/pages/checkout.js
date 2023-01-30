@@ -3,16 +3,13 @@ import { useSelector } from 'react-redux';
 import NavbarSebelumLogin from "../componen/navbar2";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios' //untuk interaksi dengan database
-
-
+import axios from 'axios'
 
 
 export default function CheckOut() {
     const token = localStorage.getItem('token')
     const myBag = JSON.parse(localStorage.getItem('addBag'))
     const [totalOrder,setTotalOrder] = useState(localStorage.getItem('totalOrder'))
-    // const totalOrder = localStorage.getItem('totalOrder')
     const [checkout, setCheckout] = useState([])
     const user = useSelector((state) => state.user.user)
 
@@ -25,7 +22,7 @@ export default function CheckOut() {
     
     const getDataCheckout = () => {
         // untuk get data
-        axios.get(`http://localhost:4000/checkout/`,{
+        axios.get(process.env.REACT_APP_URL_BE +`/checkout/`,{
             headers: {Authorization : `Bearer ${token}`}
         })
             .then((res) => {
@@ -48,7 +45,7 @@ export default function CheckOut() {
     console.log(filterCheckout,'ini data filter')
 
     const payment = () => {
-        axios.put(`http://localhost:4000/checkout/payment/${user.id}`,{},{
+        axios.put(process.env.REACT_APP_URL_BE +`/checkout/payment/${user.id}`,{},{
             headers: {Authorization : `Bearer ${token}`}
         })
             .then((res) => {
@@ -83,13 +80,12 @@ export default function CheckOut() {
                         <Card style={{ height: '' }} className='mb-2 shadow p-3 bg-white rounded'>
                             <Card.Body>
                                 <h6>{user.fullname}</h6>
-                                <p>{user.adress}</p>
+                                <p> Adres Jln, Durian no.2 kecamatan Sirimau, Kota Ambon {user.adress}</p>
                                 <Button className='m-3' variant="white" style={{ width: '210px', height: '36px', borderRadius: '24px', borderColor: '#9B9B9B' }}> go to detail history  </Button>{' '}
                             </Card.Body>
                         </Card>
                         {checkout?.length >= 1 ? filterCheckout.map((p) => {
                             return (
-
                                 <Card style={{ height: '' }} className='mb-2 shadow p-3 bg-white rounded' key={p.id}>
                                     <Card.Body>
                                         <div className="row">
@@ -111,7 +107,6 @@ export default function CheckOut() {
                                     </Card.Body>
                                 </Card>
                             )
-
                         }) : 'data not found'}
                     </div>
                     <div className="col-lg-4">

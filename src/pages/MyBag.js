@@ -4,8 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import NavbarSebelumLogin from "../componen/navbar2";
 import axios from 'axios' //untuk interaksi dengan database
-import NavbarBaru from "../componen/navbarBaru";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 export default function MyBag() {
     
@@ -19,8 +18,7 @@ export default function MyBag() {
     console.log(filterPayment,'ini data diatas')
     let sum = filterPayment.map(i => (i.products_price * i.count)).reduce((e,c)=> {return parseInt(e+c,0)},[]) 
     console.log(sum,'ini data sum')
-    // let sum = addBag.map(i => {if(i.status === 0) {i.products_price * i.count})}.reduce((e,c)=> {return parseInt(e+c,0)},[]) 
-
+    
     totalOrder = sum 
     console.log(sum)
     const user = useSelector((state) => state.user.user)
@@ -34,7 +32,7 @@ export default function MyBag() {
 
     // add product
     const addBagAll = () => {
-        axios.get(`http://localhost:4000/addProduct`, {
+        axios.get(process.env.REACT_APP_URL_BE +`/addProduct`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then((res) => {
@@ -50,7 +48,7 @@ export default function MyBag() {
     //delete product
     const deleteAdd = (e,id) => {
         console.log(id)
-        axios.delete(`http://localhost:4000/addProduct/${id}`, {
+        axios.delete(process.env.REACT_APP_URL_BE +`/addProduct/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then((res) => {
@@ -65,66 +63,15 @@ export default function MyBag() {
                 console.log(err)
             })
     }
+
     //get product
     useEffect(() => {
         addBagAll()
-        // console.log(addBag.map((p)=>p.count),'ini get my bag')
     }, [])
 
-    //delete All product
-    const deleteAll = () => {
-       
-          axios.delete(`http://localhost:4000/addProduct`, {
-            headers: { Authorization: `Bearer ${token}` }
-        })
-            .then((res) => {
-                console.log("keranjang empty")
-                alert('delete success')
-                addBagAll()
-
-            })
-            .catch((err) => {
-                console.log("delete data fail")
-                alert('delete fail')
-                console.log(err)
-            })  
-      
-        
-    }
-
-    useEffect(() => {
-        addBagAll()
-    }, [])
-
-    //post product to checkout
-    const count = 1
-    const handleCheck = (e,products_id,categorys_id) => {
-            e.preventDefault()
-            const formData = new FormData()
-            formData.append('products_id', products_id)
-            formData.append('categorys_id',categorys_id)
-            formData.append('user_id', user.id)
-            formData.append('count', count)
-            console.log(formData)
-            axios.post('http://localhost:4000/checkout/', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    Authorization: `Bearer ${token}`
-                },
-            })
-                .then((res) => {
-                    console.log(res, "post data success")
-                    alert('berhasil order')
-                })
-                .catch((err) => {
-                    console.log(err.message, 'post data fail')
-                    alert('gagal order')
-                })
-    }
-   
 
     const handleBuy = (e) => {
-        axios.put(`http://localhost:4000/addProduct/updateStatus`, {},
+        axios.put(process.env.REACT_APP_URL_BE +`/addProduct/updateStatus`, {},
             {
                 headers: {
                 'Content-Type': 'multipart/form-data',
@@ -145,7 +92,6 @@ export default function MyBag() {
                 alert('gagal order, please login lagi ')
             })
     }
-
 
     //total count
     const handleTambah = (id) => {
@@ -197,7 +143,7 @@ export default function MyBag() {
                                                 {/* <p>{tmb}</p> */}
                                             </div>
                                             <div className="col-lg-3 col-6  p-lg-4 d-flex "><p className="text-right">$ {p.products_price}</p>
-                                                <button className='btn btn-white text-danger' onClick={(e) => deleteAdd(e,p.id)}>X</button>
+                                                <button className='btn btn-white text-danger ' onClick={(e) => deleteAdd(e,p.id)}>X</button>
                                             </div>
                                         </div>
                                     </Card.Body>

@@ -1,12 +1,9 @@
 import GambarLogo from './../componen/logoBelanja';
 import ButtonCustomSig from '../componen/buttonSig';
-import ButtonUmum from './../componen/buttonUmum';
 import styles from './login/Login.module.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import FormK from '../componen/form';
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'; //untuk mengimpor data dari database
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -28,7 +25,7 @@ export default function SigUpSeller() {
     const data = {password,email,fullname,role}
     // adminLogin(data)
 
-    const res = await (await fetch('http://localhost:4000/users/register/toko', {
+    const res = await (await fetch(process.env.REACT_APP_URL_BE +`/users/register/toko`, {
       method : 'POST',
       body : JSON.stringify(data),
       headers : { 'Content-Type' :'application/json' }
@@ -56,17 +53,6 @@ export default function SigUpSeller() {
     setInputData({ ...inputData, [name]: value })
   }
 
-    // console.log(data)
-    // axios.post('http://localhost:4000/users/register/toko')
-    //   .then(result => {
-    //     console.log(result)
-    //   })
-  
-  // id VARCHAR PRIMARY KEY,
-  // email VARCHAR NOT NULL,
-  // password VARCHAR NOT NULL,
-  // fullname VARCHAR NOT NULL,
-  // role VARCHAR
 
   return (
     <Container className='container ' style={{ textAlign: 'center' }} >
@@ -81,7 +67,7 @@ export default function SigUpSeller() {
               <Form.Control style={{ height: '48px', borderRadius: '4px', marginBottom: '10px' }} type='fullname' placeholder='fullname' value={inputData.fullname} name='fullname' onChange={onChangeHandler} />
               <button className='btn btn-danger col-12 mt-3' style={{ height:'48px',borderRadius:'25px'}} onClick={registerHandling}>Register</button>
           </form>
-          <p className={styles.p}>Already have a Tokopedia account?<Link to='/' className='text-danger'>Login</Link></p>
+          <p className={styles.p}>Already have a Tokopedia account?<Link to='/login' className='text-danger'>Login</Link></p>
         </div>
       </Row>
     </Container>

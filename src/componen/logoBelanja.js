@@ -1,7 +1,6 @@
-import logoTas from './../image/tas.png' //untuk import gambar
+import logoTas from './../image/tas.png' 
 import '../index.css'
 import './../font/Metropolis-ExtraBold.otf'
-
 
 
 function GambarLogo() {
@@ -14,6 +13,3 @@ function GambarLogo() {
 }
 
 export default GambarLogo;
-
-//untuk pemanggilan
-//import GambarLogo from './logoBelanja';

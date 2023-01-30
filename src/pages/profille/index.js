@@ -1,14 +1,11 @@
-import axios from "axios"; //untuk menampilkan API di website 
+import axios from "axios";
 import { useEffect, useState } from "react";
-import styles from './Profile.module.css'; //mengimpor css kita dan menajdikan componin yg bisa dipakai lagi
+import styles from './Profile.module.css'; 
 import DatePicker from "react-datepicker"; //untuk mengimpor tgl dari npm
-import profile from '../../image/cth.png'
 import "react-datepicker/dist/react-datepicker.css"; //untuk mengimpor tgl
 import SideBar from "../../componen/sideBar";
 import NavbarSebelumLogin from "../../componen/navbar2";
 import { useSelector } from 'react-redux'; 
-
-
 
 
 
@@ -27,8 +24,7 @@ export default function Profile() {
     const [photo,setPhoto] = useState(null)
     const token = localStorage.getItem('token')
     const [startDate, setStartDate] = useState(new Date());
-    //http://localhost:4000/users/get/20ec53a1-1402-48ff-877f-fecdc43ac362
-    let users = `http://localhost:4000/users/get/${user.id?user.id:'profile not found please login'}`
+    let users = process.env.REACT_APP_URL_BE +`/users/get/${user.id?user.id:'profile not found please login'}`
     const get = () => {
         axios.get(users)
             .then((res) => {
@@ -51,7 +47,7 @@ export default function Profile() {
             formData.append('gender', data.gender)
             formData.append('phonenumber', data.phonenumber)
             console.log(formData)
-            axios.put( `http://localhost:4000/users/${user.id}`, formData, {
+            axios.put( process.env.REACT_APP_URL_BE +`/users/${user.id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${token}`
@@ -162,13 +158,6 @@ export default function Profile() {
                     </div>
                 </div>
             </div>
-
-            {/* <ol>
-                <li>{data? data.name:'data not found'}</li>
-                <li>{data? data.email:'data not found'}</li>
-                <li>{data? data.username:'data not found'}</li>
-            </ol> */}
-
         </div>
     )
 }

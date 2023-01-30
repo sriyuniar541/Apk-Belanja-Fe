@@ -36,7 +36,7 @@ export default function SideBar() {
     }, [user])
     const [photo, setPhoto] = useState(null)
     const token = localStorage.getItem('token')
-    let users = `http://localhost:4000/users/get/${user.id}`
+    let users = process.env.REACT_APP_URL_BE +`/users/get/${user.id}`
     const get = () => {
         axios.get(users)
             .then((res) => {
@@ -59,7 +59,7 @@ export default function SideBar() {
         formData.append('gender', data.gender)
         formData.append('phonenumber', data.phonenumber)
         console.log(formData)
-        axios.put(`http://localhost:4000/users/${user.id}`, formData, {
+        axios.put(process.env.REACT_APP_URL_BE +`/users/${user.id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${token}`

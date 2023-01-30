@@ -39,7 +39,7 @@ export default function EditProduct() {
     }
 
     const addBagAll = () => {
-        axios.get(`http://localhost:4000/product/${id}`, {
+        axios.get(process.env.REACT_APP_URL_BE +`/product/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then((res) => {
@@ -87,7 +87,6 @@ export default function EditProduct() {
     }
 
    
-
     return (
         <div className='Container-fluid' style={{ background: '#F5F5F5' }}>
             <NavbarSebelumLogin />
@@ -106,66 +105,27 @@ export default function EditProduct() {
                                         <Form.Control placeholder={get.name} type="text" value={updateData.name} name='name' onChange={handleChange} />
                                     </Card.Body>
                                 </Card>
-
-
                                 <Card className='bg-white mb-3'>
                                     <Card.Header className='bg-white'><h4>Item details</h4></Card.Header>
                                     <Card.Body className='col-lg-6'>
                                         <p>Unit price</p>
                                         <Form.Control type="text" placeholder={get.price} value={updateData.price} name='price' onChange={handleChange} className='mb-3'/>
                                         <div className='d-flex'>
-                                        <Form.Control type="text"  value={updateData.stock} placeholder={get.stock} name='stock' onChange={handleChange} />
-                                        <Form.Control type="text" placeholder={get.categorys_id} value={updateData.categorys_id} name='categorys_id' onChange={handleChange} />
-                                        {/* <select class="form-select" aria-label="Default select example">
-                                        <option selected>Category</option>
-                                        <option value={1} name={1} onChange={handleChange}>t_shirt</option>
-                                        <option value={2} name={2}onChange={handleChange}>soes</option>
-                                        <option value={3} name={3}onChange={handleChange}>jacket</option>
-                                        <option value={4} name={4}onChange={handleChange}>short</option>
-                                        <option value={5} name={5}onChange={handleChange}>pants</option>
-                                        </select> */}
+                                            <Form.Control type="text"  value={updateData.stock} placeholder={get.stock} name='stock' onChange={handleChange} />
+                                            <Form.Control type="text" placeholder={get.categorys_id} value={updateData.categorys_id} name='categorys_id' onChange={handleChange} />
                                         </div>
-                                        
-
                                     </Card.Body>
                                 </Card>
                                 <Card className='bg-white mb-3'>
                                     <Card.Header className='bg-white'><h4>Photo of goods</h4></Card.Header>
                                     <Card.Body>
                                         <Form.Control type="file" placeholder="buah" name='photo' onChange={handlePhoto} />
-                                        {/* <div  style={{border:'1px dashed grey'}}>
-                        <div className='col-12 d-flex p-3'>
-                            <div style={{width :'190px',height:'190px',backgroundColor:'#D4D4D4',marginRight:'3%'}}>
-                                <img src ='' style={{maxWidth :'190px',maxHeight:'190px'}}/>
-                            </div>
-
-                            <div style={{width :'120px',height:'120px',backgroundColor:'#D4D4D4',marginRight:'3%',marginTop:'7%'}}>
-                                <img src ='' style={{maxWidth :'120px',maxHeight:'120px'}}/>
-                            </div>
-
-                            <div style={{width :'120px',height:'120px',backgroundColor:'#D4D4D4',marginRight:'3%',marginTop:'7%'}}>
-                                <img src ='' style={{maxWidth :'120px',maxHeight:'120px'}}/>
-                            </div>
-
-                            <div style={{width :'120px',height:'120px',backgroundColor:'#D4D4D4',marginRight:'3%',marginTop:'7%'}}>
-                                <img src ='' style={{maxWidth :'120px',maxHeight:'120px'}}/>
-                            </div>
-
-                            <div style={{width :'120px',height:'120px',backgroundColor:'#D4D4D4',marginRight:'3%',marginTop:'7%'}}>
-                                <img src ='' style={{maxWidth :'120px',maxHeight:'120px'}}/>
-                            </div>
-                        </div>
-                            <hr/>
-                            <Button className ='bg-white border-secondary mb-5'style={{borderRadius:'20px',color:'black',textAlign:'center'}}>Upload Foto</Button>{' '}
-                        </div> */}
                                     </Card.Body>
                                 </Card>
-
                                 <Card className='bg-white mb-3'>
                                     <Card.Header className='bg-white'><h4>Description</h4></Card.Header>
                                     <Card.Body>
                                         <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10"></textarea>
-
                                     </Card.Body>
                                 </Card>
                                 <button className='btn btn-danger col-3' style={{ borderRadius: '20px' }} onClick={postForm}>Edit</button>

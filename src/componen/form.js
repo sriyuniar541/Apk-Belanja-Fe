@@ -10,11 +10,8 @@ function FormK (props) {
     </div>
   );
 }
-
 export default FormK;
 
-//untuk pemanggilan
-//import FormK from './form';
 
 
 

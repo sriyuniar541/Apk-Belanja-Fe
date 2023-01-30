@@ -10,10 +10,6 @@ import ModalProps from '../componen/moddalSelles';
 
 
 
-
-
-
-
 export default function Order() {
     const user = useSelector((state) => state.user.user)
 
@@ -22,13 +18,10 @@ export default function Order() {
     console.log(user.id)
     },[user])
     
-
     const token = localStorage.getItem('token')
     const [checkout,setCheckout] = useState([])
     const getDataCheckout = () => {
-        // untuk get data
-        //http://localhost:4000/addProduct/order/?search=0cf2484e-5638-41d9-887b-1eab61a9518d
-        axios.get(`http://localhost:4000/addProduct/order/?search=${user.id}`,{
+        axios.get(process.env.REACT_APP_URL_BE +`/addProduct/order/?search=${user.id}`,{
             headers: {Authorization : `Bearer ${token}`}
         })
             .then((res) => {
@@ -44,8 +37,7 @@ export default function Order() {
 
 
     const changeStatus = (id) => {
-        //http://localhost:4000/addProduct/updateDelevery/044f91a5-ed46-4655-be5e-8fce4b2adb1f
-        axios.put(`http://localhost:4000/addProduct/updateDelevery/${id}`,{},{
+        axios.put(process.env.REACT_APP_URL_BE +`/addProduct/updateDelevery/${id}`,{},{
             headers: {Authorization : `Bearer ${token}`}
         })
             .then((res) => {
@@ -76,7 +68,6 @@ export default function Order() {
                     <div className='col-lg-4'>
                         <SideBar/>
                     </div>
-
                     <div className='col-lg-8 p-5' style={{ background: '#F5F5F5' }}>
                         <div className='mx-5 bg-white'>
 
@@ -96,7 +87,6 @@ export default function Order() {
                                         <th>Status</th>
                                         <th>price total</th>
                                         <th>Action</th>
-                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -120,12 +110,10 @@ export default function Order() {
                                          total ={0}
                                          status={p.statusorder?p.statusorder:'Packaging'}
                                          order={p.user_name} 
-                                        
                                         />
                                         <button className='btn btn-warning text-white' onClick={()=>changeStatus(p.id)}>Change Status</button>
                                         </td></>
                                     </tr>
-                                   
                                     )) :'data empty'}
                                 </tbody>
                             </table>

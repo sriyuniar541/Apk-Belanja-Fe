@@ -15,10 +15,8 @@ import { Link } from 'react-router-dom';
 
 
 export default function LoginSeller() {
-
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
-
   const navigate = useNavigate()
   const dispact = useDispatch()
 

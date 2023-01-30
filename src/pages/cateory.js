@@ -7,14 +7,12 @@ import "@fontsource/metropolis";
 
 
 
-
 const Category = () => {
     const [product, setProduct] = useState([])
-    // const [t_shirt, setT_shirt] = useState([])
-    const { id } = useParams() //untuk berpindah sesuai params (id)
+    const { id } = useParams() 
     const { categoryP } = useParams()
 
-    let users = 'http://localhost:4000/product'
+    let users = process.env.REACT_APP_URL_BE +`/product`
     useEffect(() => {
         // untuk get data
         axios.get(users)

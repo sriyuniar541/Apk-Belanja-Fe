@@ -1,11 +1,8 @@
 import GambarLogo from '../../componen/logoBelanja';
-import ButtonUmum from '../../componen/buttonUmum';
 import ButtonSeller from '../../componen/buttonSeller';
-import ButtonCustom from '../../componen/button';
 import styles from '../login/Login.module.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import FormK from '../../componen/form';
 import "@fontsource/metropolis";
 import { Link } from 'react-router-dom';
 import {Form, Button} from 'react-bootstrap';
@@ -26,7 +23,7 @@ function Otp() {
     e.preventDefault()
     const {email,otp} = user
     const data = {email,otp}
-    const res = await (await fetch('http://localhost:4000/users/email/otp', {
+    const res = await (await fetch(process.env.REACT_APP_URL_BE +`/users/email/otp`, {
       method : 'POST',
       body : JSON.stringify(data),
       headers : { 'Content-Type' :'application/json' }
@@ -37,10 +34,6 @@ function Otp() {
         email: '',
         otp: '',
       })
-      
-      // localStorage.setItem('token',user.token)
-      // localStorage.getItem('user',user.role === "toko" ? navigate('/product') :  navigate('/')) 
-       //if disini
        navigate('/login')
     }  else {
       alert(res.data)
@@ -53,7 +46,6 @@ function Otp() {
     const value = e.target.value
     setUser({ ...user, [name]: value })
   }
-
 
 
   return (
