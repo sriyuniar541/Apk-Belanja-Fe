@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+<h1 align="center">BELANJA</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <img height="150" src="https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087904/belanja/Group_1159_1_rhys0v.png"  />
+</p>
+<p align="center">
+  Built with React Js.
+</p>
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [About the Project](#about-the-project)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Related Project](#related-project)
+- [Screenshot](#screenshot)
+- [Contact](#contact)
 
-### `npm start`
+## About The Project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Application to buy and sell various types of clothing and accessories [demo flyer](-------link demo disini------)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Built With
 
-### `npm test`
+- [Node JS](https://nodejs.org/en/docs/)
+- [React JS](https://reactjs.org/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This is an example of how to list things you need to use the software and how to install them.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [nodejs](https://nodejs.org/en/download/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation
 
-### `npm run eject`
+1. Clone the repo
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+git clone [https://github.com/sriyuniar541/Apk-Belanja-Fe]
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Install NPM packages
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Add .env file at root folder project, and add following
 
-## Learn More
+```bash
+================lingk env backend disini========= // or use your own
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Screenshot
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Login Page                                | Register Page Customer                       | Register Page Admin                          |
+| ----------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| ![login](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087220/belanja/login-belanja_ecplmj.png) | ![register](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675088816/belanja/registerCus-belanja_apktxd.png) | ![register](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087222/belanja/register-belanja_ykhsx6.png) |
 
-### Code Splitting
+| Landing Page                                               | Product List                        | Profile Customer                                            |
+| ---------------------------------------------------------- | -------------------------------------------- | ------------------------------------------------- |
+| ![landing page](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087224/belanja/landingPageSebelumLogin-belanja_asrghi.png) | ![product](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087217/belanja/daftarProduct-belanja_vkogpl.png) | ![profile](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087223/belanja/profileCust-belanja_cybwuu.png) |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+| Profile Admin                                             | Detail Product                                           | get By Category                                               |
+| --------------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------- |
+| ![profile admin](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087222/belanja/profileAdmin-belanja_dop51i.png) | ![detail product](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087220/belanja/detailProduct-belanja_uqot0v.png) | ![get by category](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087216/belanja/daftarProductCategory-belanja_vtamzz.png) |
 
-### Analyzing the Bundle Size
+| My Bag                                            | Checkout                                          | Hisrory order Customer                                          |
+| ------------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------- |
+| ![my bag](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087220/belanja/myBag-belanja_qa4zdr.png) | ![checkout](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087213/belanja/checkout-belanja_faybqj.png) | ![history](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087217/belanja/historyBelanjaCus-belanja_yq1zhw.png) |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+| Admin Page                                     | Add Product                                     | Add Category                                  |                                     
+| ---------------------------------------------- | ------------------------------------------------- | -------------------------------------------------- | 
+| ![admin page](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087217/belanja/halamanProductAdmin-belanja_cdhusm.png) | ![add product](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087213/belanja/addProductAdmin-belanja_dvzt3n.png) | ![add category](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087216/belanja/editAndAddCategoryAdmin-belanja_qwkrzk.png) |
 
-### Making a Progressive Web App
+| History Order                                           | Detail Order                                          | 
+| ------------------------------------------------------ | ------------------------------------------------ | 
+| ![!history](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087219/belanja/orderAdmin-belanja_xp0xtm.png) | ![detail](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087215/belanja/detailOrderCus-belanja_nqzxjs.png) |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Related Project
 
-### Advanced Configuration
+- [`Belanja Demo`](====link deploy here===)
+- [`Belanja REST API`](===link deploy be =====)
+- [`Peworld REST API Repository`](https://github.com/sriyuniar541/Apk-Belanja-Be)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contact
+  - Sri Yuniar [@sriyuniar541](https://github.com/sriyuniar541)
