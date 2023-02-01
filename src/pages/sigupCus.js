@@ -25,7 +25,7 @@ function SigUpCustommer() {
     const {password,email,fullname,role} = inputData
     const data = {password,email,fullname,role}
     // adminLogin(data)
-
+    
     const res = await (await fetch(process.env.REACT_APP_URL_BE +`/users/register/cust`, {
       method : 'POST',
       body : JSON.stringify(data),

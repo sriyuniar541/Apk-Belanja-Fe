@@ -21,7 +21,7 @@ export const loginUser = (data,navigate) => async(dispact) => {
     }catch (err) {
         console.log('user login fail')
         console.log(err)
-        alert(err.response.data.message,err.response.data.data,'login fail')
+        alert('login fail')
 
     }
 }
