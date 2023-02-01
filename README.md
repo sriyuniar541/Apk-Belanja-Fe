@@ -20,7 +20,7 @@
 
 ## About The Project
 
-Application to buy and sell various types of clothing and accessories [demo flyer](-------link demo disini------)
+Application to buy and sell various types of clothing and accessories [demo flyer](https://apk-belanja-fe.vercel.app/Order)
 
 ### Built With
 
