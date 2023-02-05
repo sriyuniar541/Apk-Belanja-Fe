@@ -8,7 +8,8 @@ import  SigUpSeller from './pages/sigup';
 import SigUpCustommer from './pages/sigupCus';
 import  MyBag from './pages/MyBag';
 import DetailProduct from './pages/DetailProduct'
-import AuthChecker from '../src/componen/AuthChecker'
+import AuthChecker from '../src/componen/AuthChecker/index'
+import AuthCheckerCus from './componen/AuthChecker/authCheckCus';
 import SellingProduct from './pages/sellingProduct'
 import EditProduct from './pages/editProduct';
 import CheckOut from './pages/checkout';
@@ -51,17 +52,45 @@ function App() {
               <Editcategory/>
           </AuthChecker>
         } />
-        <Route path='/profile' element={<Profile/>} />
+        <Route path='/profile' element={
+          <AuthCheckerCus>
+              <Profile/>
+          </AuthCheckerCus>    
+        }/>
+        <Route path='/MyBag' element={
+           <AuthCheckerCus>
+              <MyBag/>
+           </AuthCheckerCus>
+        } />
+        <Route path='/checkout/' element={
+           <AuthCheckerCus>
+              <CheckOut/>
+           </AuthCheckerCus>
+        } />
+        <Route path='/History' element={
+         <AuthCheckerCus>
+              <History/> 
+         </AuthCheckerCus>
+        } />
+        <Route path='/Order' element={
+           <AuthCheckerCus>
+              <Order/> 
+           </AuthCheckerCus>
+        } />
+        <Route path='/DetailProduct' element={
+           <AuthCheckerCus>
+              <DetailProduct/>
+           </AuthCheckerCus>
+        } />
+        <Route path='/DetailProduct/:id' element={
+           <AuthCheckerCus>
+              <DetailProduct/>
+           </AuthCheckerCus>
+        } />
         <Route path='/login' element={<LoginSeller/>} />
         <Route path='/sighupSeller' element={<SigUpSeller/>} />
         <Route path='/sighupCustommer' element={<SigUpCustommer/>} />
-        <Route path='/MyBag' element={<MyBag/>} />
-        <Route path='/DetailProduct' element={<DetailProduct/>} />
-        <Route path='/DetailProduct/:id' element={<DetailProduct/>} />
         <Route path='/category/:categoryP' element={<Category/>} />
-        <Route path='/checkout/' element={<CheckOut/>} />
-        <Route path='/History' element={<History/>} />
-        <Route path='/Order' element={<Order/>} />
         <Route path='/Otp' element={<Otp/>} />
         <Route path='*' element={<page not Found/>} /> 
     </Routes>

@@ -74,7 +74,7 @@ function NavbarSebelumLogin(props) {
             </Link></Button>
             { !token ? 
              (
-              <><Link to='/'><button className='col-lg-12 btn btn-danger me-2' style={{ borderRadius: '20px' }}>Login</button></Link>
+              <><Link to='/login'><button className='col-lg-12 btn btn-danger me-2' style={{ borderRadius: '20px' }}>Login</button></Link>
               <Link to='/sighupSeller'><button className='col-lg-12 btn btn-white border-secondary ' style={{ borderRadius: '20px' }}>SingIn</button></Link></>
               ): (
                 <><>
