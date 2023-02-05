@@ -20,7 +20,7 @@
 
 ## About The Project
 
-Application to buy and sell various types of clothing and accessories [demo flyer](-------link demo disini------)
+Application to buy and sell various types of clothing and accessories [demo Belanja](https://apk-belanja-fe.vercel.app/)
 
 ### Built With
 
@@ -52,7 +52,7 @@ npm install
 3. Add .env file at root folder project, and add following
 
 ```bash
-================lingk env backend disini========= // or use your own
+https://light-clam-overalls.cyclic.app // or use your own
 ```
 
 ## Screenshot
@@ -83,8 +83,8 @@ npm install
 
 ## Related Project
 
-- [`Belanja Demo`](====link deploy here===)
-- [`Belanja REST API`](===link deploy be =====)
+- [`Belanja Demo`](https://apk-belanja-fe.vercel.app/)
+- [`Belanja REST API`](https://light-clam-overalls.cyclic.app)
 - [`Peworld REST API Repository`](https://github.com/sriyuniar541/Apk-Belanja-Be)
 
 ## Contact
