@@ -17,16 +17,36 @@ export default class Carousel2 extends Component {
             <div>
                 <Slider {...settings}>
                     <div className=" d-flex justify-content-between   me-3" >
-                        <img src={k11} alt='' className='img-fluid col-12'  style={{borderRadius:'5px'}}/>
+                        <img 
+                            src={k11} 
+                            alt='category' 
+                            className='img-fluid col-12'  
+                            style={{borderRadius:'5px'}}
+                        />
                     </div>
                     <div className=" d-flex justify-content-between ">
-                        <img src={k10} alt='' className='img-fluid col-12 ms-3'style={{borderRadius:'6px'}}/>
+                        <img 
+                            src={k10} 
+                            alt='category' 
+                            className='img-fluid col-12 ms-3'
+                            style={{borderRadius:'6px'}}
+                        />
                     </div>
                     <div className=" d-flex justify-content-between   me-3"  >
-                        <img src={k11} alt='' className='img-fluid col-12'  style={{borderRadius:'5px'}}/>
+                        <img 
+                            src={k11} 
+                            alt='category' 
+                            className='img-fluid col-12'  
+                            style={{borderRadius:'5px'}}
+                        />
                     </div>
                     <div className=" d-flex justify-content-between ">
-                        <img src={k10} alt='' className='img-fluid col-12 ms-3'style={{borderRadius:'6px'}}/>
+                        <img 
+                            src={k10} 
+                            alt='category' 
+                            className='img-fluid col-12 ms-3'
+                            style={{borderRadius:'6px'}}
+                        />
                     </div>
                 </Slider>
             </div>

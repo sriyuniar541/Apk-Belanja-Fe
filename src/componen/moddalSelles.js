@@ -12,7 +12,11 @@ function ModalProps(props) {
   
     return (
       <>
-        <Button variant="primary" onClick={handleShow}>
+        <Button 
+          variant="primary" 
+          onClick={handleShow}
+          className='col-lg-9 offset-lg-1'
+        >
           Detail Order
         </Button>
         <Modal show={show} onHide={handleClose}>

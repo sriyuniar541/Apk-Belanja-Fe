@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
-import pr2 from './../image/gbr1.png' //untuk import gambar
 import ubah from './../image/ub.png'
-import g1 from './../image/g1.png'
-import g2 from './../image/g2.png'
-import g3 from './../image/g3.png'
 import l2 from './../image/g4.png'
 import l3 from './../image/g6.png'
 import s from './../image/krg.png'
@@ -15,14 +11,13 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 
-
 export default function SideBar() {
     const navigate = useNavigate
     const logout = () => {
-        localStorage.clear() 
+        localStorage.clear()
         window.location.reload(false)
         navigate('/login')
-      }
+    }
     const [data, setData] = useState({
         email: '',
         fullname: '',
@@ -36,7 +31,7 @@ export default function SideBar() {
     }, [user])
     const [photo, setPhoto] = useState(null)
     const token = localStorage.getItem('token')
-    let users = process.env.REACT_APP_URL_BE +`/users/get/${user.id}`
+    let users = process.env.REACT_APP_URL_BE + `/users/get/${user.id}`
     const get = () => {
         axios.get(users)
             .then((res) => {
@@ -59,7 +54,7 @@ export default function SideBar() {
         formData.append('gender', data.gender)
         formData.append('phonenumber', data.phonenumber)
         console.log(formData)
-        axios.put(process.env.REACT_APP_URL_BE +`/users/${user.id}`, formData, {
+        axios.put(process.env.REACT_APP_URL_BE + `/users/${user.id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${token}`
@@ -74,7 +69,6 @@ export default function SideBar() {
                 console.log(err.message, 'post data fail')
                 alert('gagal update')
             })
-
     }
 
     const handlePhoto = (e) => {
@@ -88,57 +82,102 @@ export default function SideBar() {
 
 
     let filterRole = localStorage.getItem('role')
-    const toko = filterRole ==='toko'
+    const toko = filterRole === 'toko'
     console.log(toko)
 
 
     return (
         <div className="container ">
             <div className="row ">
-                <div className="col-lg-4 col-5 mt-lg-5 " style={{ height: '100vh' }}>
+                <div className="col-lg-4 col-5 mt-lg-5 " 
+                    style={{ height: '100vh' }}
+                >
                     <div className="container px-lg-5 py-lg-5 py-2">
                         <div className="row ">
-                            <div className="col-lg-4  ">
-                                <div className="d-flex ">
-                                    <img alt='' src={data.photo ? data.photo : 'data not found'} style={{ borderRadius: '50%', maxWidth: '90px', maxHeight: '61px' }} />
-                                    <div className=" mt-2">
-                                        <p style={{ marginLeft: '10%' }}>{data.fullname ? data.fullname : 'data not found'}</p>
-                                        <Button href='#' variant="" className="" onClick={updateProfile}>
-                                            <img alt='' src={ubah} style={{ marginTop: '-50%', marginLeft: '-1%' }} />
-                                            </Button>
-                                        <input type='file' placeholder="ubah profile" onChange={handlePhoto} />
+                            <div className="col-lg-4">
+                                <div className="d-flex mb-2">
+                                    <img alt=''
+                                        src={data.photo ? data.photo : 'data not found'}
+                                        style={{
+                                            borderRadius: '50%',
+                                            maxWidth: '60px',
+                                            maxHeight: '60px'
+                                        }}
+                                    />
+                                    <div className=" mt-2 ">
+                                        <p style={{ marginLeft: '10%' }}>
+                                            {data.fullname ? data.fullname : 'data not found'}
+                                        </p>
+                                        <Button
+                                            variant=""
+                                            onClick={updateProfile}
+                                            style={{ 
+                                                marginTop: '-20%', 
+                                                marginLeft: '-1%' 
+                                            }}>
+                                            <img
+                                                alt='' src={ubah}
+                                                className='opacity-50'
+                                            />
+                                        </Button>
                                     </div>
                                 </div>
+                                <input
+                                    type='file'
+                                    onChange={handlePhoto}
+                                    onKeyPress={(e) => e.key === 'Enter' && updateProfile()}
+                                />
                             </div>
                             <div className="">
                                 <div className="mt-3  ">
-                                    { !toko ?
+                                    {!toko ?
                                         (
-                                        <>
-                                        <Link to='/History'><Button variant="">
-                                            <div className="d-flex">
-                                               <img alt='' src={s1} />
-                                                <p className="ms-2">History</p> 
-                                            </div>
-                                            
-                                            </Button></Link>
-                                        <Link to='/MyBag'><Button href='#' variant="">
-                                        <div className="d-flex">
-                                               <img alt='' src={s} />
-                                                <p className="ms-2">Cart</p> 
-                                            </div>
-                                        </Button></Link>
-                                        {/* <Button className='btn btn-warning col-lg-12 mt-2 text-white' variant="" onClick={() => logout()}>logout</Button> */}
-                                        </>)
+                                            <>
+                                                <Link to='/History'>
+                                                    <Button variant="">
+                                                    <div className="d-flex">
+                                                        <img 
+                                                            alt='history' 
+                                                            src={s1} 
+                                                            style={{ 
+                                                                width: '35px', 
+                                                                height: '35px' 
+                                                            }} 
+                                                        />
+                                                        <p className="ms-2">History</p>
+                                                    </div>
+                                                    </Button>
+                                                </Link>
+                                                <Link to='/MyBag'>
+                                                    <Button variant="">
+                                                    <div className="d-flex">
+                                                        <img 
+                                                            alt='cart' 
+                                                            src={s} 
+                                                            style={{ 
+                                                                width: '35px', 
+                                                                height: '35px' 
+                                                            }} 
+                                                        />
+                                                        <p className="ms-2">Cart</p>
+                                                    </div>
+                                                    </Button>
+                                                </Link>
+                                            </>)
                                         : (
-                                           <>
-                                           <Link to='/product'>
-                                                <Button variant=""><img alt='' src={l2} style={{}} />
-                                                </Button>
-                                            </Link>
-                                            <Link to='/Order'><Button variant=""><img alt='' src={l3} /></Button>
-                                            </Link>
-                                            </>  
+                                            <>
+                                                <Link to='/product'>
+                                                    <Button 
+                                                        variant="">
+                                                        <img alt='' src={l2}/>
+                                                    </Button>
+                                                </Link>
+                                                <Link to='/Order'>
+                                                    <Button variant="">
+                                                        <img alt='' src={l3} />
+                                                    </Button>
+                                                </Link>
+                                            </>
                                         )
                                     }
                                 </div>
@@ -148,8 +187,5 @@ export default function SideBar() {
                 </div>
             </div>
         </div>
-
-
     )
-
 }

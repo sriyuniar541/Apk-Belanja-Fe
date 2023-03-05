@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import  userReducers  from './user';
 
 
-const rooterReducers =  combineReducers ({ //wadah untuk menyimpan state
+const rooterReducers =  combineReducers ({ 
     user : userReducers
 })
 

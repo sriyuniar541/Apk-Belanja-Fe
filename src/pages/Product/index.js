@@ -4,7 +4,8 @@ import Alert from "../../componen/Alert";
 import NavbarSebelumLogin from '../../componen/navbar2';
 import SideBar from "../../componen/sideBar";
 import { Link } from 'react-router-dom';
-
+import { RiDeleteBinLine } from "react-icons/ri";
+import { TbEdit } from "react-icons/tb";
 
 
 export default function Product() {
@@ -38,7 +39,11 @@ export default function Product() {
         console.log("delete data success")
         console.log(res)
         setMessageShow(true)
-        setMessage({ title: "success", text: "delete data success", type: "success" })
+        setMessage({ 
+          title: "success", 
+          text: "delete data success", 
+          type: "success" 
+        })
         messageTime()
         getData()
       })
@@ -47,21 +52,15 @@ export default function Product() {
         console.log("delete data fail")
         console.log(err)
         setMessageShow(true)
-        setMessage({ title: "fail", text: "delete data fail", type: "danger" })
+        setMessage({ 
+          title: "fail", 
+          text: "delete data fail", 
+          type: "danger" 
+        })
         messageTime()
       })
   }
 
-  const editForm = (item) => {
-    console.log(item)
-    setTemp(item)
-    setInputData({
-      ...inputData,
-      name: item.name,
-      stock: item.stock,
-      price: item.price,
-    })
-  }
 
   useEffect(() => {
     selected ? setOnedit(true) : setOnedit(false)
@@ -104,7 +103,11 @@ export default function Product() {
         console.log(res.data.data)
         res.data && setData(res.data.data)
         !selected && setMessageShow(true)
-        !selected && setMessage({ title: "success", text: "get data success", type: "success" })
+        !selected && setMessage({ 
+          title: "success", 
+          text: "get data success", 
+          type: "success" 
+        })
         !selected && messageTime()
         setSelected(null)
       })
@@ -113,66 +116,13 @@ export default function Product() {
         console.log(err)
         setData([])
         setMessageShow(true)
-        setMessage({ title: "fail", text: "get data fail", type: "danger" })
+        setMessage({ 
+          title: "fail", 
+          text: "get data fail", 
+          type: "danger" 
+        })
         //messageTime()
       })
-  }
-
-  const postForm = (e) => {
-    e.preventDefault()
-    const formData = new FormData()
-    formData.append("name", inputData.name)
-    formData.append("stock", inputData.stock)
-    formData.append("price", inputData.price)
-    formData.append("categorys_id", inputData.categorys_id)
-    formData.append("photo", photo)
-    console.log(formData)
-    if (!selected) {
-      axios.
-        post(`${urlGet}`, formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          }
-        }).then((res) => {
-          console.log("input data success")
-          console.log(res)
-          setMessageShow(true)
-          setMessage({ title: "success", text: "post data success", type: "success" })
-          messageTime()
-          getData()
-        }).catch((err) => {
-          console.log("input data fail")
-          setMessageShow(true)
-          setMessage({ title: "fail", text: "post data fail", type: "danger" })
-          messageTime()
-          console.log(err)
-        })
-    } else {
-      axios.
-        put(`${urlGet}/${selected}`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }).then((res) => {
-          console.log("input data success")
-          console.log(res)
-          setMessageShow(true)
-          setMessage({ title: "success", text: "update data success", type: "success" })
-          messageTime()
-          getData()
-        }).catch((err) => {
-          console.log("input data fail")
-          setMessageShow(true)
-          setMessage({ title: "fail", text: "post data fail", type: "danger" })
-          messageTime()
-          console.log(err)
-        })
-    }
-  }
-  const handlePhoto = (e) => {
-    setPhoto(e.target.files[0])
-    console.log(e.target.files[0])
   }
 
   const handleChange = (e) => {
@@ -238,49 +188,86 @@ export default function Product() {
             <SideBar />
           </div>
 
-          <div className='col-lg-8 p-5' style={{ background: '#F5F5F5' }}>
-            <div className='mx-5 bg-white'>
+          <div className='col-lg-8 p-5' 
+            style={{ background: '#F5F5F5' }}
+          >
+            <div className='mx-5 bg-white pt-2 pb-4 px-5'>
               {/* filter */}
               <div className="container mt-2 p-2 rounded " >
                 <div className='d-flex justify-content-between'>
                   <h5 className='py-4'>My Products</h5>
                   <div className='py-4'>
-                    <Link to='/Editcategory'><button className='btn btn-warning text-white mx-2 '>Category</button></Link>
-                    <Link to='/SellingProduct'><button className='btn btn-warning text-white'>Add Products</button></Link>
+                    <Link to='/Editcategory'>
+                      <button 
+                        className='btn btn-warning text-white mx-2 '>
+                        Category
+                      </button>
+                    </Link>
+                    <Link to='/SellingProduct'>
+                      <button className='btn btn-warning text-white'>
+                        Add Products
+                      </button>
+                    </Link>
                   </div>
                 </div>
 
                 <div className="container d-flex flex-row">
                   <div className="">
-                    <div className={`btn ${sortBy == "name" ? "btn-primary" : "btn-secondary"} ms-1`} onClick={() => setSortBy("name")}>name</div>
-                    <div className={`btn ${sortBy == "stock" ? "btn-primary" : "btn-secondary"} ms-1`} onClick={() => setSortBy("stock")}>stock</div>
-                    <div className={`btn ${sortBy == "price" ? "btn-primary" : "btn-secondary"} ms-1`} onClick={() => setSortBy("price")}>price</div>
+                    <div 
+                      className={`btn ${sortBy == "name" ? "btn-primary" : "btn-secondary"} `} 
+                      onClick={() => setSortBy("name")}>
+                      name
+                    </div>
+                    <div 
+                      className={`btn ${sortBy == "stock" ? "btn-primary" : "btn-secondary"} ms-1`} 
+                      onClick={() => setSortBy("stock")}>
+                      stock
+                    </div>
+                    <div 
+                      className={`btn ${sortBy == "price" ? "btn-primary" : "btn-secondary"} ms-1`} 
+                      onClick={() => setSortBy("price")}>
+                      price
+                    </div>
                   </div>
-                  <div className="ms-1 border-start border-dark">
-                    <div className={`btn ${sort == "asc" ? "btn-primary" : "btn-secondary"} ms-1`} onClick={() => setSort("asc")}>asc</div>
-                    <div className={`btn ${sort == "desc" ? "btn-primary" : "btn-secondary"} ms-1`} onClick={() => setSort("desc")}>desc</div>
+                  <div 
+                    className="ms-1 border-start border-dark">
+                    <div className={`btn ${sort == "asc" ? "btn-primary" : "btn-secondary"} ms-1`} 
+                      onClick={() => setSort("asc")}>
+                      asc
+                    </div>
+                    <div 
+                      className={`btn ${sort == "desc" ? "btn-primary" : "btn-secondary"} ms-1`} 
+                      onClick={() => setSort("desc")}>
+                      desc
+                    </div>
                   </div>
                   <div className="search ms-2">
-                    <input type="text" className="form-control" value={inputData.search} name="search" onChange={handleChange} placeholder="search" />
+                    <input 
+                      type="text" 
+                      className="form-control" 
+                      value={inputData.search} 
+                      name="search" 
+                      onChange={handleChange} 
+                      placeholder="search" 
+                    />
                   </div>
                 </div>
               </div>
-
               {/* get data */}
-              <table className='table container'>
+              <table className='table container mt-5'>
                 <thead >
                   <tr>
-                    <th>Product nama</th>
+                    <th>Name</th>
                     <th>Stock</th>
                     <th>Price</th>
                     <th>Category</th>
-                    <th>Action</th>
+                    <th className='text-center'>Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className=''>
                   {data.map((item, index) => (
                     <tr key={index + 1} className={`${item.id}`}>
-                      <td>
+                      <td >
                         {item.name}
                       </td>
                       <td>
@@ -292,33 +279,66 @@ export default function Product() {
                       <td>
                         {item.categorys}
                       </td>
-                      <td> <Link to={`/EditProduct/${item.id}`}><button className='btn btn-warning text-white'>Edit</button></Link>
+                      <td className='justify-content-end'>
+                        <Link to={`/EditProduct/${item.id}`}>
+                          <TbEdit 
+                            className='text-secondary' 
+                            size={25}
+                          />
+                        </Link>
                         { }
-                        <button className='btn btn-danger text-white' onClick={() => deleteData(item.id)}>Hapus</button>
-                        <button className='btn btn-success text-white' onClick={() => updateData(item.id)}>Active</button>
-                        <button className='btn btn-primary text-white' onClick={() => notActive(item.id)}>Not active</button>
+                        <button 
+                          className='btn btn-white text-white py-1' 
+                          onClick={() => deleteData(item.id)}> 
+                          <RiDeleteBinLine 
+                            size={25}
+                            className='text-secondary'
+                          />
+                        </button>
+                        <button 
+                          className='btn btn-primary text-white col-lg-4 py-1' 
+                          onClick={() => updateData(item.id)}>
+                          Active
+                        </button>
+                        <button 
+                          className='btn btn-danger text-white py-1' 
+                          onClick={() => notActive(item.id)}>
+                          Not active
+                        </button>
                       </td>
                     </tr>
                   ))
                   }
                 </tbody>
               </table>
-
               {/* delete data */}
               {
                 selected &&
                 <div className="container">
-                  <button className='btn btn-danger mx-auto col-12' onClick={() => deleteData()}>
+                  <button 
+                    className='btn btn-danger mx-auto col-12' 
+                    onClick={() => deleteData()}>
                     delete {temp?.name ?? ''}
                   </button>
                 </div>
               }
 
               {/* pagination */}
-              <div className='d-flex text-end '>
-                <button className='btn btn-white border-secondary' onClick={next}>Next</button>
-                <button className='btn btn-white '>{page}</button>
-                <button className='btn btn-white border-secondary' onClick={back}>Back</button>
+              <div className='d-flex text-end mt-5'>
+                <button 
+                  className='btn btn-white border-secondary' 
+                  onClick={next}>
+                  Next
+                </button>
+                <button 
+                  className='btn btn-white '>
+                  {page}
+                </button>
+                <button 
+                  className='btn btn-white border-secondary' 
+                  onClick={back}>
+                  Back
+                </button>
               </div>
             </div>
           </div>

@@ -4,15 +4,16 @@ import SideBarProduct from "../componen/sideBar";
 import Card from 'react-bootstrap/Card';
 import "@fontsource/metropolis";
 import NavbarSebelumLogin from '../componen/navbar2';
-import axios from 'axios' //untuk interaksi dengan database
-import { useParams } from 'react-router-dom';
+import axios from 'axios'
+import { RiDeleteBinLine } from "react-icons/ri";
+import ModalCategory from '../componen/modalCategory';
 
 
 export default function Editcategory() {
-    const token = localStorage.getItem('token')    
+    const token = localStorage.getItem('token')
     const [categorys, setCategorys] = useState([])
-    const [postcategory,setPostCategory] = useState({
-        categorys:''
+    const [postcategory, setPostCategory] = useState({
+        categorys: ''
     })
 
     const handleChange = (e) => {
@@ -21,25 +22,25 @@ export default function Editcategory() {
             [e.target.name]: e.target.value
         })
     }
-   
+
+    // insert data
     const postForm = (e) => {
         e.preventDefault()
         const formData = new FormData()
         formData.append("categorys", postcategory.categorys)
         console.log(formData)
         axios.
-            post(process.env.REACT_APP_URL_BE +`/categorys`, formData, {
+            post(process.env.REACT_APP_URL_BE + `/categorys`, formData, {
                 headers: {
-                    Authorization : `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                     "Content-Type": "multipart/form-data",
-                }, 
+                },
             }).then((res) => {
                 console.log("insert data success")
                 console.log(res)
                 alert('insert data success')
                 setPostCategory('')
                 addBagAll()
-                // navigate('/product')
             }).catch((err) => {
                 console.log("inseert data fail")
                 console.log(err)
@@ -47,43 +48,20 @@ export default function Editcategory() {
             })
     }
 
-    const editForm = (e,id,item) => {
-        e.preventDefault()
-        const formData = new FormData()
-        formData.append("categorys", postcategory.categorys)
-        console.log(formData)
+    // delete data
+    const deleteCategory = (e, id) => {
         axios.
-            put(process.env.REACT_APP_URL_BE +`/categorys/${id}`, formData, {
+            delete(process.env.REACT_APP_URL_BE + `/categorys/${id}`, {
                 headers: {
-                    Authorization : `Bearer ${token}`,
-                    "Content-Type": "multipart/form-data",
-                },
-            }).then((res) => {
-                console.log("update data success")
-                console.log(res)
-                alert('update data success')
-                addBagAll()
-                // navigate('/product')
-            }).catch((err) => {
-                console.log("inseert data fail")
-                console.log(err)
-                alert('insert data fail')
-            })
-    }
-
-    const deleteCategory = (e,id) => {
-        axios.
-            delete(process.env.REACT_APP_URL_BE +`/categorys/${id}`,{
-                headers: {
-                    Authorization : `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                     "Content-Type": "multipart/form-data",
                 },
             }).then((res) => {
                 console.log("delete data success")
                 console.log(res)
                 alert('delete data success')
-                addBagAll()
-              
+                return addBagAll()
+
             }).catch((err) => {
                 console.log("delete data fail")
                 console.log(err)
@@ -91,8 +69,9 @@ export default function Editcategory() {
             })
     }
 
+    // get data
     const addBagAll = () => {
-        axios.get(process.env.REACT_APP_URL_BE +`/categorys`, {
+        axios.get(process.env.REACT_APP_URL_BE + `/categorys`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then((res) => {
@@ -112,7 +91,9 @@ export default function Editcategory() {
     }, [])
 
     return (
-        <div className='Container-fluid' style={{ background: '#F5F5F5' }}>
+        <div className='Container-fluid' 
+            style={{ background: '#F5F5F5' }}
+        >
             <NavbarSebelumLogin />
             <div className=''>
                 <div className='container-fluid'>
@@ -122,22 +103,40 @@ export default function Editcategory() {
                         </div>
                         <div className='col-lg-7 px-5 mt-5'>
                             <div className='p-2'>
-                                <Card className='bg-white mb-3'>
-                                    <Card.Header className='bg-white'>
-                                         <h4>Category</h4>
-                                        <div className='d-flex justify-content-between'>
-                                        <Form.Control name='categorys' value={postcategory.categorys} onChange={handleChange}/>
-                                             <button className='btn btn-warning text-white ms-2' onClick={postForm}>Add</button>
-                                        </div>
+                                <Card className=' p-5 mb-3'>
+                                    <Card.Header className='bg-white mx-5'>
+                                        <h4>Category</h4>
                                     </Card.Header>
-                                    <Card.Body className='col-lg-6'>
-                                        {categorys?categorys.map((p)=>(
-                                        <div className='d-flex justify-content-between'>
-                                            <Form.Control name='categorys' value={p.categorys}/>
-                                            <button className='btn btn-warning text-white ms-2' onClick={(e)=>editForm(e,p.id)}>Edit</button>
-                                            <button className='btn btn-danger text-white ms-2' onClick={(e)=> deleteCategory(e,p.id)}>Delete</button>
+                                    <Card.Body className='col-lg-9 offset-lg-1 justify-content-center'>
+                                        <div className='d-flex mb-4 col-12'>
+                                            <Form.Control 
+                                                name='categorys' 
+                                                value={postcategory.categorys} 
+                                                onChange={handleChange}
+                                                placeholder='Input Category' 
+                                            />
+                                            <button 
+                                                className='btn btn-warning text-white ms-2' 
+                                                onClick={postForm}>
+                                                Add
+                                            </button>
                                         </div>
-                                         )) : 'data not found'}
+                                        {categorys ? categorys.map((p) => (
+                                            <div className='d-flex justify-content-between'>
+                                                <Form.Control name='categorys' 
+                                                    value={p.categorys} 
+                                                />
+                                                <button     
+                                                    className='btn btn-white text-white ms-2' 
+                                                    onClick={(e) => deleteCategory(e, p.id)}>
+                                                    <RiDeleteBinLine className='text-secondary'/>
+                                                </button>
+                                                <ModalCategory id={p.id} 
+                                                    placeholder={postcategory.categorys}
+                                                    addBagAll={addBagAll}
+                                                />
+                                            </div>
+                                        )) : 'data not found'}
                                     </Card.Body>
                                 </Card>
                             </div>

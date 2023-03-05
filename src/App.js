@@ -1,5 +1,4 @@
- //import { useState } from 'react';
-import Home from './pages/Home'; 
+ import Home from './pages/Home'; 
 import Product from './pages/Product/index'; 
 import Profile from './pages/profille/index'; 
 import { BrowserRouter,Route,Routes,Navigate} from 'react-router-dom';
@@ -21,10 +20,7 @@ import History from './pages/historyCus';
 import Otp from './pages/login/otp';
 
 
-
-//untuk menulis code
 function App() {
-
   return (
     <div className="App">
     <BrowserRouter>
@@ -99,4 +95,4 @@ function App() {
   ); 
 }
 
-export default App; //untuk export
+export default App; 

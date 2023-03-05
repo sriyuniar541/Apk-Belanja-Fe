@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from 'react-redux'; 
 import NavbarSebelumLogin from "../componen/navbar2";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios'
+import { Link } from "react-router-dom";
 
 
 export default function CheckOut() {
     const token = localStorage.getItem('token')
     const myBag = JSON.parse(localStorage.getItem('addBag'))
+    const user = JSON.parse(localStorage.getItem('user'))
     const [totalOrder,setTotalOrder] = useState(localStorage.getItem('totalOrder'))
     const [checkout, setCheckout] = useState([])
-    const user = useSelector((state) => state.user.user)
 
     useEffect(()=>{
-    console.log(user)
-    console.log(user.id)
-    console.log(totalOrder) 
-    console.log(myBag)
+        console.log(user)
+        console.log(user.id)
+        console.log(totalOrder) 
+        console.log(myBag)
     },[user])
     
     const getDataCheckout = () => {
-        // untuk get data
         axios.get(process.env.REACT_APP_URL_BE +`/checkout/`,{
             headers: {Authorization : `Bearer ${token}`}
         })
@@ -51,7 +50,6 @@ export default function CheckOut() {
             .then((res) => {
                 alert(" Terima kasih telah order")
                 console.log(" Terima kasih telah order")
-                // console.log(res.data.data)
                  setCheckout([])
                  setTotalOrder(0)
             })
@@ -77,40 +75,37 @@ export default function CheckOut() {
                 <p>Shipping Adress</p>
                 <div className="row">
                     <div className="col-lg-8">
-                        <Card style={{ height: '' }} className='mb-2 shadow p-3 bg-white rounded'>
+                        <Card 
+                            style={{ height: '' }} 
+                            className='mb-2 shadow p-3 bg-white rounded'
+                        >
                             <Card.Body>
                                 <h6>{user.fullname}</h6>
-                                <p> Adres Jln, Durian no.2 kecamatan Sirimau, Kota Ambon {user.adress}</p>
-                                <Button className='m-3' variant="white" style={{ width: '210px', height: '36px', borderRadius: '24px', borderColor: '#9B9B9B' }}> go to detail history  </Button>{' '}
+                                <p>  
+                                    {user?user.adress :'Adres Jln, Durian no.2 kecamatan Sirimau, Kota Ambon'}
+                                </p>
+                                <Button 
+                                    className='m-3' 
+                                    variant="white" 
+                                    style={{ 
+                                        width: '210px', 
+                                        height: '36px', 
+                                        borderRadius: '24px', 
+                                        borderColor: '#9B9B9B' }}
+                                    > 
+                                    <Link 
+                                        to='/History' 
+                                        style={{textDecoration:'none'}} 
+                                        className='text-secondary'>
+                                        Go to detail history 
+                                    </Link> </Button>{' '}
                             </Card.Body>
                         </Card>
-                        {checkout?.length >= 1 ? filterCheckout.map((p) => {
-                            return (
-                                <Card style={{ height: '' }} className='mb-2 shadow p-3 bg-white rounded' key={p.id}>
-                                    <Card.Body>
-                                        <div className="row">
-                                            <div className="col-lg-2 col-4 p-2">
-                                                <img src={p.products_photo} style={{ height: '69px', borderRadius: '8px' }} alt='' />
-                                            </div>
-                                            <div className="col-lg-4 col-4 p-3">
-                                                <h6>{p.products_name
-                                                }</h6>
-                                                <p className="text-secondary">Zalora Cloth</p>
-                                            </div>
-                                            <div className="col-lg-3 col-4 p-3 d-flex">
-                                                <button className="border-white rounded-circle" style={{ width: '36px', height: '36px' }}><h4>-</h4></button>
-                                                <h5 className='p-2'>1</h5>
-                                                <button className="border-white rounded-circle" style={{ width: '36px', height: '36px' }}><h4>+</h4></button>
-                                            </div>
-                                            <div className="col-lg-3 col-4 p-4"><p className="text-right">$. {p.products_price}</p></div>
-                                        </div>
-                                    </Card.Body>
-                                </Card>
-                            )
-                        }) : 'data not found'}
                     </div>
                     <div className="col-lg-4">
-                        <Card style={{ height: '' }} className='mb-2 shadow p-3 bg-white rounded'>
+                        <Card style={{ height: '' }} 
+                            className='mb-2 shadow p-3 bg-white rounded'
+                        >
                             <Card.Body>
                                 <div className='row'>
                                     <div className="col-lg-8 col-8">
@@ -118,20 +113,29 @@ export default function CheckOut() {
                                     </div>
                                     <div className="d-flex justify-content-between text-secondary">
                                         <p>Order</p>
-                                        <p>$. {totalOrder}</p>
+                                        <p>Rp. {totalOrder}</p>
                                     </div>
                                     <div className="d-flex justify-content-between text-secondary">
                                         <p>Delivery</p>
-                                        <p>$. 80000</p>
+                                        <p>Rp. 80000</p>
                                     </div>
                                     <hr />
                                     <div className="d-flex justify-content-between ">
                                         <h6>Shooping summary</h6>
-                                        <h6 className='text-danger'>$. {total}</h6>
+                                        <h6 className='text-danger'>Rp. {total}</h6>
                                     </div>
                                 </div>
                                 <div>
-                                    <Button className='bg-danger col-12 text-white mt-2' variant="white" style={{ height: '36px', borderRadius: '25px' }} onClick={payment}>Select Payment</Button>
+                                    <Button 
+                                        className='bg-danger col-12 text-white mt-2' 
+                                        variant="white" 
+                                        style={{ 
+                                            height: '36px', 
+                                            borderRadius: '25px' 
+                                        }} 
+                                        onClick={payment}>
+                                        Select Payment
+                                    </Button>
                                 </div>
                             </Card.Body>
                         </Card>

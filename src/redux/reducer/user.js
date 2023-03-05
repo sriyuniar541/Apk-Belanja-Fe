@@ -1,6 +1,4 @@
-//state global dan untuk mengupdate state menggunakan action
 const initialState = { 
-//sesuai backend login user
     user : {
         id:'',
         email :'',
@@ -10,7 +8,6 @@ const initialState = {
     },
     isLoading:false
 }
-
 
 const userReducer = (state=initialState,action) => {
     if (action.type === 'USER_LOGIN_PENDING') {

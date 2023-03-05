@@ -10,7 +10,10 @@ function Example(props) {
 
   return (
     <>
-      <Button variant="" className='btn btn-danger' onClick={handleShow}>
+      <Button variant="" 
+        className='btn btn-danger' 
+        onClick={handleShow}
+      >
         Detail Order
       </Button>
       <Modal show={show} onHide={handleClose}>

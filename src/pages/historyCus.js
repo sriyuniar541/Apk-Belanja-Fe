@@ -9,16 +9,14 @@ import Example from '../componen/modal';
 
 export default function Order() {
     const user = useSelector((state) => state.user.user)
-
+    const token = localStorage.getItem('token')
+    const [checkout,setCheckout] = useState([])
     useEffect(()=>{
     console.log(user)
     console.log(user.id)
     },[user])
     
-    const token = localStorage.getItem('token')
-    const [checkout,setCheckout] = useState([])
     const getDataCheckout = () => {
-        // untuk get data
         axios.get(process.env.REACT_APP_URL_BE +`/addProduct/`,{
             headers: {Authorization : `Bearer ${token}`}
         })
@@ -40,6 +38,7 @@ export default function Order() {
     const filterChek = checkout.filter((p)=> p.status === 1)
     console.log(filterChek, 'ini filter check')
 
+    
     return (
         <div>
             <NavbarSebelumLogin />
