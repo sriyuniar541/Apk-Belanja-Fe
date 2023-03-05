@@ -210,7 +210,6 @@ export default function Product() {
                     </Link>
                   </div>
                 </div>
-
                 <div className="container d-flex flex-row">
                   <div className="">
                     <div 
@@ -264,7 +263,7 @@ export default function Product() {
                     <th className='text-center'>Action</th>
                   </tr>
                 </thead>
-                <tbody className=''>
+                <tbody >
                   {data.map((item, index) => (
                     <tr key={index + 1} className={`${item.id}`}>
                       <td >
@@ -288,7 +287,7 @@ export default function Product() {
                         </Link>
                         { }
                         <button 
-                          className='btn btn-white text-white py-1' 
+                          className='btn btn-white text-white py-1 col-lg-2' 
                           onClick={() => deleteData(item.id)}> 
                           <RiDeleteBinLine 
                             size={25}
