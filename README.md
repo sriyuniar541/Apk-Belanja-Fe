@@ -63,23 +63,23 @@ https://light-clam-overalls.cyclic.app // or use your own
 
 | Landing Page                                               | Product List                        | Profile Customer                                            |
 | ---------------------------------------------------------- | -------------------------------------------- | ------------------------------------------------- |
-| ![landing page](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087224/belanja/landingPageSebelumLogin-belanja_asrghi.png) | ![product](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087217/belanja/daftarProduct-belanja_vkogpl.png) | ![profile](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087223/belanja/profileCust-belanja_cybwuu.png) |
+| ![landing page](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1677999516/belanja/landingPage_baru_k0thzu.png) | ![product](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087217/belanja/daftarProduct-belanja_vkogpl.png) | ![profile](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1677999756/belanja/Screenshot_164_ruxufk.png) |
 
 | Profile Admin                                             | Detail Product                                           | get By Category                                               |
 | --------------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------- |
-| ![profile admin](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087222/belanja/profileAdmin-belanja_dop51i.png) | ![detail product](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087220/belanja/detailProduct-belanja_uqot0v.png) | ![get by category](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087216/belanja/daftarProductCategory-belanja_vtamzz.png) |
+| ![profile admin](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1677999512/belanja/profile_baru_jvvv1x.png) | ![detail product](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087220/belanja/detailProduct-belanja_uqot0v.png) | ![get by category](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1678000031/belanja/filterproduct_baru_b2hmq0.png) |
 
 | My Bag                                            | Checkout                                          | Hisrory order Customer                                          |
 | ------------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------- |
-| ![my bag](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087220/belanja/myBag-belanja_qa4zdr.png) | ![checkout](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087213/belanja/checkout-belanja_faybqj.png) | ![history](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087217/belanja/historyBelanjaCus-belanja_yq1zhw.png) |
+| ![my bag](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1677999516/belanja/mybag_baru_carb3s.png) | ![checkout](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1677999511/belanja/checkout_baru_uwrcps.png) | ![history](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1677999513/belanja/order_baru_ogcubi.png) |
 
 | Admin Page                                     | Add Product                                     | Add Category                                  |                                     
 | ---------------------------------------------- | ------------------------------------------------- | -------------------------------------------------- | 
-| ![admin page](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087217/belanja/halamanProductAdmin-belanja_cdhusm.png) | ![add product](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087213/belanja/addProductAdmin-belanja_dvzt3n.png) | ![add category](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087216/belanja/editAndAddCategoryAdmin-belanja_qwkrzk.png) |
+| ![admin page](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1677999516/belanja/product_baru_yuvyl9.png) | ![add product](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1677999512/belanja/editproduct_baru_eobwty.png) | ![add category](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1677999509/belanja/category_baru_tgqqrh.png) |
 
 | History Order                                           | Detail Order                                          | 
 | ------------------------------------------------------ | ------------------------------------------------ | 
-| ![!history](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087219/belanja/orderAdmin-belanja_xp0xtm.png) | ![detail](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1675087215/belanja/detailOrderCus-belanja_nqzxjs.png) |
+| ![!history](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1678000570/belanja/Screenshot_172_bwzejc.png) | ![detail](https://res.cloudinary.com/dxrsjyu6o/image/upload/v1677999512/belanja/detailorder_baru_yvgti7.png) |
 
 ## Related Project
 
