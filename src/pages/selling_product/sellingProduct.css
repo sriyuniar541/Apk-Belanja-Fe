@@ -1,0 +1,35 @@
+/* insert  */
+.cont_selling {
+    background-color: #F5F5F5;
+    padding-top: 90px;
+}
+
+.sidebar_selling {
+    background-color: white;
+}
+
+.card_selling {
+    background-color: white;
+    margin: 50px 0 50px 50px;
+    padding: 50px;
+    box-shadow: 5px 4px 10px rgb(212, 208, 208);
+}
+
+.card_selling .card {
+    background-color: white;
+}
+
+.card_selling .card_item {
+    margin: 20px 0;
+}
+
+@media (max-width : 768px) {
+    .card_selling {
+        margin: 50px 0 0 0px;
+    }
+
+    .sidebar_selling {
+        margin-top: 30px;
+        padding-top: 20px;
+    }
+}

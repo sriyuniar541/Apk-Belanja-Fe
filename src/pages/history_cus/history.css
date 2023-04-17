@@ -1,0 +1,20 @@
+.cont_history {
+    padding-top: 90px;
+    background-color: #F5F5F5;
+}
+
+.table_history, .sidebar_historys {
+    background-color: white;
+}
+
+.table_history {
+    padding: 50px;
+    margin: 60px 0 50px 60px ;
+    box-shadow: 5px 4px 10px rgb(212, 208, 208);
+}
+
+@media (max-width : 768px) { 
+    .table_history {
+        margin: 0px;
+    }
+}

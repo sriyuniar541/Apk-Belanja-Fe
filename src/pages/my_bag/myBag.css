@@ -1,0 +1,109 @@
+.cont-myBag {
+    padding-top: 150px;
+}
+
+.product_All {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product_list .card {
+    box-sizing: border-box;
+    padding: 10px;
+    box-shadow: 5px 4px 10px rgb(212, 208, 208);
+    margin-bottom: 20px;
+}
+
+.car_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.range_price,
+.price_item {
+    display: flex;
+    align-items: center;
+}
+
+.range_price h5 {
+    margin: 0 10px;
+}
+
+.car_item .title_product {
+    margin-top: 16px;
+}
+
+.car_item .image_product {
+    width: 40px;
+    height: auto;
+}
+
+.car_item .price_item p {
+    margin-right: 20px;
+    margin: 2px 20px 0 0;
+}
+
+.car_item .price_item button {
+    border: none;
+    background-color: white;
+    color: rgb(155, 8, 8);
+}
+
+.tambah,
+.kurang {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    box-shadow: 1px 1px 1px rgb(212, 208, 208);
+    border: 1px solid rgb(240, 226, 226);
+}
+
+.kurang:hover {
+    scale: 1.1;
+    background-color: rgba(177, 175, 175, 0.2);
+}
+
+.tambah:hover {
+    scale: 1.1;
+    background-color: rgba(177, 175, 175, 0.2);
+}
+
+.product_All img {
+    height: 50px;
+    width: 50px;
+}
+
+.card_summary {
+    padding: 10px;
+    box-shadow: 5px 4px 10px rgb(212, 208, 208);
+}
+
+.total_price {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button_buy Button {
+    background-color: aqua;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 20px;
+    border: none;
+    padding: 10px 0;
+}
+
+@media (min-width : 768px) {
+    .product_list .card {
+        margin-right: 50px;
+    }
+
+    .product_All img {
+        height: 100px;
+        width: 100px;
+    }
+    
+}
+

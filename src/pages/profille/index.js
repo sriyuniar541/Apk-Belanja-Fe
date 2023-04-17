@@ -1,12 +1,11 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-// import styles from './Profile.module.css';
-// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SideBar from "../../componen/sideBar";
-import NavbarSebelumLogin from "../../componen/navbar2";
+import NavbarSebelumLogin from "../../componen/navbar/navbar2";
 import { useSelector } from 'react-redux';
-
+import profile from '../../image/profile.png'
+import './profile.css';
+import axios from "axios";
 
 export default function Profile() {
     const [data, setData] = useState({
@@ -86,21 +85,21 @@ export default function Profile() {
     return (
         <div className="bg-light w-100 h-100">
             <NavbarSebelumLogin />
-            <div className="row">
-                <div className='col-lg-3 col-4 bg-white'>
+            <div className="row cont_profile">
+                <div className='col-lg-3 bg-white'>
                     <SideBar />
                 </div>
-                <div className='col-lg-8 col-8 p-lg-5'>
+                <div className='col-lg-8 p-lg-5'>
                     <div className="container bg-white p-lg-5">
                         <h2 >My Profil</h2>
                         <h5 className="text-black opacity-50">
                             Manage your profile information
                         </h5>
                         <hr />
-                        <div className="container col-lg-12  row">
-                            <div className="col col-8 row">
+                        <div className="container col-lg-12  row ">
+                            <div className="col col-lg-8 row cont_profine">
                                 <div className="col-lg-12  row mb-3">
-                                    <div className="col col-3 centered-value">
+                                    <div className="col col-lg-3 centered-value">
                                         Name
                                     </div>
                                     <div className=" col col-lg-9">
@@ -108,7 +107,7 @@ export default function Profile() {
                                             type="text"
                                             name='fullname'
                                             className="from-control"
-                                            value={data ? data.fullname : 'data not found,please login lagi'}
+                                            value={data ? data.fullname : 'data not found,please login again'}
                                             onChange={handleChange}
                                         />
                                     </div>
@@ -121,8 +120,8 @@ export default function Profile() {
                                         <input
                                             type="text"
                                             className="from-control"
-                                            value={data ? data.email : 'data not found,please login lagi'}
-                                            name='email' 
+                                            value={data ? data.email : 'data not found,please login again'}
+                                            name='email'
                                             onChange={handleChange}
                                         />
                                     </div>
@@ -136,9 +135,9 @@ export default function Profile() {
                                         <input
                                             type="text"
                                             className="from-control"
-                                            value={data ? data.phonenumber : 'data not found,please login lagi'}
-                                            name='phonenumber' 
-                                            onChange={handleChange} 
+                                            value={data ? data.phonenumber : 'data not found,please login again'}
+                                            name='phonenumber'
+                                            onChange={handleChange}
                                         />
                                     </div>
                                 </div>
@@ -150,34 +149,29 @@ export default function Profile() {
                                     <div className=" col col-9">
                                         <input
                                             type="text"
-                                            className="from-control" 
-                                            value={data ? data.adress : 'data not found,please login lagi'} 
-                                            name='adress' onChange={handleChange} 
+                                            className="from-control"
+                                            value={data ? data.adress : 'data not found,please login again'}
+                                            name='adress' onChange={handleChange}
                                         />
                                     </div>
                                 </div>
-                                <button 
-                                    className=" btn btn-danger text-white col-lg-5 offset-lg-3 mt-3 mb-4" 
-                                    style={{ borderRadius: '20px' }} 
+                                <button
+                                    className=" btn btn-danger text-white col-lg-5 offset-lg-3 mt-3 mb-4"
+                                    style={{ borderRadius: '20px' }}
                                     onClick={updateProfile}>
                                     Save
                                 </button>
                             </div>
-                            <div className="col-lg-4 col-6 text-center " ms-auto>
-                                <img src={data ? data.photo : 'photo not found'} 
-                                    alt='profile' 
-                                    style={{ 
-                                        width: '200px', 
-                                        height: '200px', 
-                                        borderRadius: '50%' 
-                                    }} 
-                                    className='image-fluid mb-3' 
-                                    name='photo' 
+                            <div className="col-lg-4  text-center " ms-auto>
+                                <img src={data ? data.photo : profile}
+                                    alt='profile'
+                                    className='image-fluid mb-3 img-profile'
+                                    name='photo'
                                 />
-                                <input 
-                                    type='file' 
-                                    placeholder="Select Image" 
-                                    onChange={handlePhoto} 
+                                <input
+                                    type='file'
+                                    placeholder="Select Image"
+                                    onChange={handlePhoto}
                                 />
                             </div>
                         </div>

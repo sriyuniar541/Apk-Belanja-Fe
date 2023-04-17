@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Alert from "../../componen/Alert";
-import NavbarSebelumLogin from '../../componen/navbar2';
+import NavbarSebelumLogin from '../../componen/navbar/navbar2';
 import SideBar from "../../componen/sideBar";
 import { Link } from 'react-router-dom';
 import { RiDeleteBinLine } from "react-icons/ri";
 import { TbEdit } from "react-icons/tb";
+import './product.css'
 
 
 export default function Product() {
@@ -182,24 +183,21 @@ export default function Product() {
   return (
     <div>
       <NavbarSebelumLogin />
-      <div className='container-fluid'>
+      <div className='container-fluid cont-productSeller'>
         <div className='row'>
-          <div className='col-lg-4'>
+          <div className='col-lg-3 cont_sideBar'>
             <SideBar />
           </div>
-
-          <div className='col-lg-8 p-5' 
-            style={{ background: '#F5F5F5' }}
-          >
-            <div className='mx-5 bg-white pt-2 pb-4 px-5'>
+          <div className='col-lg-8 cont-body_product'>
+            <div className='cont_header'>
               {/* filter */}
-              <div className="container mt-2 p-2 rounded " >
-                <div className='d-flex justify-content-between'>
-                  <h5 className='py-4'>My Products</h5>
-                  <div className='py-4'>
+              <div className="container header_product " >
+                <div className='title_product'>
+                  <h3 className=''>My Products</h3>
+                  <div className='button_product_item'>
                     <Link to='/Editcategory'>
                       <button 
-                        className='btn btn-warning text-white mx-2 '>
+                        className='btn btn-warning text-white'>
                         Category
                       </button>
                     </Link>
@@ -210,7 +208,7 @@ export default function Product() {
                     </Link>
                   </div>
                 </div>
-                <div className="container d-flex flex-row">
+                <div className=" filter_product">
                   <div className="">
                     <div 
                       className={`btn ${sortBy == "name" ? "btn-primary" : "btn-secondary"} `} 
@@ -253,7 +251,7 @@ export default function Product() {
                 </div>
               </div>
               {/* get data */}
-              <table className='table container mt-5'>
+              <table className='table container table_product'>
                 <thead >
                   <tr>
                     <th>Name</th>
@@ -287,7 +285,7 @@ export default function Product() {
                         </Link>
                         { }
                         <button 
-                          className='btn btn-white text-white py-1 col-lg-2' 
+                          className='btn btn-white col-lg-2' 
                           onClick={() => deleteData(item.id)}> 
                           <RiDeleteBinLine 
                             size={25}
@@ -295,12 +293,12 @@ export default function Product() {
                           />
                         </button>
                         <button 
-                          className='btn btn-primary text-white col-lg-4 py-1' 
+                          className='btn btn-primary col-lg-4' 
                           onClick={() => updateData(item.id)}>
                           Active
                         </button>
                         <button 
-                          className='btn btn-danger text-white py-1' 
+                          className='btn btn-danger py-1' 
                           onClick={() => notActive(item.id)}>
                           Not active
                         </button>
@@ -315,7 +313,7 @@ export default function Product() {
                 selected &&
                 <div className="container">
                   <button 
-                    className='btn btn-danger mx-auto col-12' 
+                    className='btn btn-danger col-12' 
                     onClick={() => deleteData()}>
                     delete {temp?.name ?? ''}
                   </button>
@@ -323,9 +321,9 @@ export default function Product() {
               }
 
               {/* pagination */}
-              <div className='d-flex text-end mt-5'>
+              <div className='pagination_product'>
                 <button 
-                  className='btn btn-white border-secondary' 
+                  className='btn btn-white' 
                   onClick={next}>
                   Next
                 </button>
@@ -334,7 +332,7 @@ export default function Product() {
                   {page}
                 </button>
                 <button 
-                  className='btn btn-white border-secondary' 
+                  className='btn btn-white ' 
                   onClick={back}>
                   Back
                 </button>

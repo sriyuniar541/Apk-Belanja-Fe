@@ -1,0 +1,136 @@
+.cont_detail {
+    padding-top: 150px;
+}
+
+.img_1 {
+    height: 430px;
+    width: 100%;
+}
+
+.detail_price,
+.color_detail {
+    line-height: 1px;
+    margin-top: 50px;
+}
+
+.color_detail {
+    margin-bottom: 30px;
+}
+
+.color_detail button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.size_detail_All {
+    display: flex;
+}
+
+.size_detail {
+    margin-right: 20px;
+}
+
+.size_detail button,
+.count_detail_All button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: .5px solid rgb(161, 158, 158);
+}
+
+.size_detail .count_detail,
+.count_detail {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.size_detail button:hover {
+    scale: 1.2;
+    background-color: grey;
+    color: white;
+}
+
+.count_detail_All button:hover {
+    scale: 1.2;
+    background-color: rgb(167, 160, 160);
+    color: white;
+}
+
+.button_detail {
+    padding-top: 50px;
+}
+
+.button_detail Button {
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button_detail Button:nth-child(3) {
+    border: none;
+}
+
+.button_detail Button:nth-child(2) {
+    margin: 0 5px;
+}
+
+.infromasi_detail {
+    margin-top: 50px;
+}
+
+.infromasi_detail h2 {
+    margin-bottom: 20px;
+}
+
+.infromasi_detail h6,
+h2 {
+    font-weight: bold;
+}
+
+.cont_detail_info h2, .cont_detail h2 {
+    font-weight: 500;
+}
+
+.descrip {
+    margin-top: 30px;
+}
+
+.infromasi_detail p {
+    text-align: justify;
+    margin-bottom: 50px;
+}
+
+.product_riview {
+    margin-bottom: 150px;
+}
+
+
+@media (max-width : 768px) {
+    .cont_detail .img_1 {
+        height: 400px;
+        border-radius: 20px;
+        width: 100%;
+        height: auto;
+        padding: 0 90px;
+    }
+
+    .cont_detail h2{
+        margin-top: 50px;
+    }
+
+    .button_detail Button:nth-child(3) {
+        margin-top: 10px;
+        width: 90%;
+        text-align: center;
+    }
+
+    .button_detail Button:nth-child(2), .button_detail Button:nth-child(1) {
+        width: 45%;
+        text-align: center;
+    }
+    
+}

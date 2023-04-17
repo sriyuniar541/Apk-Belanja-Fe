@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import NavbarSebelumLogin from "../componen/navbar2";
+import NavbarSebelumLogin from "../../componen/navbar/navbar2";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios'
 import { Link } from "react-router-dom";
+import './checkout.css'
 
 
 export default function CheckOut() {
@@ -70,69 +71,54 @@ export default function CheckOut() {
     return (
         <div>
             <NavbarSebelumLogin />
-            <div className="container">
+            <div className="container cont_checkout">
                 <h2>Checkout</h2>
                 <p>Shipping Adress</p>
                 <div className="row">
                     <div className="col-lg-8">
-                        <Card 
-                            style={{ height: '' }} 
-                            className='mb-2 shadow p-3 bg-white rounded'
-                        >
-                            <Card.Body>
+                        <Card>
+                            <Card.Body className="card_checkout">
                                 <h6>{user.fullname}</h6>
                                 <p>  
                                     {user?user.adress :'Adres Jln, Durian no.2 kecamatan Sirimau, Kota Ambon'}
                                 </p>
                                 <Button 
-                                    className='m-3' 
+                                    className='button_history' 
                                     variant="white" 
-                                    style={{ 
-                                        width: '210px', 
-                                        height: '36px', 
-                                        borderRadius: '24px', 
-                                        borderColor: '#9B9B9B' }}
-                                    > 
+                                > 
                                     <Link 
-                                        to='/History' 
-                                        style={{textDecoration:'none'}} 
-                                        className='text-secondary'>
+                                        to='/History'
+                                        className='text-secondary link'>
                                         Go to detail history 
-                                    </Link> </Button>{' '}
+                                    </Link></Button>{' '}
                             </Card.Body>
                         </Card>
                     </div>
                     <div className="col-lg-4">
-                        <Card style={{ height: '' }} 
-                            className='mb-2 shadow p-3 bg-white rounded'
-                        >
-                            <Card.Body>
+                        <Card>
+                            <Card.Body className="card_summary">
                                 <div className='row'>
-                                    <div className="col-lg-8 col-8">
+                                    <div className="col-8">
                                         <h6>Shopping summary</h6>
                                     </div>
-                                    <div className="d-flex justify-content-between text-secondary">
+                                    <div className="order_list">
                                         <p>Order</p>
                                         <p>Rp. {totalOrder}</p>
                                     </div>
-                                    <div className="d-flex justify-content-between text-secondary">
+                                    <div className="delivery_list">
                                         <p>Delivery</p>
                                         <p>Rp. 80000</p>
                                     </div>
                                     <hr />
-                                    <div className="d-flex justify-content-between ">
+                                    <div className="shooping_summary">
                                         <h6>Shooping summary</h6>
                                         <h6 className='text-danger'>Rp. {total}</h6>
                                     </div>
                                 </div>
                                 <div>
                                     <Button 
-                                        className='bg-danger col-12 text-white mt-2' 
-                                        variant="white" 
-                                        style={{ 
-                                            height: '36px', 
-                                            borderRadius: '25px' 
-                                        }} 
+                                        className='bg-danger col-12 ' 
+                                        variant="white"
                                         onClick={payment}>
                                         Select Payment
                                     </Button>

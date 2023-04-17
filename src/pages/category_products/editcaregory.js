@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form';
-import SideBarProduct from "../componen/sideBar";
+import SideBarProduct from "../../componen/sideBar";
 import Card from 'react-bootstrap/Card';
 import "@fontsource/metropolis";
-import NavbarSebelumLogin from '../componen/navbar2';
+import NavbarSebelumLogin from '../../componen/navbar/navbar2';
 import axios from 'axios'
 import { RiDeleteBinLine } from "react-icons/ri";
-import ModalCategory from '../componen/modalCategory';
+import ModalCategory from '../../componen/modalCategory';
+import './category_product.css'
 
 
 export default function Editcategory() {
@@ -91,47 +92,45 @@ export default function Editcategory() {
     }, [])
 
     return (
-        <div className='Container-fluid' 
-            style={{ background: '#F5F5F5' }}
-        >
+        <div className='Container-fluid cont_editcategory'>
             <NavbarSebelumLogin />
-            <div className=''>
+            <div className='body_category'>
                 <div className='container-fluid'>
                     <div className='row'>
-                        <div className=' col-4 bg-white p-2'>
+                        <div className='col-lg-3 cont_sideBar'>
                             <SideBarProduct />
                         </div>
-                        <div className='col-lg-7 px-5 mt-5'>
-                            <div className='p-2'>
-                                <Card className=' p-5 mb-3'>
-                                    <Card.Header className='bg-white mx-5'>
+                        <div className='col-lg-8'>
+                            <div>
+                                <Card className='card_category'>
+                                    <Card.Header className='bg-white'>
                                         <h4>Category</h4>
                                     </Card.Header>
-                                    <Card.Body className='col-lg-9 offset-lg-1 justify-content-center'>
-                                        <div className='d-flex mb-4 col-12'>
+                                    <Card.Body className='col-lg-9 offset-lg-1'>
+                                        <div className='col-12 item_category'>
                                             <Form.Control 
-                                                name='categorys' 
-                                                value={postcategory.categorys} 
+                                                name='categorys'
+                                                value={postcategory.categorys}
                                                 onChange={handleChange}
-                                                placeholder='Input Category' 
+                                                placeholder='Input Category'
                                             />
-                                            <button 
-                                                className='btn btn-warning text-white ms-2' 
+                                            <button
+                                                className='btn btn-warning'
                                                 onClick={postForm}>
                                                 Add
                                             </button>
                                         </div>
                                         {categorys ? categorys.map((p) => (
                                             <div className='d-flex justify-content-between'>
-                                                <Form.Control name='categorys' 
-                                                    value={p.categorys} 
+                                                <Form.Control name='categorys'
+                                                    value={p.categorys}
                                                 />
-                                                <button     
-                                                    className='btn btn-white text-white ms-2' 
+                                                <button
+                                                    className='btn btn-white'
                                                     onClick={(e) => deleteCategory(e, p.id)}>
-                                                    <RiDeleteBinLine className='text-secondary'/>
+                                                    <RiDeleteBinLine className='text-secondary' />
                                                 </button>
-                                                <ModalCategory id={p.id} 
+                                                <ModalCategory id={p.id}
                                                     placeholder={postcategory.categorys}
                                                     addBagAll={addBagAll}
                                                 />

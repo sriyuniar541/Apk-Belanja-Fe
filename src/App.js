@@ -1,22 +1,22 @@
- import Home from './pages/Home'; 
+ import Home from './pages/home/Home'; 
 import Product from './pages/Product/index'; 
 import Profile from './pages/profille/index'; 
 import { BrowserRouter,Route,Routes,Navigate} from 'react-router-dom';
 import LoginSeller from './pages/login/login';
-import  SigUpSeller from './pages/sigup';
-import SigUpCustommer from './pages/sigupCus';
-import  MyBag from './pages/MyBag';
-import DetailProduct from './pages/DetailProduct'
+import  SigUpSeller from './pages/Sigup/sigupSeller';
+import SigUpCustommer from './pages/Sigup/sigupCus';
+import  MyBag from './pages/my_bag/MyBag';
+import DetailProduct from './pages/detailProduct/DetailProduct'
 import AuthChecker from '../src/componen/AuthChecker/index'
 import AuthCheckerCus from './componen/AuthChecker/authCheckCus';
-import SellingProduct from './pages/sellingProduct'
-import EditProduct from './pages/editProduct';
-import CheckOut from './pages/checkout';
+import SellingProduct from './pages/selling_product/sellingProduct'
+import EditProduct from './pages/selling_product/editProduct';
+import CheckOut from './pages/checkout/checkout';
 import "@fontsource/metropolis";
-import Category from './pages/cateory';
-import Editcategory from './pages/editcaregory';
-import Order from './pages/order';
-import History from './pages/historyCus';
+import Category from './pages/category/category';
+import Editcategory from './pages/category_products/editcaregory';
+import Order from './pages/order/order';
+import History from './pages/history_cus/historyCus';
 import Otp from './pages/login/otp';
 
 

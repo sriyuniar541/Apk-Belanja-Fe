@@ -1,0 +1,54 @@
+.cont-home {
+    padding-top: 150px;
+    line-height: 15px;
+}
+
+.cont-home h4 {
+    margin-top: 50px;
+}
+
+.cont-home p {
+    margin-bottom: 30px;
+}
+
+.card_product {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.link {
+    text-decoration: none;
+    color: rgb(39, 37, 37);
+    text-transform: capitalize;
+}
+
+.pagination {
+    padding: 10px;
+    margin: 50px 0 100px 0;
+    justify-content: center;
+}
+
+.pagination button:nth-child(1),
+.pagination button:nth-child(3) {
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #9B9B9B;
+}
+
+.pagination button:nth-child(2) {
+    border: none;
+    margin: 0 10px;
+    background-color: white;
+}
+
+.pagination button:hover {
+    scale: 1.1;
+}
+
+@media (max-width : 768px) { 
+    .cont-home {
+        overflow: hidden;
+    }
+}

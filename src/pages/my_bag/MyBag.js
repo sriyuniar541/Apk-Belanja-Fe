@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import NavbarSebelumLogin from "../componen/navbar2";
-import axios from 'axios'
+import NavbarSebelumLogin from "../../componen/navbar/navbar2";
 import { useNavigate } from "react-router-dom";
 import { RiDeleteBinLine } from "react-icons/ri";
-
+import axios from 'axios'
+import './myBag.css'
 
 export default function MyBag() {
     const navigate = useNavigate()
@@ -118,64 +118,49 @@ export default function MyBag() {
     return (
         <div>
             <NavbarSebelumLogin />
-            <div className="container">
-                <h2 className='py-4'>My Bag</h2>
-                <div className="row">
-                    <div className="col-lg-8">
+            <div className="container cont-myBag">
+                <h2>My Bag</h2>
+                <div className="product_All">
+                    <div className=" col-lg-8 col-12 product_list">
                         {filterBag?.length >= 1 ? filterBag.map((p) => {
                             return (
-                                <Card className='mb-2 shadow p-3 bg-white rounded' 
+                                <Card className='card'
                                     key={p.id}
                                 >
                                     <Card.Body >
-                                        <div className="row ">
-                                            <div className="col-lg-3 col-4 p-lg-2 ">
+                                        <div className="car_item">
+                                            <div className="image_product">
                                                 <img 
-                                                    src={p.products_photo} 
-                                                    style={{ 
-                                                        height: '69px', 
-                                                        borderRadius: '8px' }} 
+                                                    src={p.products_photo}  
                                                     alt='product' 
                                                 />
                                             </div>
-                                            <div className="col-lg-3 col-4 p-lg-2 ">
+                                            <div className="title_product">
                                                 <h6>{p.products_name}</h6>
                                                 <p className="text-secondary">
                                                     Sri-Olshop
                                                 </p>
                                             </div>
-                                            <div className="col-lg-2 col-3 p-lg-3  d-flex">
+                                            <div className="range_price">
                                                 <button 
-                                                    className="border-white rounded-circle" 
-                                                    style={{ 
-                                                        width: '36px', 
-                                                        height: '36px' 
-                                                    }} 
+                                                    className="kurang" 
                                                     onClick={() => handleKurang(p.id)}>
-                                                    <h4>-</h4>
+                                                    -
                                                 </button>
-                                                <h5 className='p-2'>{p.count}</h5>
+                                                <h5 >{p.count}</h5>
                                                 <button 
-                                                    className="border-white rounded-circle" 
-                                                    style={{ 
-                                                        width: '36px', 
-                                                        height: '36px' 
-                                                    }} 
+                                                    className="tambah" 
                                                     onClick={() => handleTambah(p.id)}>
-                                                    <h4>+</h4>
+                                                   +
                                                 </button>
                                             </div>
-                                            <div className="col-lg-3 col-6  p-lg-4 d-flex">
-                                                <p className="text-right">
+                                            <div className="price_item">
+                                                <p>
                                                     Rp. {p.products_price}
                                                 </p>
-                                                <button 
-                                                    className='border-white btn btn-white ms-4 text-danger' 
+                                                <button  
                                                     onClick={(e) => deleteAdd(e, p.id)} 
-                                                    style={{ 
-                                                        padding: '0px', 
-                                                        marginTop: '-20px' 
-                                                    }}>
+                                                    >
                                                     <RiDeleteBinLine size={20} />
                                                 </button>
                                             </div>
@@ -185,27 +170,22 @@ export default function MyBag() {
                             )
                         }) : 'My Bag Empty'}
                     </div>
-                    <div className="col-lg-4">
-                        <Card className='mb-2 shadow p-3 bg-white rounded'>
+                    <div className="col-lg-4 col-12">
+                        <Card className="card_summary">
                             <Card.Body>
                                 <div>
-                                    <div className="p-1">
+                                    <div>
                                         <h6>Shopping summary</h6>
                                         <hr />
                                     </div>
-                                    <div className="d-flex justify-content-between mt-3">
+                                    <div className="total_price">
                                         <p>Total Price</p>
                                         <h6>Rp. {totalOrder}</h6>
                                     </div>
                                 </div>
-                                <div>
+                                <div className="button_buy">
                                     <Button 
-                                        className='bg-danger col-12 text-white' 
-                                        variant="white" 
-                                        style={{ 
-                                            height: '36px', 
-                                            borderRadius: '25px' 
-                                        }} 
+                                        className='bg-danger' 
                                         onClick={handleBuy}>
                                         Buy
                                     </Button>

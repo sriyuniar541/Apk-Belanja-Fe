@@ -1,0 +1,178 @@
+.cont_nav {
+    box-shadow: 0px 1px 20px rgb(192, 188, 188);
+    margin-bottom: 50px;
+    position: fixed;
+    z-index: 999;
+    background-color: white;
+}
+
+.cont-navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.brand-logo {
+    display: flex;
+}
+
+.brand-logo h4 {
+    display: flex;
+    align-items: center;
+    margin-top: 13px;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.brand .link {
+    text-decoration: none;
+    color: rgb(65, 60, 60);
+}
+
+.search {
+    display: flex;
+    width: 45%;
+    height: 40px;
+}
+
+.search input,
+.search Button {
+    border: 1px solid #9B9B9B;
+}
+
+.search input {
+    border-radius: 20px;
+    margin-right: 5px;
+}
+
+.search Button {
+    border-radius: 10px;
+}
+
+.icon_filter,
+.icon_bag {
+    color: #9B9B9B;
+}
+
+.menu-nav .icon_bag {
+    border: none;
+}
+
+.link .product_nav,
+.link .logout_nav {
+    border-radius: 20px;
+    width: 100px;
+    text-decoration: none;
+}
+
+.link .product_nav {
+    border: 1px solid #9B9B9B;
+    margin: 0 5px;
+}
+
+.profile_nav {
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    margin-left: 10px;
+    border: 1px solid #9B9B9B;
+}
+
+.menu-nav .link_product .button_product {
+    border: 1px solid #9B9B9B;
+    border-radius: 20px;
+    color: #9B9B9B;
+}
+
+.hamburger_menu,
+.close_menu {
+    display: none;
+}
+
+.menu-nav .btn {
+    border-radius: 20px;
+    width: 100px;
+    border: none;
+    color: white;
+
+}
+
+.menu-nav .btn:nth-child(1) {
+    margin-right: 5px;
+
+}
+
+
+@media (max-width : 576px) {
+    .menu-nav {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        margin-top: 70px;
+        padding: 50px;
+        width: 50%;
+        align-items: center;
+        box-shadow: 0px 1px 20px rgb(192, 188, 188);
+        border-radius: 15px;
+    }
+
+    .active {
+        margin-left: 200px;
+        margin-top: -10px;
+    }
+
+    .noActive {
+        margin-left: 1000px;
+    }
+
+    .search {
+        display: flex;
+        width: 65%;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .search input {
+        height: 40px;
+    }
+
+    .hamburger_menu {
+        display: flex;
+        align-items: center;
+        background-color: white;
+    }
+
+    .search .hamburger_menu {
+        border-color: white;
+        color: #9B9B9B;
+    }
+
+    .search .close_menu {
+        border-color: white;
+        color: rgb(179, 28, 28);
+    }
+
+    .close_menu {
+        z-index: 9;
+        display: flex;
+        background-color: white;
+    }
+
+    .close_menu:hover {
+        background-color: #cfc9c9;
+        border-radius: 50%;
+        padding: 5px;
+        color: white;
+        scale: 0.8;
+    }
+
+    .menu-nav .btn {
+        margin-top: 10px;
+    }
+
+    .menu-nav .btn:nth-child(1) {
+        margin-right: 0px;
+    }
+
+}

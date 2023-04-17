@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form';
-import SideBarProduct from "../componen/sideBar";
+import SideBarProduct from "../../componen/sideBar";
 import Card from 'react-bootstrap/Card';
 import "@fontsource/metropolis";
-import NavbarSebelumLogin from '../componen/navbar2';
+import NavbarSebelumLogin from '../../componen/navbar/navbar2';
 import axios from 'axios' 
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import './sellingProduct.css'
 
 
 export default function EditProduct() {
@@ -86,18 +87,18 @@ export default function EditProduct() {
 
    
     return (
-        <div className='Container-fluid' style={{ background: '#F5F5F5' }}>
+        <div className='Container-fluid'>
             <NavbarSebelumLogin />
-            <div className=''>
+            <div className='cont_selling'>
                 <div className='container-fluid'>
                     <div className='row'>
-                        <div className=' col-4 bg-white p-2'>
+                        <div className=' col-lg-3 sidebar_selling'>
                             <SideBarProduct />
                         </div>
-                        <div className='col-lg-7 px-5 mt-5'>
-                            <div className='p-2'>
-                                <Card className='bg-white mb-3'>
-                                    <Card.Header className='bg-white'>
+                        <div className='col-lg-7 card_selling'>
+                            <div>
+                                <Card>
+                                    <Card.Header className='card'>
                                         <h4>Inventory</h4>
                                     </Card.Header>
                                     <Card.Body className='col-lg-6'>
@@ -111,14 +112,14 @@ export default function EditProduct() {
                                         />
                                     </Card.Body>
                                 </Card>
-                                <Card className='bg-white mb-3'>
-                                    <Card.Header className='bg-white'>
+                                <Card className='card_item'>
+                                    <Card.Header className='card'>
                                         <h4>Item details</h4>
                                     </Card.Header>
                                     <Card.Body className='col-lg-6'>
                                         <p>Unit price</p>
                                         <Form.Control 
-                                            type="text" 
+                                            type="number" 
                                             placeholder={get.price} 
                                             value={updateData.price} 
                                             name='price' 
@@ -143,8 +144,8 @@ export default function EditProduct() {
                                         </div>
                                     </Card.Body>
                                 </Card>
-                                <Card className='bg-white mb-3'>
-                                    <Card.Header className='bg-white'>
+                                <Card className='card_item'>
+                                    <Card.Header className='card'>
                                         <h4>Photo of goods</h4>
                                     </Card.Header>
                                     <Card.Body>
@@ -156,8 +157,8 @@ export default function EditProduct() {
                                         />
                                     </Card.Body>
                                 </Card>
-                                <Card className='bg-white mb-3'>
-                                    <Card.Header className='bg-white'>
+                                <Card className='card_item'>
+                                    <Card.Header className='card'>
                                         <h4>Description</h4>
                                     </Card.Header>
                                     <Card.Body>

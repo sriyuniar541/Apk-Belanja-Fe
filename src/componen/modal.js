@@ -14,7 +14,7 @@ function Example(props) {
         className='btn btn-danger' 
         onClick={handleShow}
       >
-        Detail Order
+        Detail
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

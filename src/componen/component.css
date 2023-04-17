@@ -1,0 +1,48 @@
+/* sidebar */
+.sidebar_menu {
+    height: 100vh;
+}
+
+.edit_profile {
+    width: 100%;
+}
+.edit_profile input {
+    width: 200px;
+}
+
+
+@media (max-width : 768px) {
+    .sidebar_menu {
+        height: 80px;
+        width: 100%;
+        margin-bottom: 50px;
+    }
+
+    .sidebar_menu Button {
+        border: 1px solid #d4c9c9;
+        border-radius: 20px;
+    }
+
+    .sidebar_menu Button:hover {
+        background-color: #dbd6d6;
+        color: rgb(233, 223, 223);
+    }
+
+    .sidebar_menu Button:nth-child(1) {
+        margin-right: 10px;
+    }
+
+    .active {
+        padding-top: 100px;
+    }
+
+    .edit_profile {
+        display: none;
+    }
+
+    .sidebar_item_list {
+        display: flex;
+    }
+
+
+}

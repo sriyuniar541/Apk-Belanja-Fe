@@ -1,0 +1,10 @@
+.cont_profile {
+    padding-top: 100px ;
+    display: block
+}
+
+.img-profile {
+   width: 200px;
+   height: 200px;
+   border-radius: 50% ;   
+}

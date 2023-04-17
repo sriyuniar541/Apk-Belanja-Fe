@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import NavbarSebelumLogin from "./../componen/navbar2";
-import CardsProduct from "./../componen/CardsProduct";
-import axios from 'axios'
+import NavbarSebelumLogin from "../../componen/navbar/navbar2";
+import CardsProduct from "../../componen/CardsProduct";
 import { Link, useParams } from 'react-router-dom';
-import "@fontsource/metropolis";
-import Carousel from "../componen/carousel";
-import Carousel2 from "../componen/carousel2";
-
+import Carousel from "../../componen/carousel";
+import Carousel2 from "../../componen/carousel2";
+import './home.css'
+import axios from 'axios'
 
 const Home = () => {
     const [product, setProduct] = useState([])
@@ -52,23 +51,21 @@ const Home = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
-            <div className="container">
+            <div className="container cont-home">
                 <Carousel2 />
                 <h4>Category</h4>
-                <p className="mb-4">Where are you currently looking for</p>
-                <div className="row d-flex justify-content-between ">
+                <p>Where are you currently looking for</p>
+                <div className="carousel ">
                     <Carousel />
                 </div>
-                <h4 className="mt-4">New</h4>
+                <h4 className="">New</h4>
                 <p>You’ve never seen it before!</p>
             </div>
             <div className='container'>
-                <div className='row  d-flex justify-content-between'>
+                <div className='card_product'>
                     {filterActive.map((products) =>
                         <div className="col-lg-2 col-6 mx-lg-2" key={products.id}>
-                            <Link to={`/DetailProduct/${products.id}`}
-                                style={{ textDecoration: 'none', color: 'black' }}
-                            >
+                            <Link to={`/DetailProduct/${products.id}`} className="link">
                                 <CardsProduct
                                     key={id}
                                     photo={products.photo}
@@ -82,45 +79,39 @@ const Home = () => {
                 </div>
             </div>
             <div className="container ">
-                <h4 className="mt-5">Popular</h4>
+                <h4>Popular</h4>
                 <div className='col-12'>
                     <p>Find clothes that are trending recently
                     </p>
                 </div>
-                <div className='row  d-flex justify-content-between'>
+                <div className='card_product'>
                     {filterActive.map((products) =>
                         <div className="col-lg-2 col-6 mx-lg-2" key={products.id}>
-                            <Link
+                            <Link className="link"
                                 to={`/DetailProduct/${products.id}`}
-                                style={{
-                                    textDecoration: 'none',
-                                    color: 'black'
-                                }}
                             >
                                 <CardsProduct
-                                    key={id} 
-                                    photo={products.photo} 
-                                    name={products.name} 
-                                    price={products.price} 
-                                    toko='Sri-Olshop' 
+                                    key={id}
+                                    photo={products.photo}
+                                    name={products.name}
+                                    price={products.price}
+                                    toko='Sri-Olshop'
                                 />
                             </Link>
                         </div>
                     )}
                 </div>
                 {/* pagination */}
-                <div className='d-flex justify-content-center m-5'>
-                    <button 
-                        className='btn btn-white border-secondary' 
+                <div className='pagination'>
+                    <button
+                        className=''
                         onClick={next}>
                         Next
                     </button>
-                    <button 
-                        className='btn btn-white '>
+                    <button>
                         {page}
                     </button>
-                    <button 
-                        className='btn btn-white border-secondary' 
+                    <button
                         onClick={back}>
                         Back
                     </button>

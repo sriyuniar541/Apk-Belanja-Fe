@@ -1,0 +1,28 @@
+.cont_order {
+    padding-top: 90px;
+    background-color: #F5F5F5;
+}
+
+.card_order, .sidebar_order {
+    background-color: white;
+}
+
+.cont_order .card_order{
+    box-sizing: border-box;
+    margin: 150px 50px 60px 50px;
+    margin-top: 100px;
+    box-shadow: 5px 4px 10px rgb(212, 208, 208);
+    padding: 50px;
+}
+
+
+@media (max-width : 768px) { 
+    .cont_order{
+      overflow: hidden;
+    }
+
+    .cont_order .card_order {
+        margin: 0px;
+        padding: 10px;
+    }
+}

@@ -8,19 +8,18 @@ function ButtonSellerSig() {
         <Link 
           to='/sighupCustommer'>
           <Button 
-            variant="danger" 
-            style={{ width:'123px',height:'48px'}}>
+            variant="white" 
+            style={{ width:'123px',height:'48px', borderColor:'#9B9B9B'}}>
             Custommer
           </Button> 
         </Link>
         <Link 
           to='/sighupSeller'> 
           <Button 
-            variant="white" 
+            variant="danger" 
             style={{ 
               width:'123px',
               height:'48px',
-              borderColor:'#9B9B9B'
             }}>
             Seller
           </Button>

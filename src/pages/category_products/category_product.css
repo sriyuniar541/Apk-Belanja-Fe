@@ -1,0 +1,40 @@
+.cont_editcategory {
+    background-color: #F5F5F5;
+}
+
+.cont_sideBar {
+    background-color: white;
+}
+
+.body_category {
+    padding-top: 90px;
+}
+
+.card_category {
+    margin: 50px 50px 0 50px;
+    box-shadow: 5px 4px 10px rgb(212, 208, 208);
+    padding: 50px;
+    border: none;
+    border-radius: 0;
+}
+
+.item_category {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.item_category input {
+    margin-right: 10px;
+}
+
+.item_category button {
+    margin-right: 20px;
+    color: white;
+}
+
+@media (max-width : 768px) { 
+    .card_category {
+        margin: 0px;
+    }
+}

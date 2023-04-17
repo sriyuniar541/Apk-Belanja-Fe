@@ -9,6 +9,7 @@ import s1 from './../image/tk.png'
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import './component.css'
 
 
 export default function SideBar() {
@@ -87,14 +88,13 @@ export default function SideBar() {
 
 
     return (
-        <div className="container ">
+        <div className="container sidebar_item nonActive">
             <div className="row ">
-                <div className="col-lg-4 col-5 mt-lg-5 " 
-                    style={{ height: '100vh' }}
+                <div className="col-lg-4 col-5 mt-lg-5 sidebar_menu" 
                 >
                     <div className="container px-lg-5 py-lg-5 py-2">
                         <div className="row ">
-                            <div className="col-lg-4">
+                            <div className="col-lg-4 edit_profile">
                                 <div className="d-flex mb-2">
                                     <img alt=''
                                         src={data.photo ? data.photo : 'data not found'}
@@ -104,7 +104,7 @@ export default function SideBar() {
                                             maxHeight: '60px'
                                         }}
                                     />
-                                    <div className=" mt-2 ">
+                                    <div className=" mt-2">
                                         <p style={{ marginLeft: '10%' }}>
                                             {data.fullname ? data.fullname : 'data not found'}
                                         </p>
@@ -128,8 +128,8 @@ export default function SideBar() {
                                     onKeyPress={(e) => e.key === 'Enter' && updateProfile()}
                                 />
                             </div>
-                            <div className="">
-                                <div className="mt-3  ">
+                            <div className="list_item_sidebar">
+                                <div className="mt-3  sidebar_item_list">
                                     {!toko ?
                                         (
                                             <>

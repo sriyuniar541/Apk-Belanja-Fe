@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import NavbarSebelumLogin from '../componen/navbar2'
-import SideBar from '../componen/sideBar'
+import NavbarSebelumLogin from '../../componen/navbar/navbar2'
+import SideBar from '../../componen/sideBar'
 import { useSelector } from 'react-redux';
-import ModalProps from '../componen/moddalSelles';
+import ModalProps from '../../componen/moddalSelles';
+import './order.css'
 
 
 export default function Order() {
@@ -59,22 +60,14 @@ export default function Order() {
     return (
         <div>
             <NavbarSebelumLogin />
-            <div className='container-fluid'>
+            <div className='container-fluid cont_order' >
                 <div className='row'>
-                    <div className='col-lg-4'>
+                    <div className='col-lg-3 sidebar_order'>
                         <SideBar />
                     </div>
-                    <div className='col-lg-8 p-5' 
-                        style={{ background: '#F5F5F5' }}
-                    >
-                        <div className='mx-5 bg-white px-5'>
-                            <div className="container mt-2 p-2 rounded " >
-                                <div className='d-flex justify-content-between'>
-                                    <div className='py-4'>
-                                    </div>
-                                </div>
-                            </div>
-                            <table className='table container'>
+                    <div className='col-lg-7 card_order '>
+                        <div >
+                            <table className='table container table_order'>
                                 <thead >
                                     <tr className='text-center'>
                                         <th>Order</th>
@@ -106,7 +99,7 @@ export default function Order() {
                                                         order={p.user_name}
                                                     />
                                                     <button
-                                                        className='btn btn-warning text-white col-lg-9 offset-lg-1'
+                                                        className='btn btn-warning col-lg-9 offset-lg-1'
                                                         onClick={() => changeStatus(p.id)}>
                                                         Change Status
                                                     </button>
